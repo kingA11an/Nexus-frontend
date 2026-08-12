@@ -17,9 +17,9 @@
     <nav
       class="sticky top-0 bg-white shadow-md py-4 px-8 flex justify-between items-center z-50"
     >
-      <a href="#" class="flex items-center">
+      <a href="#" class="flex items-center gap-1">
         <!-- The Butterfly Icon -->
-        <img src="./images/logo.png" alt="Logo" class="h-16 w-auto" />
+        <img src="./images/logo-small.png" alt="Logo" class="h-16 w-auto" />
 
         <!-- The Text Stack -->
         <div class="flex flex-col">
@@ -50,7 +50,7 @@
     <header
       class="flex flex-col md:flex-row items-center justify-between px-8 py-16 max-w-7xl mx-auto"
     >
-      <div class="md:w-1/2 space-y-6">
+      <div class="md:w-1/2 lg:w-5/12 space-y-6">
         <span
           class="bg-sage-green-100 text-sage-green-700 font-bold px-3 py-1 rounded-full text-sm"
         >
@@ -74,13 +74,133 @@
         </button>
       </div>
       <!-- This single container holds the image -->
-      <div class="md:w-3/4 lg:w-4/5 mt-10 md:mt-0 ml-auto">
+      <div class="md:w-1/2 lg:w-7/12 mt-10 md:mt-0 ml-auto">
         <img
-          src="./images/children-with-toys-unsplash.jpg"
+          src="./images/Hero-Image.jpg"
           alt="Child in a sensory inclusive space"
-          class="w-full h-[400px] object-cover rounded-3xl shadow-2xl border-4 border-white"
+          class="w-full h-100 object-cover rounded-3xl shadow-2xl border-4 border-white"
         />
       </div>
     </header>
+    <!-- SERVICES SECTION -->
+    <section id="services" class="py-25 px-8 max-w-7xl mx-auto">
+      <!-- Section Header -->
+      <div class="text-center mb-8">
+        <h2 class="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          We provide tailored solutions to create inclusive, sensory-friendly
+          environments for neurodivergent individuals across various settings.
+        </p>
+      </div>
+
+      <!-- Services Grid  -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Card 1: Sensory Room Setup -->
+        <div
+          class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:shadow-2xl transition duration-300 flex flex-col hover:border-gray-300"
+        >
+          <img
+            src="./images/service-1.jpg"
+            alt="Sensory Room Setup"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-6 flex flex-col grow">
+            <h3 class="text-[18px] font-bold text-gray-900 mb-3">
+              Sensory Room Setup
+            </h3>
+            <p class="text-gray-600 mb-6 leading-relaxed grow">
+              Custom-designed sensory rooms that stimulate and soothe, tailored
+              to individual needs.
+            </p>
+            <a
+              href="#contact"
+              class="block w-full text-center bg-brick-ember-600 text-white font-bold py-1.5 rounded-xl hover:bg-brick-ember-700 transition shadow-md mt-auto"
+              >Learn more &rarr;</a
+            >
+          </div>
+        </div>
+
+        <!-- Card 2: Calm-Down Corners -->
+        <div
+          class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:shadow-2xl transition duration-300 flex flex-col hover:border-gray-300"
+        >
+          <img
+            src="./images/service-2.jpg"
+            alt="Calm-Down Corners"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-6 flex flex-col grow">
+            <h3 class="text-[18px] font-bold text-gray-900 mb-3">
+              Calm-Down Corners
+            </h3>
+            <p class="text-gray-600 mb-6 leading-relaxed grow">
+              Peaceful retreat spaces that help children self-regulate and find
+              calm.
+            </p>
+            <a
+              href="#contact"
+              class="block w-full text-center bg-brick-ember-600 text-white font-bold py-1.5 rounded-xl hover:bg-brick-ember-700 transition shadow-md mt-auto"
+              >Learn more &rarr;</a
+            >
+          </div>
+        </div>
+
+        <!-- Card 3: Inclusive Space Design -->
+        <div
+          class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:shadow-2xl transition duration-300 flex flex-col hover:border-gray-300"
+        >
+          <img
+            src="./images/service-3.jpg"
+            alt="Inclusive Space Design"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-6 flex flex-col grow">
+            <h3 class="text-[18px] font-bold text-gray-900 mb-3">
+              Inclusive Space Design
+            </h3>
+            <p class="text-gray-600 mb-6 leading-relaxed grow">
+              Environments where every child feels welcome, supported, and able
+              to thrive.
+            </p>
+            <!-- Upgraded: Raw Google Form link converted to a secondary button -->
+            <a
+              href="https://docs.google.com/forms/d/1z1LiAYvfra84OtOyAlGDeL4pHQDWnsEDyZrJQHTV5IY/edit?usp=drivesdk"
+              target="_blank"
+              class="block w-full text-center bg-brick-ember-600 text-white font-bold py-1.5 rounded-xl hover:bg-brick-ember-700 transition shadow-md mt-auto"
+            >
+              Book Consultation
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 4: Assistive Learning -->
+        <div
+          class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:shadow-2xl transition duration-300 flex flex-col hover:border-gray-300"
+        >
+          <img
+            src="./images/service-4.jpg"
+            alt="Assistive Learning & Therapy Resources"
+            class="w-full h-48 object-cover"
+          />
+          <div class="p-6 flex flex-col grow">
+            <h3 class="text-[18px] font-bold text-gray-900 mb-3">
+              Assistive Learning & Therapy Resources
+            </h3>
+            <p class="text-gray-600 mb-6 leading-relaxed grow">
+              From sensory support to Montessori materials, we provide full
+              360-degree neurodivergent support equipment.
+            </p>
+            <!-- Upgrade:Raw whatsApp link converted to a primary button -->
+            <a
+              href="https://wa.me/c/254734635274"
+              target="_blank"
+              class="block w-full text-center bg-brick-ember-600 text-white font-bold py-1.5 rounded-xl hover:bg-brick-ember-700 transition shadow-md mt-auto"
+            >
+              View Catalogue
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   </body>
 </html>
