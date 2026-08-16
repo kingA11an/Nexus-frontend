@@ -1,385 +1,1593 @@
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth scroll-pt-35">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Special Needs Resource Hub</title>
-    <!-- website Icon -->
-    <link rel="icon" href="./images/logo-large.png" type="image/png" />
-    <!-- Google Fonts (Inter) -->
+    <meta
+      name="description"
+      content="Assistive products, sensory and therapy equipment, and inclusive-space design for homes, schools, therapy centres, healthcare facilities, churches, workplaces and community institutions."
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
       rel="stylesheet"
     />
-    <!-- Linking the Tailwind CSS output file -->
-    <link href="./dist/output.css" rel="stylesheet" />
+
+    <!-- Compiled Tailwind v4 Stylesheet -->
+    <link rel="stylesheet" href="dist/output.css" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./Images/logo-large.png" />
   </head>
-  <body class="font-sans text-gray-800 bg-gray-50">
-    <!-- NAVBAR -->
-    <nav
-      class="sticky top-0 bg-white shadow-md py-3 px-4 sm:px-8 flex justify-between items-center z-50"
+
+  <body class="bg-[#FAF7F1] text-[#26251F] antialiased leading-relaxed text-lg">
+    <!-- SKIP LINK -->
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-teal-900 focus:text-white focus:p-4 focus:rounded-lg focus:font-bold"
     >
-      <!-- Brand logo -->
-      <a href="#" class="flex items-center gap-2">
-        <img src="./images/logo-small.png" alt="Logo" class="h-16 w-auto" />
-        <!-- Brand name -->
-        <div class="flex flex-col">
+      Skip to main content
+    </a>
+
+    <!-- STICKY HEADER WRAPPER -->
+    <div class="sticky top-0 z-50 w-full shadow-md flex flex-col">
+      <!-- ACCESSIBILITY TOOLBAR -->
+      <div
+        class="a11y-bar bg-teal-900 text-white px-4 py-2 border-b border-teal-800"
+        role="region"
+        aria-label="Accessibility tools"
+      >
+        <div
+          class="max-w-7xl mx-auto flex flex-wrap items-center justify-end gap-3 text-sm font-bold"
+        >
           <span
-            class="font-bold text-lg sm:text-2xl leading-tight text-gray-900"
-            >Special Needs Resource Hub</span
+            class="flex items-center gap-1.5"
+            role="group"
+            aria-label="Text size"
           >
+            <button
+              type="button"
+              id="font-dec"
+              class="px-3 py-1.5 min-h-[44px] bg-white/10 hover:bg-white/20 border border-white/40 rounded-md transition-colors"
+              aria-label="Decrease text size"
+            >
+              A−
+            </button>
+            <button
+              type="button"
+              id="font-reset"
+              class="px-3 py-1.5 min-h-[44px] bg-white/10 hover:bg-white/20 border border-white/40 rounded-md transition-colors"
+              aria-label="Reset text size"
+            >
+              A
+            </button>
+            <button
+              type="button"
+              id="font-inc"
+              class="px-3 py-1.5 min-h-[44px] bg-white/10 hover:bg-white/20 border border-white/40 rounded-md transition-colors"
+              aria-label="Increase text size"
+            >
+              A+
+            </button>
+          </span>
+          <button
+            type="button"
+            id="contrast-toggle"
+            class="px-3 py-1.5 min-h-[44px] bg-white/10 hover:bg-white/20 border border-white/40 rounded-md flex items-center gap-1.5 transition-colors"
+            aria-pressed="false"
+          >
+            <span aria-hidden="true">◐</span> High contrast
+          </button>
           <span
-            class="text-[9px] sm:text-xs font-bold text-brick-ember-600 uppercase tracking-widest mt-0.5"
+            class="flex items-center gap-1.5"
+            role="group"
+            aria-label="Read aloud controls"
           >
-            Design · Equip · Setup · Empower
+            <label for="speed-select" class="sr-only">Reading speed</label>
+            <select
+              id="speed-select"
+              class="min-h-[44px] bg-white text-slate-800 px-2.5 py-1.5 rounded-md border border-white/40 text-sm font-semibold"
+            >
+              <option value="0.8">Slow</option>
+              <option value="1" selected>Normal</option>
+              <option value="1.25">Fast</option>
+            </select>
+            <button
+              type="button"
+              id="read-page-btn"
+              class="px-3 py-1.5 min-h-[44px] bg-white/10 hover:bg-white/20 border border-white/40 rounded-md flex items-center gap-1.5 transition-colors"
+              data-default-label="Read page aloud"
+              aria-pressed="false"
+            >
+              <span aria-hidden="true">🔊</span>
+              <span class="btn-label">Read page aloud</span>
+            </button>
           </span>
         </div>
-      </a>
-      <div class="hidden md:flex gap-6 font-semibold">
-        <a href="#services" class="hover:text-brick-ember-600 transition">
-          Services
-        </a>
-        <a href="#training" class="hover:text-brick-ember-600 transition">
-          Training
-        </a>
-        <a href="#contact" class="hover:text-brick-ember-600 transition">
-          Contact
-        </a>
-      </div>
-      <!-- Mobile hamburger menu  -->
-      <button
-        id="menu-btn"
-        class="block md:hidden text-gray-800 hover:text-brick-ember-600 focus:outline-none"
-        aria-label="Toggle Menu"
-      >
-        <svg
-          class="w-7 h-7 transition-transform duration-300"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          ></path>
-        </svg>
-      </button>
-
-      <!-- Mobile Menu -->
-      <div
-        id="mobile-menu"
-        class="absolute top-full right-4 sm:right-8 mt-1 w-32 bg-gray-100 rounded-xl shadow-2xl border border-gray-200 transition-all duration-300 ease-in-out opacity-0 -translate-y-4 pointer-events-none md:hidden flex flex-col text-center overflow-hidden"
-      >
-        <a
-          href="#services"
-          class="block px-5 py-3 font-semibold text-gray-800 hover:text-brick-ember-600 hover:bg-gray-50 transition mobile-link"
-          >Services</a
-        >
-        <a
-          href="#training"
-          class="block px-5 py-3 font-semibold text-gray-800 hover:text-brick-ember-600 hover:bg-gray-50 transition mobile-link border-t border-gray-100"
-          >Training</a
-        >
-        <a
-          href="#contact"
-          class="block px-5 py-3 font-semibold text-gray-800 hover:text-brick-ember-600 hover:bg-gray-50 transition mobile-link border-t border-gray-100"
-          >Contact</a
-        >
-      </div>
-    </nav>
-    <!-- HERO SECTION -->
-    <header
-      class="flex flex-col md:flex-row items-center justify-between px-4 md:px-8 pt-6 pb-1 md:pb-8 max-w-7xl mx-auto"
-    >
-      <div class="md:w-1/2 lg:w-5/12 space-y-6">
-        <span
-          class="bg-sage-green-100 text-sage-green-700 font-bold px-3 py-1 rounded-full text-sm"
-        >
-          Autism & Neurodivergent Inclusive Spaces
-        </span>
-        <h1 class="text-4xl md:text-5xl font-bold leading-tight text-gray-900">
-          Designing Sensory & Inclusive Spaces
-        </h1>
-        <p class="text-lg md:text-xl text-gray-700">
-          For Homes, Schools, Churches & Therapy Centres
-        </p>
-        <p class="text-gray-500 max-w-md">
-          We design, equip, and set up child-friendly sensory rooms, calm-down
-          corners, and inclusive spaces for home, school, church, and therapy
-          settings.
-        </p>
-        <a
-          href="#contact"
-          class="bg-brick-ember-600 hover:bg-brick-ember-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 w-full md:w-auto text-center justify-center max-md:flex items-center align-center"
-        >
-          Partner With Us
-        </a>
+        <p
+          id="a11y-status"
+          class="sr-only"
+          role="status"
+          aria-live="polite"
+        ></p>
       </div>
 
-      <div class="md:w-1/2 lg:w-7/12 mt-10 md:mt-0 flex justify-center">
-        <img
-          src="./images/Hero-Image.jpg"
-          alt="Children in a sensory inclusive space"
-          class="w-full h-64 md:h-96 object-cover rounded-3xl shadow-2xl border-4 border-white"
-        />
-      </div>
-    </header>
-    <!-- SERVICES SECTION -->
-    <section
-      id="services"
-      class="py-12 px-4 md:px-8 max-w-7xl mx-auto scroll-mt-24"
-    >
-      <!-- Section Header -->
-      <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-          Our Services
-        </h2>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-          We provide tailored solutions to create inclusive, sensory-friendly
-          environments for neurodivergent individuals across various settings.
-        </p>
-      </div>
-
-      <!-- Services Grid  -->
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"
-      >
-        <!-- Tile-1: Sensory Room Setup -->
+      <!-- SITE HEADER (Two-Tier Layout) -->
+      <header class="bg-[#FAF7F1] border-b border-[#E1D8C4]" role="banner">
         <div
-          class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:shadow-2xl flex flex-col hover:border-gray-300 transform hover:-translate-y-2 transition-all duration-300"
+          class="max-w-[1400px] mx-auto px-6 py-4 flex flex-wrap lg:flex-nowrap items-center justify-between gap-4"
         >
-          <img
-            src="./images/service-1.jpg"
-            alt="Sensory Room Setup"
-            class="w-full h-48 object-cover"
-          />
-          <div class="p-6 flex flex-col grow">
-            <h3 class="text-[18px] font-bold text-gray-900 mb-3">
-              Sensory Room Setup
-            </h3>
-            <p class="text-gray-600 mb-6 leading-relaxed grow">
-              Custom-designed sensory rooms that stimulate and soothe, tailored
-              to individual needs.
-            </p>
-            <a
-              href="#contact"
-              class="block w-full text-center bg-brick-ember-600 text-white font-bold py-1.5 rounded-xl hover:bg-brick-ember-700 transition shadow-md mt-auto md:w-auto"
-              >Learn more &rarr;</a
+          <!-- LEFT SIDE: Logo, Brand Name & Emblem -->
+          <a
+            href="#"
+            class="flex items-center gap-3 md:gap-4 flex-shrink-0 group outline-none"
+          >
+            <!-- TODO: Replace placeholder src with the actual Butterfly Logo -->
+            <img
+              src="./Images/logo-large.png"
+              alt="SNRH Logo"
+              class="h-14 md:h-16 w-auto object-contain bg-white rounded-md p-1 shadow-sm group-focus-visible:ring-4 ring-teal-600"
+            />
+            <div class="flex flex-col justify-center">
+              <span
+                class="font-bold text-xl md:text-2xl text-[#26251F] leading-tight tracking-tight"
+                >Special Needs Resource Hub</span
+              >
+              <span
+                class="text-brand-accent-dark font-bold text-[0.65rem] md:text-xs tracking-[0.2em] uppercase mt-1"
+                >Design · Equip · Setup · Empower</span
+              >
+            </div>
+          </a>
+
+          <!-- Mobile Menu Button (Visible only on small screens) -->
+          <button
+            type="button"
+            id="nav-toggle"
+            class="lg:hidden inline-flex items-center gap-2 border-2 border-[#E1D8C4] rounded-lg px-3 py-1.5 font-bold min-h-[40px]"
+          >
+            <span aria-hidden="true">☰</span> Menu
+          </button>
+
+          <!-- RIGHT SIDE: Links (Top) & Buttons (Bottom) -->
+          <nav
+            id="primary-nav"
+            class="hidden lg:flex w-full lg:w-auto flex-col lg:items-end gap-5 lg:gap-3 order-3 lg:order-none pt-4 lg:pt-0 border-t lg:border-t-0 border-[#E1D8C4]"
+            aria-label="Primary"
+          >
+            <!-- Top Row: Navigation Links -->
+            <ul
+              class="flex flex-col lg:flex-row items-start lg:items-center gap-4 lg:gap-6 xl:gap-8 font-bold text-sm lg:text-base text-[#26251F]"
             >
+              <li>
+                <a
+                  href="#pathways"
+                  class="hover:text-teal-800 transition-colors"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a href="#shop" class="hover:text-teal-800 transition-colors"
+                  >Shop</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#inclusive-spaces"
+                  class="hover:text-teal-800 transition-colors"
+                  >Inclusive Spaces</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#resources"
+                  class="hover:text-teal-800 transition-colors"
+                  >Resource Portal</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#institutions"
+                  class="hover:text-teal-800 transition-colors"
+                  >Training &amp; Institutions</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#our-work"
+                  class="hover:text-teal-800 transition-colors"
+                  >Our Work</a
+                >
+              </li>
+              <li>
+                <a href="#contact" class="hover:text-teal-800 transition-colors"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+
+            <!-- Bottom Row: Action Buttons -->
+            <div
+              class="flex flex-col lg:flex-row w-full lg:w-auto items-stretch lg:items-center gap-3"
+            >
+              <a
+                href="#shop"
+                class="bg-teal-900 hover:bg-teal-800 text-white font-bold px-6 py-2.5 rounded-lg text-sm min-h-[44px] inline-flex items-center justify-center transition-colors shadow-sm"
+                >Shop now</a
+              >
+              <a
+                href="#contact"
+                class="border-2 border-teal-900 text-teal-900 hover:bg-teal-50 font-bold px-6 py-2.5 rounded-lg text-sm min-h-[44px] inline-flex items-center justify-center transition-colors shadow-sm"
+                >Book a site visit</a
+              >
+            </div>
+          </nav>
+        </div>
+      </header>
+    </div>
+
+    <main id="main" tabindex="-1">
+      <!-- 1. HERO SECTION -->
+      <section
+        id="top"
+        class="pt-4 pb-12 lg:pt-8 lg:pb-16 px-6 max-w-7xl mx-auto"
+        aria-labelledby="hero-heading"
+      >
+        <div
+          class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start"
+        >
+          <!-- LEFT SIDE: Text Content -->
+          <div class="lg:col-span-7 pt-2 lg:pt-12">
+            <p
+              class="text-teal-800 uppercase tracking-widest font-bold text-sm mb-3"
+            >
+              Design · Equip · Set Up · Empower
+            </p>
+            <h1
+              id="hero-heading"
+              class="text-4xl md:text-5xl font-bold text-[#26251F] leading-tight mb-4"
+            >
+              Designing inclusion into everyday spaces
+            </h1>
+            <p
+              class="text-lg md:text-xl text-[#4E4C42] max-w-2xl mb-6 leading-relaxed"
+            >
+              We provide assistive products, sensory and therapy equipment, and
+              inclusive-space design for homes, schools, therapy centres,
+              healthcare facilities, churches, workplaces and community
+              institutions.
+            </p>
+
+            <div class="flex flex-wrap gap-4">
+              <a
+                href="#shop"
+                class="bg-teal-900 hover:bg-teal-800 text-white font-bold px-6 py-3 rounded-lg min-h-[44px] inline-flex items-center justify-center transition-colors shadow-sm"
+                >Shop assistive &amp; sensory products</a
+              >
+              <a
+                href="#contact"
+                class="border-2 border-teal-900 text-teal-900 hover:bg-teal-50 font-bold px-6 py-3 rounded-lg min-h-[44px] inline-flex items-center justify-center transition-colors shadow-sm"
+                >Book an inclusive space consultation</a
+              >
+            </div>
+          </div>
+
+          <!-- RIGHT SIDE: Listen Button & Hero Image -->
+          <div class="lg:col-span-5 flex flex-col items-end mt-6 lg:mt-0">
+            <!-- Listen Button (Top Right) -->
+            <button
+              type="button"
+              class="listen-btn no-read inline-flex items-center gap-2 border-2 border-dashed border-[#E1D8C4] text-[#4E4C42] px-4 py-2 rounded-lg font-bold text-sm min-h-[44px] hover:border-teal-900 hover:text-teal-900 transition-colors bg-transparent mb-4"
+              data-target="top"
+              data-default-label="Listen to this section"
+              aria-pressed="false"
+            >
+              <span aria-hidden="true">🔊</span>
+              <span class="btn-label">Listen to this section</span>
+            </button>
+
+            <!-- Image Container -->
+            <div class="relative flex items-center justify-center w-full">
+              <img
+                src="./Images/Hero-image.jpg"
+                alt="Completed sensory inclusive space"
+                class="w-full h-auto aspect-[4/3] object-cover rounded-2xl shadow-md border border-[#E1D8C4] z-10"
+              />
+
+              <!-- Subtle decorative background accent -->
+              <div
+                class="absolute w-full h-full bg-[#2B6F63]/10 rounded-3xl translate-x-3 translate-y-3 lg:translate-x-4 lg:translate-y-4"
+              ></div>
+            </div>
           </div>
         </div>
-
-        <!-- Tile-2: Calm-Down Corners -->
-        <div
-          class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:shadow-2xl flex flex-col hover:border-gray-300 transform hover:-translate-y-2 transition-all duration-300"
-        >
-          <img
-            src="./images/service-2.jpg"
-            alt="Calm-Down Corners"
-            class="w-full h-48 object-cover"
-          />
-          <div class="p-6 flex flex-col grow">
-            <h3 class="text-[18px] font-bold text-gray-900 mb-3">
-              Calm-Down Corners
-            </h3>
-            <p class="text-gray-600 mb-6 leading-relaxed grow">
-              Peaceful retreat spaces that help children self-regulate and find
-              calm.
-            </p>
-            <a
-              href="#contact"
-              class="block w-full text-center bg-brick-ember-600 text-white font-bold py-1.5 rounded-xl hover:bg-brick-ember-700 transition shadow-md mt-auto md:w-auto"
-              >Learn more &rarr;</a
+      </section>
+      <!-- 2. WHAT ARE YOU LOOKING FOR (PATHWAYS) -->
+      <section
+        id="pathways"
+        class="py-16 px-6 bg-[#F1EADA] border-y border-[#E1D8C4]"
+        aria-labelledby="pathways-heading"
+      >
+        <div class="max-w-7xl mx-auto">
+          <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+            <h2 id="pathways-heading" class="text-3xl font-bold text-[#26251F]">
+              What are you looking for?
+            </h2>
+            <button
+              type="button"
+              class="listen-btn no-read inline-flex items-center gap-2 border-2 border-dashed border-[#E1D8C4] text-[#4E4C42] px-4 py-2 rounded-lg font-bold text-sm min-h-[44px] hover:border-teal-900 hover:text-teal-900 transition-colors"
+              data-target="pathways"
+              data-default-label="Listen to this section"
+              aria-pressed="false"
             >
+              <span aria-hidden="true">🔊</span>
+              <span class="btn-label">Listen to this section</span>
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <article
+              class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg hover:border-teal-800 group"
+            >
+              <div>
+                <h3 class="text-xl font-bold text-[#26251F] mb-2">
+                  I need equipment
+                </h3>
+                <p class="text-[#4E4C42] text-base mb-4">
+                  Sensory, therapy, assistive, Montessori, communication and
+                  inclusive-learning resources.
+                </p>
+              </div>
+              <a
+                href="#shop"
+                class="font-bold text-teal-900 hover:underline mt-auto"
+                >Visit the shop
+                <span
+                  aria-hidden="true"
+                  class="inline-block transition-transform duration-300 group-hover:translate-x-1.5"
+                  >→</span
+                ></a
+              >
+            </article>
+
+            <article
+              class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg hover:border-teal-800 group"
+            >
+              <div>
+                <h3 class="text-xl font-bold text-[#26251F] mb-2">
+                  I want to create an inclusive space
+                </h3>
+                <p class="text-[#4E4C42] text-base mb-4">
+                  From a sensory corner to a complete therapy or learning
+                  environment.
+                </p>
+              </div>
+              <a
+                href="#inclusive-spaces"
+                class="font-bold text-teal-900 hover:underline mt-auto"
+                >Explore Inclusive Spaces
+                <span
+                  aria-hidden="true"
+                  class="inline-block transition-transform duration-300 group-hover:translate-x-1.5"
+                  >→</span
+                ></a
+              >
+            </article>
+
+            <article
+              class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg hover:border-teal-800 group"
+            >
+              <div>
+                <h3 class="text-xl font-bold text-[#26251F] mb-2">
+                  I need information or support
+                </h3>
+                <p class="text-[#4E4C42] text-base mb-4">
+                  Neurodiversity information, service directories, caregiver
+                  support and digital tools.
+                </p>
+              </div>
+              <a
+                href="#resources"
+                class="font-bold text-teal-900 hover:underline mt-auto"
+                >Access NeuroHub
+                <span
+                  aria-hidden="true"
+                  class="inline-block transition-transform duration-300 group-hover:translate-x-1.5"
+                  >→</span
+                ></a
+              >
+            </article>
+
+            <article
+              class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg hover:border-teal-800 group"
+            >
+              <div>
+                <h3 class="text-xl font-bold text-[#26251F] mb-2">
+                  I need training
+                </h3>
+                <p class="text-[#4E4C42] text-base mb-4">
+                  Practical orientation for teachers, caregivers, professionals
+                  and institutions.
+                </p>
+              </div>
+              <a
+                href="#training"
+                class="font-bold text-teal-900 hover:underline mt-auto"
+                >Explore Training
+                <span
+                  aria-hidden="true"
+                  class="inline-block transition-transform duration-300 group-hover:translate-x-1.5"
+                  >→</span
+                ></a
+              >
+            </article>
           </div>
         </div>
+      </section>
 
-        <!-- Tile-3: Inclusive Space Design -->
-        <div
-          class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:shadow-2xl flex flex-col hover:border-gray-300 transform hover:-translate-y-2 transition-all duration-300"
-        >
-          <img
-            src="./images/service-3.jpg"
-            alt="Inclusive Space Design"
-            class="w-full h-48 object-cover"
-          />
-          <div class="p-6 flex flex-col grow">
-            <h3 class="text-[18px] font-bold text-gray-900 mb-3">
-              Inclusive Space Design
-            </h3>
-            <p class="text-gray-600 mb-6 leading-relaxed grow">
-              Environments where every child feels welcome, supported, and able
-              to thrive.
-            </p>
-
-            <a
-              href="https://docs.google.com/forms/d/1z1LiAYvfra84OtOyAlGDeL4pHQDWnsEDyZrJQHTV5IY/edit?usp=drivesdk"
-              target="_blank"
-              class="block w-full text-center bg-brick-ember-600 text-white font-bold py-1.5 rounded-xl hover:bg-brick-ember-700 transition shadow-md mt-auto md:w-auto"
+      <!-- 3. SHOP SECTION -->
+      <section
+        id="shop"
+        class="py-16 px-6 max-w-7xl mx-auto"
+        aria-labelledby="shop-heading"
+      >
+        <!-- Header Area (Aligned Left-to-Right with Dashed Button) -->
+        <div class="flex flex-wrap items-start justify-between gap-6 mb-10">
+          <div class="flex-1">
+            <h2
+              id="shop-heading"
+              class="text-3xl font-bold text-[#26251F] mb-3"
             >
-              Book Consultation
-            </a>
+              Practical tools for learning, regulation, therapy &amp;
+              independence
+            </h2>
+            <p class="text-[#4E4C42] max-w-2xl text-lg">
+              Products are organised by category, by need, and by setting — so
+              you can find what actually helps.
+            </p>
           </div>
+
+          <button
+            type="button"
+            class="listen-btn no-read inline-flex items-center gap-2 border-2 border-dashed border-[#E1D8C4] text-[#4E4C42] px-4 py-2 rounded-lg font-bold text-sm min-h-[44px] hover:border-teal-900 hover:text-teal-900 transition-colors bg-transparent flex-shrink-0"
+            data-target="shop"
+            data-default-label="Listen to this section"
+            aria-pressed="false"
+          >
+            <span aria-hidden="true">🔊</span>
+            <span class="btn-label">Listen to this section</span>
+          </button>
         </div>
 
-        <!-- Tile-4: Assistive Learning -->
-        <div
-          class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:shadow-2xl flex flex-col hover:border-gray-300 transform hover:-translate-y-2 transition-all duration-300"
-        >
-          <img
-            src="./images/service-4.jpg"
-            alt="Assistive Learning & Therapy Resources"
-            class="w-full h-48 object-cover"
-          />
-          <div class="p-6 flex flex-col grow">
-            <h3 class="text-[18px] font-bold text-gray-900 mb-3">
-              Assistive Learning & Therapy Resources
-            </h3>
-            <p class="text-gray-600 mb-6 leading-relaxed grow">
-              From sensory support to Montessori materials, we provide full
-              360-degree neurodivergent support equipment.
-            </p>
-
+        <!-- Interactive Category Chips -->
+        <div class="mb-12">
+          <div class="flex flex-wrap gap-3 mb-6 list-none p-0">
             <a
               href="https://wa.me/c/254734635274"
               target="_blank"
-              class="block w-full text-center bg-brick-ember-600 text-white font-bold py-1.5 rounded-xl hover:bg-brick-ember-700 transition shadow-md mt-auto md:w-auto"
+              rel="noopener noreferrer"
+              class="bg-white border border-[#E1D8C4] text-[#4E4C42] hover:border-teal-800 hover:text-teal-900 hover:shadow-md rounded-full px-5 py-2 font-bold text-sm transition-all duration-200 hover:-translate-y-0.5"
+              >Sensory &amp; Regulation</a
             >
-              View Catalogue
+            <a
+              href="https://wa.me/c/254734635274"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-white border border-[#E1D8C4] text-[#4E4C42] hover:border-teal-800 hover:text-teal-900 hover:shadow-md rounded-full px-5 py-2 font-bold text-sm transition-all duration-200 hover:-translate-y-0.5"
+              >Therapy &amp; Rehabilitation</a
+            >
+            <a
+              href="https://wa.me/c/254734635274"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-white border border-[#E1D8C4] text-[#4E4C42] hover:border-teal-800 hover:text-teal-900 hover:shadow-md rounded-full px-5 py-2 font-bold text-sm transition-all duration-200 hover:-translate-y-0.5"
+              >Learning &amp; Education</a
+            >
+            <a
+              href="https://wa.me/c/254734635274"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-white border border-[#E1D8C4] text-[#4E4C42] hover:border-teal-800 hover:text-teal-900 hover:shadow-md rounded-full px-5 py-2 font-bold text-sm transition-all duration-200 hover:-translate-y-0.5"
+              >Montessori</a
+            >
+            <a
+              href="https://wa.me/c/254734635274"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-white border border-[#E1D8C4] text-[#4E4C42] hover:border-teal-800 hover:text-teal-900 hover:shadow-md rounded-full px-5 py-2 font-bold text-sm transition-all duration-200 hover:-translate-y-0.5"
+              >Communication &amp; AAC</a
+            >
+          </div>
+
+          <div class="space-y-3 text-[#4E4C42]">
+            <p>
+              <strong class="text-[#26251F]">Shop by need:</strong>
+              Communication · Sensory Regulation · Fine Motor · Gross Motor ·
+              Learning · Daily Living · Mobility · Therapy · Inclusive Play
+            </p>
+            <p>
+              <strong class="text-[#26251F]">Shop by setting:</strong> Home ·
+              School · Therapy Centre · Hospital · Church · Workplace
+            </p>
+          </div>
+        </div>
+
+        <!-- Featured Products Preview Grid (Linked to WhatsApp Catalogue) -->
+        <h3 class="text-xl font-bold text-[#26251F] mb-6">
+          Featured Categories
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+          <!-- Product Card 1 -->
+          <a
+            href="https://wa.me/c/254734635274"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group bg-white rounded-2xl border border-[#E1D8C4] overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 block flex flex-col h-full"
+          >
+            <!-- Tailwind 2x2 Image Grid -->
+            <div
+              class="grid grid-cols-2 grid-rows-2 w-full h-48 bg-slate-100 overflow-hidden"
+            >
+              <!-- Top Left -->
+              <img
+                src="./Images/sensory-1.jpg"
+                class="w-full h-full object-cover border-r border-b border-white group-hover:scale-105 transition-transform duration-500"
+                alt="Item 1"
+              />
+              <!-- Top Right -->
+              <img
+                src="./Images/sensory-2.jpg"
+                class="w-full h-full object-cover border-b border-white group-hover:scale-105 transition-transform duration-500"
+                alt="Item 2"
+              />
+              <!-- Bottom Left -->
+              <img
+                src="./Images/sensory-3.jpg"
+                class="w-full h-full object-cover border-r border-white group-hover:scale-105 transition-transform duration-500"
+                alt="Item 3"
+              />
+              <!-- Bottom Right -->
+              <img
+                src="./Images/sensory-4.jpg"
+                class="w-full h-full object-cover border-white group-hover:scale-105 transition-transform duration-500"
+                alt="Item 4"
+              />
+            </div>
+
+            <div class="p-5 border-t border-[#E1D8C4] flex-grow">
+              <h4
+                class="font-bold text-[#26251F] group-hover:text-teal-800 transition-colors"
+              >
+                Sensory Tools
+              </h4>
+              <span
+                class="text-teal-700 text-sm font-bold mt-2 inline-flex items-center gap-1"
+                >Browse catalogue
+                <span
+                  class="transition-transform duration-300 group-hover:translate-x-1"
+                  >→</span
+                ></span
+              >
+            </div>
+          </a>
+
+          <!-- Product Card 2 -->
+          <a
+            href="https://wa.me/c/254734635274"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group bg-white rounded-2xl border border-[#E1D8C4] overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 block flex flex-col h-full"
+          >
+            <!-- Tailwind 2x2 Image Grid -->
+            <div
+              class="grid grid-cols-2 grid-rows-2 w-full h-48 bg-slate-100 overflow-hidden"
+            >
+              <img
+                src="./Images/therapy-1.jpg"
+                class="w-full h-full object-cover border-r border-b border-white group-hover:scale-105 transition-transform duration-500"
+                alt="Therapy Item 1"
+              />
+              <img
+                src="./Images/therapy-2.jpg"
+                class="w-full h-full object-cover border-b border-white group-hover:scale-105 transition-transform duration-500"
+                alt="Therapy Item 2"
+              />
+              <img
+                src="./Images/therapy-3.jpg"
+                class="w-full h-full object-cover border-r border-white group-hover:scale-105 transition-transform duration-500"
+                alt="Therapy Item 3"
+              />
+              <img
+                src="./Images/therapy-4.jpg"
+                class="w-full h-full object-cover border-white group-hover:scale-105 transition-transform duration-500"
+                alt="Therapy Item 4"
+              />
+            </div>
+            <div class="p-5 border-t border-[#E1D8C4] flex-grow">
+              <h4
+                class="font-bold text-[#26251F] group-hover:text-teal-800 transition-colors"
+              >
+                Therapy Equipment
+              </h4>
+              <span
+                class="text-teal-700 text-sm font-bold mt-2 inline-flex items-center gap-1"
+                >Browse catalogue
+                <span
+                  class="transition-transform duration-300 group-hover:translate-x-1"
+                  >→</span
+                ></span
+              >
+            </div>
+          </a>
+
+          <!-- Product Card 3 -->
+          <a
+            href="https://wa.me/c/254734635274"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group bg-white rounded-2xl border border-[#E1D8C4] overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 block flex flex-col h-full"
+          >
+            <!-- Tailwind 2x2 Image Grid -->
+            <div
+              class="grid grid-cols-2 grid-rows-2 w-full h-48 bg-slate-100 overflow-hidden"
+            >
+              <img
+                src="./Images/learning-1.jpg"
+                class="w-full h-full object-cover border-r border-b border-white group-hover:scale-105 transition-transform duration-500"
+                alt="Learning Item 1"
+              />
+              <img
+                src="./Images/learning-2.jpg"
+                class="w-full h-full object-cover border-b border-white group-hover:scale-105 transition-transform duration-500"
+                alt="Learning Item 2"
+              />
+              <img
+                src="./Images/learning-3.jpg"
+                class="w-full h-full object-cover border-r border-white group-hover:scale-105 transition-transform duration-500"
+                alt="Learning Item 3"
+              />
+              <img
+                src="./Images/learning-4.jpg"
+                class="w-full h-full object-cover border-white group-hover:scale-105 transition-transform duration-500"
+                alt="Learning Item 4"
+              />
+            </div>
+            <div class="p-5 border-t border-[#E1D8C4] flex-grow">
+              <h4
+                class="font-bold text-[#26251F] group-hover:text-teal-800 transition-colors"
+              >
+                Learning Aids
+              </h4>
+              <span
+                class="text-teal-700 text-sm font-bold mt-2 inline-flex items-center gap-1"
+                >Browse catalogue
+                <span
+                  class="transition-transform duration-300 group-hover:translate-x-1"
+                  >→</span
+                ></span
+              >
+            </div>
+          </a>
+
+          <!-- Product Card 4 -->
+          <a
+            href="https://wa.me/c/254734635274"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group bg-white rounded-2xl border border-[#E1D8C4] overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 block flex flex-col h-full"
+          >
+            <!-- Tailwind 2x2 Image Grid -->
+            <div
+              class="grid grid-cols-2 grid-rows-2 w-full h-48 bg-slate-100 overflow-hidden"
+            >
+              <img
+                src="./Images/adl-1.jpg"
+                class="w-full h-full object-cover border-r border-b border-white group-hover:scale-105 transition-transform duration-500"
+                alt="ADL Item 1"
+              />
+              <img
+                src="./Images/adl-2.jpg"
+                class="w-full h-full object-cover border-b border-white group-hover:scale-105 transition-transform duration-500"
+                alt="ADL Item 2"
+              />
+              <img
+                src="./Images/adl-3.jpg"
+                class="w-full h-full object-cover border-r border-white group-hover:scale-105 transition-transform duration-500"
+                alt="ADL Item 3"
+              />
+              <img
+                src="./Images/adl-4.jpg"
+                class="w-full h-full object-cover border-white group-hover:scale-105 transition-transform duration-500"
+                alt="ADL Item 4"
+              />
+            </div>
+            <div class="p-5 border-t border-[#E1D8C4] flex-grow">
+              <h4
+                class="font-bold text-[#26251F] group-hover:text-teal-800 transition-colors"
+              >
+                Adaptive & Daily Living
+              </h4>
+              <span
+                class="text-teal-700 text-sm font-bold mt-2 inline-flex items-center gap-1"
+                >Browse catalogue
+                <span
+                  class="transition-transform duration-300 group-hover:translate-x-1"
+                  >→</span
+                ></span
+              >
+            </div>
+          </a>
+        </div>
+
+        <!-- Main Action Buttons -->
+        <div class="flex flex-wrap gap-4 pt-4 border-t border-[#E1D8C4]">
+          <a
+            href="https://wa.me/254734635274"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-teal-900 hover:bg-teal-800 text-white font-bold px-8 py-3.5 rounded-lg min-h-[44px] inline-flex items-center justify-center transition-colors shadow-sm text-lg"
+            >Ask about products</a
+          >
+          <a
+            href="mailto:support@specialneedsresourcehub.org?subject=Institutional%20Quote%20Request"
+            class="border-2 border-teal-900 text-teal-900 hover:bg-teal-50 font-bold px-8 py-3.5 rounded-lg min-h-[44px] inline-flex items-center justify-center transition-colors shadow-sm text-lg"
+            >Request an institutional quote</a
+          >
+        </div>
+      </section>
+      <!-- 4. INCLUSIVE SPACES SECTION -->
+      <section
+        id="inclusive-spaces"
+        class="w-full bg-[#F1EADA] border-y border-[#E1D8C4]"
+        aria-labelledby="spaces-heading"
+      >
+        <!-- Centered Inner Wrapper -->
+        <div class="py-16 px-6 max-w-7xl mx-auto">
+          <!-- Header Area -->
+          <div class="flex flex-wrap items-start justify-between gap-6 mb-12">
+            <div class="flex-1">
+              <h2
+                id="spaces-heading"
+                class="text-3xl md:text-4xl font-bold text-[#26251F] mb-4"
+              >
+                We don't just sell equipment. We build environments.
+              </h2>
+              <p class="text-[#4E4C42] max-w-3xl text-lg leading-relaxed">
+                We work with families and institutions to transform existing
+                spaces into environments that support sensory regulation,
+                learning, communication, therapy, participation and
+                independence.
+              </p>
+            </div>
+
+            <button
+              type="button"
+              class="listen-btn no-read inline-flex items-center gap-2 border-2 border-dashed border-[#E1D8C4] text-[#4E4C42] px-4 py-2 rounded-lg font-bold text-sm min-h-[44px] hover:border-teal-900 hover:text-teal-900 transition-colors bg-transparent flex-shrink-0"
+              data-target="inclusive-spaces"
+              data-default-label="Listen to this section"
+              aria-pressed="false"
+            >
+              <span aria-hidden="true">🔊</span>
+              <span class="btn-label">Listen to this section</span>
+            </button>
+          </div>
+
+          <!-- 6-Step Process Cards -->
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 mb-16"
+          >
+            <!-- Step 1 -->
+            <article
+              class="bg-white rounded-xl p-6 border border-[#E1D8C4] border-t-4 border-t-teal-900 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            >
+              <div
+                class="w-8 h-8 rounded-full bg-teal-900 text-white flex items-center justify-center font-bold mb-4"
+              >
+                1
+              </div>
+              <h3 class="font-bold text-[#26251F] text-lg mb-2">Assess</h3>
+              <p class="text-[#4E4C42] text-sm leading-relaxed">
+                Needs, site and user requirements, sensory considerations.
+              </p>
+            </article>
+
+            <!-- Step 2 -->
+            <article
+              class="bg-white rounded-xl p-6 border border-[#E1D8C4] border-t-4 border-t-teal-900 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            >
+              <div
+                class="w-8 h-8 rounded-full bg-teal-900 text-white flex items-center justify-center font-bold mb-4"
+              >
+                2
+              </div>
+              <h3 class="font-bold text-[#26251F] text-lg mb-2">Design</h3>
+              <p class="text-[#4E4C42] text-sm leading-relaxed">
+                Layout, equipment specification, accessibility and budget
+                planning.
+              </p>
+            </article>
+
+            <!-- Step 3 -->
+            <article
+              class="bg-white rounded-xl p-6 border border-[#E1D8C4] border-t-4 border-t-teal-900 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            >
+              <div
+                class="w-8 h-8 rounded-full bg-teal-900 text-white flex items-center justify-center font-bold mb-4"
+              >
+                3
+              </div>
+              <h3 class="font-bold text-[#26251F] text-lg mb-2">Equip</h3>
+              <p class="text-[#4E4C42] text-sm leading-relaxed">
+                Sensory, therapy, learning and adaptive resources sourced and
+                supplied.
+              </p>
+            </article>
+
+            <!-- Step 4 -->
+            <article
+              class="bg-white rounded-xl p-6 border border-[#E1D8C4] border-t-4 border-t-teal-900 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            >
+              <div
+                class="w-8 h-8 rounded-full bg-teal-900 text-white flex items-center justify-center font-bold mb-4"
+              >
+                4
+              </div>
+              <h3 class="font-bold text-[#26251F] text-lg mb-2">Set up</h3>
+              <p class="text-[#4E4C42] text-sm leading-relaxed">
+                Delivery, installation, positioning and safety checks.
+              </p>
+            </article>
+
+            <!-- Step 5 -->
+            <article
+              class="bg-white rounded-xl p-6 border border-[#E1D8C4] border-t-4 border-t-teal-900 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            >
+              <div
+                class="w-8 h-8 rounded-full bg-teal-900 text-white flex items-center justify-center font-bold mb-4"
+              >
+                5
+              </div>
+              <h3 class="font-bold text-[#26251F] text-lg mb-2">Orient</h3>
+              <p class="text-[#4E4C42] text-sm leading-relaxed">
+                User orientation for staff, caregivers and learners.
+              </p>
+            </article>
+
+            <!-- Step 6 -->
+            <article
+              class="bg-white rounded-xl p-6 border border-[#E1D8C4] border-t-4 border-t-teal-900 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+            >
+              <div
+                class="w-8 h-8 rounded-full bg-teal-900 text-white flex items-center justify-center font-bold mb-4"
+              >
+                6
+              </div>
+              <h3 class="font-bold text-[#26251F] text-lg mb-2">Support</h3>
+              <p class="text-[#4E4C42] text-sm leading-relaxed">
+                Ongoing guidance so the space keeps working for its users.
+              </p>
+            </article>
+          </div>
+
+          <!-- Types of Spaces -->
+          <div>
+            <h3 class="text-xl font-bold text-[#26251F] mb-6">
+              Types of spaces we create
+            </h3>
+
+            <div class="flex flex-wrap gap-3 mb-10 list-none p-0">
+              <a
+                href="#contact"
+                class="bg-white border border-[#E1D8C4] text-[#4E4C42] hover:bg-teal-900 hover:text-white hover:border-teal-900 hover:shadow-md rounded-full px-5 py-2.5 font-bold text-sm transition-all duration-200 hover:-translate-y-0.5"
+                >Sensory Rooms</a
+              >
+              <a
+                href="#contact"
+                class="bg-white border border-[#E1D8C4] text-[#4E4C42] hover:bg-teal-900 hover:text-white hover:border-teal-900 hover:shadow-md rounded-full px-5 py-2.5 font-bold text-sm transition-all duration-200 hover:-translate-y-0.5"
+                >Calm-Down Corners</a
+              >
+              <a
+                href="#contact"
+                class="bg-white border border-[#E1D8C4] text-[#4E4C42] hover:bg-teal-900 hover:text-white hover:border-teal-900 hover:shadow-md rounded-full px-5 py-2.5 font-bold text-sm transition-all duration-200 hover:-translate-y-0.5"
+                >Inclusive Classrooms</a
+              >
+              <a
+                href="#contact"
+                class="bg-white border border-[#E1D8C4] text-[#4E4C42] hover:bg-teal-900 hover:text-white hover:border-teal-900 hover:shadow-md rounded-full px-5 py-2.5 font-bold text-sm transition-all duration-200 hover:-translate-y-0.5"
+                >Autism &amp; Special Needs Units</a
+              >
+              <a
+                href="#contact"
+                class="bg-white border border-[#E1D8C4] text-[#4E4C42] hover:bg-teal-900 hover:text-white hover:border-teal-900 hover:shadow-md rounded-full px-5 py-2.5 font-bold text-sm transition-all duration-200 hover:-translate-y-0.5"
+                >Therapy &amp; Rehabilitation Rooms</a
+              >
+              <a
+                href="#contact"
+                class="bg-white border border-[#E1D8C4] text-[#4E4C42] hover:bg-teal-900 hover:text-white hover:border-teal-900 hover:shadow-md rounded-full px-5 py-2.5 font-bold text-sm transition-all duration-200 hover:-translate-y-0.5"
+                >Inclusive Play Spaces</a
+              >
+              <a
+                href="#contact"
+                class="bg-white border border-[#E1D8C4] text-[#4E4C42] hover:bg-teal-900 hover:text-white hover:border-teal-900 hover:shadow-md rounded-full px-5 py-2.5 font-bold text-sm transition-all duration-200 hover:-translate-y-0.5"
+                >Home Sensory &amp; Therapy Spaces</a
+              >
+              <a
+                href="#contact"
+                class="bg-white border border-[#E1D8C4] text-[#4E4C42] hover:bg-teal-900 hover:text-white hover:border-teal-900 hover:shadow-md rounded-full px-5 py-2.5 font-bold text-sm transition-all duration-200 hover:-translate-y-0.5"
+                >Church Inclusive Spaces</a
+              >
+              <a
+                href="#contact"
+                class="bg-white border border-[#E1D8C4] text-[#4E4C42] hover:bg-teal-900 hover:text-white hover:border-teal-900 hover:shadow-md rounded-full px-5 py-2.5 font-bold text-sm transition-all duration-200 hover:-translate-y-0.5"
+                >Healthcare &amp; Hospital Sensory Spaces</a
+              >
+              <a
+                href="#contact"
+                class="bg-white border border-[#E1D8C4] text-[#4E4C42] hover:bg-teal-900 hover:text-white hover:border-teal-900 hover:shadow-md rounded-full px-5 py-2.5 font-bold text-sm transition-all duration-200 hover:-translate-y-0.5"
+                >Workplace Calm / Sensory Spaces</a
+              >
+            </div>
+
+            <a
+              href="#contact"
+              class="group bg-teal-900 hover:bg-teal-800 text-white font-bold px-8 py-3.5 rounded-lg min-h-[44px] inline-flex items-center justify-center transition-colors shadow-sm text-lg"
+            >
+              Book a site assessment
+              <span
+                class="inline-block transition-transform duration-300 group-hover:translate-x-1.5 ml-2"
+                aria-hidden="true"
+                >→</span
+              >
             </a>
           </div>
         </div>
-      </div>
-    </section>
-    <!-- TRAINING SECTION -->
-    <section
-      id="training"
-      class="bg-brick-ember-600 py-16 md:mt-24 px-4 md:px-8 scroll-mt-24"
-    >
-      <div class="max-w-4xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
-          Teacher Training Available
-        </h2>
-        <p
-          class="text-white text-lg md:text-xl leading-relaxed mb-8 opacity-90"
-        >
-          Professional development on Autism & Neurodiversity for educators,
-          caregivers, employers, therapists, and support teams through our Andy
-          Speaks Neuro Academy.
-        </p>
+        <!-- End of inner wrapper -->
+      </section>
 
-        <a
-          href="#contact"
-          class="inline-block bg-white text-brick-ember-600 font-bold py-3 px-8 rounded-full shadow-lg transform hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 w-full md:w-auto"
-        >
-          Inquire About Training
-        </a>
-      </div>
-    </section>
+      <!-- 5. IMPACT SECTION -->
+      <section
+        id="impact"
+        class="py-16 px-6 max-w-7xl mx-auto"
+        aria-labelledby="impact-heading"
+      >
+        <!-- Header Area -->
+        <div class="flex flex-wrap items-start justify-between gap-6 mb-10">
+          <h2
+            id="impact-heading"
+            class="text-3xl md:text-4xl font-bold text-[#26251F]"
+          >
+            Our impact so far
+          </h2>
+          <button
+            type="button"
+            class="listen-btn no-read inline-flex items-center gap-2 border-2 border-dashed border-[#E1D8C4] text-[#4E4C42] px-4 py-2 rounded-lg font-bold text-sm min-h-[44px] hover:border-teal-900 hover:text-teal-900 transition-colors bg-transparent flex-shrink-0"
+            data-target="impact"
+            data-default-label="Listen to this section"
+            aria-pressed="false"
+          >
+            <span aria-hidden="true">🔊</span>
+            <span class="btn-label">Listen to this section</span>
+          </button>
+        </div>
 
-    <!-- CONTACT SECTION -->
-    <section
-      id="contact"
-      class="pb-16 pt-4 md:pt-12 mt-12 md:mt-24 px-4 md:px-8 bg-white scroll-mt-24"
-    >
-      <div class="max-w-5xl mx-auto text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-12">
-          Partner With Us to Create Supportive, Inclusive Environments
-        </h2>
-        <p class="text-gray-600 text-lg mb-12">
-          Get in touch to discuss your project needs.
-        </p>
+        <!-- Animated Impact Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- Card 1 -->
+          <article
+            class="bg-white rounded-2xl p-8 border border-[#E1D8C4] shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 text-center flex flex-col justify-center"
+          >
+            <div
+              class="text-5xl md:text-6xl font-extrabold text-teal-900 mb-4 flex justify-center items-baseline tracking-tight"
+            >
+              <span class="counter" data-target="5000">0</span
+              ><span class="text-[#9C5D1E] ml-1">+</span>
+            </div>
+            <p class="text-[#4E4C42] font-bold text-lg">
+              assistive products supplied
+            </p>
+          </article>
 
-        <!-- Contact Details  -->
+          <!-- Card 2 -->
+          <article
+            class="bg-white rounded-2xl p-8 border border-[#E1D8C4] shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 text-center flex flex-col justify-center"
+          >
+            <div
+              class="text-5xl md:text-6xl font-extrabold text-teal-900 mb-4 tracking-tight"
+            >
+              <span class="counter" data-target="1772">0</span>
+            </div>
+            <p class="text-[#4E4C42] font-bold text-lg leading-snug">
+              learners supported through assistive devices and learning-support
+              equipment
+            </p>
+          </article>
+
+          <!-- Card 3 -->
+          <article
+            class="bg-white rounded-2xl p-8 border border-[#E1D8C4] shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1 text-center flex flex-col justify-center"
+          >
+            <div
+              class="text-5xl md:text-6xl font-extrabold text-teal-900 mb-4 tracking-tight"
+            >
+              <span class="counter" data-target="4">0</span>
+            </div>
+            <p class="text-[#4E4C42] font-bold text-lg leading-snug">
+              settings served: schools, therapy centres, homes and community
+              institutions
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 6. OUR WORK (PORTFOLIO GRID) -->
+      <section
+        id="our-work"
+        class="py-16 px-6 bg-[#F1EADA] border-y border-[#E1D8C4]"
+        aria-labelledby="work-heading"
+      >
+        <div class="max-w-7xl mx-auto">
+          <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+            <div>
+              <h2 id="work-heading" class="text-3xl font-bold text-[#26251F]">
+                Inclusion in practice
+              </h2>
+              <p class="text-[#4E4C42] max-w-2xl mt-1">
+                A look at completed projects — from assessment through to
+                equipped, working spaces.
+              </p>
+            </div>
+            <button
+              type="button"
+              class="listen-btn no-read inline-flex items-center gap-2 border-2 border-dashed border-[#E1D8C4] text-[#4E4C42] px-4 py-2 rounded-lg font-bold text-sm min-h-[44px] hover:border-teal-900 hover:text-teal-900 transition-colors"
+              data-target="our-work"
+              data-default-label="Listen to this section"
+              aria-pressed="false"
+            >
+              <span aria-hidden="true">🔊</span>
+              <span class="btn-label">Listen to this section</span>
+            </button>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10"
+          >
+            <!-- Card 1 -->
+            <article
+              class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm flex flex-col gap-4"
+            >
+              <img
+                src="https://via.placeholder.com/600x400.png?text=Tumaini+Autism+Centre"
+                alt="Tumaini Autism Centre"
+                class="w-full h-44 rounded-lg object-cover bg-slate-200"
+              />
+              <div>
+                <h3 class="text-xl font-bold text-[#26251F] mb-1">
+                  Tumaini Autism Centre
+                </h3>
+                <p class="text-[#4E4C42] text-sm">
+                  Assessment, design and set-up of sensory and therapy learning
+                  spaces.
+                </p>
+              </div>
+            </article>
+
+            <!-- Card 2 -->
+            <article
+              class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm flex flex-col gap-4"
+            >
+              <img
+                src="https://via.placeholder.com/600x400.png?text=Urafiki+Carovana+School"
+                alt="Urafiki Carovana School"
+                class="w-full h-44 rounded-lg object-cover bg-slate-200"
+              />
+              <div>
+                <h3 class="text-xl font-bold text-[#26251F] mb-1">
+                  Urafiki Carovana School
+                </h3>
+                <p class="text-[#4E4C42] text-sm">
+                  Equipment and inclusive-classroom support from challenge
+                  through to installation.
+                </p>
+              </div>
+            </article>
+
+            <!-- Card 3 -->
+            <article
+              class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm flex flex-col gap-4"
+            >
+              <img
+                src="https://via.placeholder.com/600x400.png?text=Nexus+Therapy+Centres"
+                alt="Nexus Therapy Centres"
+                class="w-full h-44 rounded-lg object-cover bg-slate-200"
+              />
+              <div>
+                <h3 class="text-xl font-bold text-[#26251F] mb-1">
+                  Nexus Therapy Centres
+                </h3>
+                <p class="text-[#4E4C42] text-sm">
+                  Design and equipment evolution across a growing therapy-centre
+                  network.
+                </p>
+              </div>
+            </article>
+
+            <!-- Card 4 -->
+            <article
+              class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm flex flex-col gap-4"
+            >
+              <img
+                src="https://via.placeholder.com/600x400.png?text=Kasarani+Primary+School"
+                alt="Kasarani Primary School Autism Unit"
+                class="w-full h-44 rounded-lg object-cover bg-slate-200"
+              />
+              <div>
+                <h3 class="text-xl font-bold text-[#26251F] mb-1">
+                  Kasarani Primary School Autism Unit
+                </h3>
+                <p class="text-[#4E4C42] text-sm">
+                  CSR project supplying inclusive learning and therapy equipment
+                  to a public-school autism unit.
+                </p>
+              </div>
+            </article>
+
+            <!-- Card 5 -->
+            <article
+              class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm flex flex-col gap-4"
+            >
+              <img
+                src="https://via.placeholder.com/600x400.png?text=Dagoretti+Special+School"
+                alt="Dagoretti Special School"
+                class="w-full h-44 rounded-lg object-cover bg-slate-200"
+              />
+              <div>
+                <h3 class="text-xl font-bold text-[#26251F] mb-1">
+                  Dagoretti Special School
+                </h3>
+                <p class="text-[#4E4C42] text-sm">
+                  Equipment and space development supporting learners at a
+                  special school.
+                </p>
+              </div>
+            </article>
+
+            <!-- Card 6 -->
+            <article
+              class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm flex flex-col gap-4"
+            >
+              <img
+                src="https://via.placeholder.com/600x400.png?text=Mnarani+Primary+School"
+                alt="Mnarani Primary School — Special Needs Unit, Kilifi"
+                class="w-full h-44 rounded-lg object-cover bg-slate-200"
+              />
+              <div>
+                <h3 class="text-xl font-bold text-[#26251F] mb-1">
+                  Mnarani Primary School — Special Needs Unit, Kilifi
+                </h3>
+                <p class="text-[#4E4C42] text-sm">
+                  Community and school-impact project equipping a special-needs
+                  unit.
+                </p>
+              </div>
+            </article>
+          </div>
+
+          <div class="flex flex-wrap gap-4">
+            <a
+              href="#contact"
+              class="border-2 border-teal-900 text-teal-900 hover:bg-teal-50 font-bold px-6 py-3 rounded-lg min-h-[44px] inline-flex items-center justify-center transition-colors"
+              >Partner with us on a CSR inclusive space</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. RESOURCES & NEUROREHUB -->
+      <section
+        id="resources"
+        class="py-16 px-6 max-w-7xl mx-auto"
+        aria-labelledby="resources-heading"
+      >
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+          <h2 id="resources-heading" class="text-3xl font-bold text-[#26251F]">
+            Looking for neurodiversity information &amp; support?
+          </h2>
+          <button
+            type="button"
+            class="listen-btn no-read inline-flex items-center gap-2 border-2 border-dashed border-[#E1D8C4] text-[#4E4C42] px-4 py-2 rounded-lg font-bold text-sm min-h-[44px] hover:border-teal-900 hover:text-teal-900 transition-colors"
+            data-target="resources"
+            data-default-label="Listen to this section"
+            aria-pressed="false"
+          >
+            <span aria-hidden="true">🔊</span>
+            <span class="btn-label">Listen to this section</span>
+          </button>
+        </div>
+
         <div
-          class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-12"
+          class="bg-teal-900 text-white rounded-2xl p-8 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center mb-8 shadow-sm"
         >
-          <!-- Phone -->
-          <a
-            href="tel:0734635274"
-            class="flex items-center gap-3 text-gray-800 hover:text-brick-ember-600 transition cursor-pointer"
-          >
-            <svg
-              class="w-6 h-6 text-brick-ember-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+          <div class="lg:col-span-8">
+            <p class="text-lg text-white/90 leading-relaxed max-w-2xl">
+              We provide practical products and inclusive environments. For
+              ongoing digital information, service navigation, caregiver
+              resources and neurodiversity support, we connect you to
+              <strong>NeuroReHub</strong> — covering neurodiversity information,
+              service and schools directories, community support, and calming
+              and tracking tools.
+            </p>
+          </div>
+          <div class="lg:col-span-4 flex flex-col gap-3">
+            <a
+              href="#resources"
+              class="bg-white text-teal-900 hover:bg-slate-100 font-bold px-5 py-3 rounded-lg flex items-center justify-center gap-2 transition-colors"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-              ></path>
-            </svg>
-            <span class="font-semibold">0734 635 274</span>
-          </a>
+              <span aria-hidden="true">🌐</span> Access NeuroReHub online
+            </a>
+            <a
+              href="#resources"
+              class="bg-white text-teal-900 hover:bg-slate-100 font-bold px-5 py-3 rounded-lg flex items-center justify-center gap-2 transition-colors"
+            >
+              <span aria-hidden="true">📱</span> Download the NeuroReHub app
+            </a>
+          </div>
+        </div>
 
-          <!-- Website -->
-          <a
-            href="https://www.specialneedsresourcehub.org"
-            target="_blank"
-            class="flex items-center gap-3 text-gray-800 hover:text-brick-ember-600 transition cursor-pointer"
-          >
-            <svg
-              class="w-6 h-6 text-brick-ember-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-              ></path>
-            </svg>
-            <span class="font-semibold"> www.specialneedsresourcehub.org</span>
-          </a>
+        <p class="text-[#4E4C42] text-base">
+          <strong>Quick Information:</strong> Understanding Autism ·
+          Understanding ADHD · Understanding Sensory Processing · Assistive
+          Technology Explained · Creating Sensory-Friendly Environments ·
+          Inclusive Education.
+        </p>
+      </section>
 
-          <!-- Email -->
-          <a
-            href="mailto:support@specialneedsresourcehub.org"
-            class="flex items-center gap-3 text-gray-800 hover:text-brick-ember-600 transition cursor-pointer"
+      <!-- 8. TRAINING & INSTITUTIONS -->
+      <section
+        id="institutions"
+        class="py-16 px-6 bg-[#F1EADA] border-y border-[#E1D8C4]"
+        aria-labelledby="inst-heading"
+      >
+        <div class="max-w-7xl mx-auto">
+          <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+            <div>
+              <h2 id="inst-heading" class="text-3xl font-bold text-[#26251F]">
+                Training &amp; solutions for institutions
+              </h2>
+              <p class="text-[#4E4C42] max-w-3xl mt-1">
+                We provide practical orientation linked to the equipment and
+                spaces we install. For broader teacher, caregiver and workplace
+                training programmes, continue to Nexus Neuro Academy.
+              </p>
+            </div>
+            <button
+              type="button"
+              class="listen-btn no-read inline-flex items-center gap-2 border-2 border-dashed border-[#E1D8C4] text-[#4E4C42] px-4 py-2 rounded-lg font-bold text-sm min-h-[44px] hover:border-teal-900 hover:text-teal-900 transition-colors"
+              data-target="institutions"
+              data-default-label="Listen to this section"
+              aria-pressed="false"
+            >
+              <span aria-hidden="true">🔊</span>
+              <span class="btn-label">Listen to this section</span>
+            </button>
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10"
           >
-            <svg
-              class="w-6 h-6 text-brick-ember-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            <article
+              class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-              ></path>
-            </svg>
-            <span class="font-semibold"
-              >support@specialneedsresourcehub.org</span
+              <h3 class="text-xl font-bold text-[#26251F] mb-2">Schools</h3>
+              <p class="text-[#4E4C42] text-sm">
+                Inclusive classrooms, sensory rooms, autism units, equipment and
+                teacher support.
+              </p>
+            </article>
+            <article
+              class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm"
             >
-          </a>
+              <h3 class="text-xl font-bold text-[#26251F] mb-2">
+                Hospitals &amp; healthcare
+              </h3>
+              <p class="text-[#4E4C42] text-sm">
+                Sensory-friendly environments, paediatric spaces and assistive
+                equipment.
+              </p>
+            </article>
+            <article
+              class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm"
+            >
+              <h3 class="text-xl font-bold text-[#26251F] mb-2">
+                Therapy &amp; rehabilitation centres
+              </h3>
+              <p class="text-[#4E4C42] text-sm">
+                Complete therapy-room design, equipment and setup.
+              </p>
+            </article>
+            <article
+              class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm"
+            >
+              <h3 class="text-xl font-bold text-[#26251F] mb-2">
+                Churches &amp; faith communities
+              </h3>
+              <p class="text-[#4E4C42] text-sm">
+                Sensory rooms, calm spaces and inclusive children's
+                environments.
+              </p>
+            </article>
+            <article
+              class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm"
+            >
+              <h3 class="text-xl font-bold text-[#26251F] mb-2">Employers</h3>
+              <p class="text-[#4E4C42] text-sm">
+                Sensory-friendly and neuroinclusive workplace environments.
+              </p>
+            </article>
+            <article
+              class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm"
+            >
+              <h3 class="text-xl font-bold text-[#26251F] mb-2">
+                NGOs, government &amp; partners
+              </h3>
+              <p class="text-[#4E4C42] text-sm">
+                Large-scale procurement, school and community projects, CSR
+                implementation.
+              </p>
+            </article>
+          </div>
+
+          <div class="flex flex-wrap gap-4">
+            <a
+              href="#contact"
+              class="bg-teal-900 hover:bg-teal-800 text-white font-bold px-6 py-3 rounded-lg min-h-[44px] inline-flex items-center justify-center transition-colors"
+              >Talk to us about your institution</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. CONTACT SECTION -->
+      <section
+        id="contact"
+        class="py-16 px-6 max-w-7xl mx-auto"
+        aria-labelledby="contact-heading"
+      >
+        <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+          <h2 id="contact-heading" class="text-3xl font-bold text-[#26251F]">
+            What can we help you with?
+          </h2>
+          <button
+            type="button"
+            class="listen-btn no-read inline-flex items-center gap-2 border-2 border-dashed border-[#E1D8C4] text-[#4E4C42] px-4 py-2 rounded-lg font-bold text-sm min-h-[44px] hover:border-teal-900 hover:text-teal-900 transition-colors"
+            data-target="contact"
+            data-default-label="Listen to this section"
+            aria-pressed="false"
+          >
+            <span aria-hidden="true">🔊</span>
+            <span class="btn-label">Listen to this section</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm flex flex-col justify-between"
+          >
+            <div>
+              <h3 class="text-xl font-bold text-[#26251F] mb-1">
+                Buy equipment
+              </h3>
+              <p class="text-[#4E4C42] text-sm mb-4">
+                Ask about a product or place an order.
+              </p>
+            </div>
+            <a
+              href="mailto:support@specialneedsresourcehub.org?subject=Product%20enquiry"
+              class="font-bold text-teal-900 hover:underline"
+              >Email us</a
+            >
+          </div>
+
+          <div
+            class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm flex flex-col justify-between"
+          >
+            <div>
+              <h3 class="text-xl font-bold text-[#26251F] mb-1">
+                Request a quotation
+              </h3>
+              <p class="text-[#4E4C42] text-sm mb-4">
+                Get pricing for a product or institutional order.
+              </p>
+            </div>
+            <a
+              href="mailto:support@specialneedsresourcehub.org?subject=Quotation%20request"
+              class="font-bold text-teal-900 hover:underline"
+              >Email us</a
+            >
+          </div>
+
+          <div
+            class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm flex flex-col justify-between"
+          >
+            <div>
+              <h3 class="text-xl font-bold text-[#26251F] mb-1">
+                Create an inclusive space
+              </h3>
+              <p class="text-[#4E4C42] text-sm mb-4">
+                Book a site visit and assessment.
+              </p>
+            </div>
+            <a
+              href="mailto:support@specialneedsresourcehub.org?subject=Site%20visit%20request"
+              class="font-bold text-teal-900 hover:underline"
+              >Email us</a
+            >
+          </div>
+
+          <div
+            class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm flex flex-col justify-between"
+          >
+            <div>
+              <h3 class="text-xl font-bold text-[#26251F] mb-1">
+                Institutional enquiry
+              </h3>
+              <p class="text-[#4E4C42] text-sm mb-4">
+                Represent a school, hospital or organisation.
+              </p>
+            </div>
+            <a
+              href="mailto:support@specialneedsresourcehub.org?subject=Institutional%20enquiry"
+              class="font-bold text-teal-900 hover:underline"
+              >Email us</a
+            >
+          </div>
+
+          <div
+            class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm flex flex-col justify-between"
+          >
+            <div>
+              <h3 class="text-xl font-bold text-[#26251F] mb-1">
+                Partnership / CSR enquiry
+              </h3>
+              <p class="text-[#4E4C42] text-sm mb-4">
+                Explore sponsoring or co-funding an inclusive space.
+              </p>
+            </div>
+            <a
+              href="mailto:support@specialneedsresourcehub.org?subject=Partnership%20enquiry"
+              class="font-bold text-teal-900 hover:underline"
+              >Email us</a
+            >
+          </div>
+
+          <div
+            class="bg-white border border-[#E1D8C4] rounded-2xl p-6 shadow-sm flex flex-col justify-between"
+          >
+            <div>
+              <h3 class="text-xl font-bold text-[#26251F] mb-1">
+                Speak to the team
+              </h3>
+              <p class="text-[#4E4C42] text-sm mb-4">
+                Prefer to chat? Message us directly.
+              </p>
+            </div>
+            <a
+              href="mailto:support@specialneedsresourcehub.org?subject=General%20enquiry"
+              class="font-bold text-teal-900 hover:underline"
+              >Email us</a
+            >
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 10. SITE FOOTER -->
+    <footer
+      class="bg-[#26251F] text-[#F1EADA] pt-16 pb-8 px-6"
+      role="contentinfo"
+    >
+      <div
+        class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-12"
+      >
+        <div class="lg:col-span-1">
+          <h3 class="text-white font-bold text-base mb-3">
+            Special Needs Resource Hub
+          </h3>
+          <p class="text-sm text-[#CFC9B8]">
+            The assistive solutions and inclusive-environments arm of the Andy
+            Speaks ecosystem.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-white font-bold text-base mb-3">Shop</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#shop" class="hover:underline">All categories</a></li>
+            <li><a href="#shop" class="hover:underline">Shop by need</a></li>
+            <li><a href="#shop" class="hover:underline">Shop by setting</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-white font-bold text-base mb-3">Inclusive Spaces</h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a href="#inclusive-spaces" class="hover:underline"
+                >Our approach</a
+              >
+            </li>
+            <li>
+              <a href="#inclusive-spaces" class="hover:underline"
+                >Types of spaces</a
+              >
+            </li>
+            <li>
+              <a href="#our-work" class="hover:underline">Completed projects</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-white font-bold text-base mb-3">Resources</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#resources" class="hover:underline">NeuroReHub</a></li>
+            <li>
+              <a href="#institutions" class="hover:underline"
+                >Training &amp; support</a
+              >
+            </li>
+            <li>
+              <a href="#institutions" class="hover:underline"
+                >Partner with us</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-white font-bold text-base mb-3">Contact</h3>
+          <ul class="space-y-2 text-sm">
+            <li>
+              <a
+                href="mailto:support@specialneedsresourcehub.org"
+                class="hover:underline"
+                >support@specialneedsresourcehub.org</a
+              >
+            </li>
+            <li>
+              <a href="#contact" class="hover:underline">Send an enquiry</a>
+            </li>
+          </ul>
         </div>
       </div>
-    </section>
-    <!-- FOOTER -->
-    <footer class="bg-gray-900 py-4 text-center">
-      <div class="max-w-xl mx-auto flex flex-col justify-center items-center">
-        <!-- footer Black & White Logo -->
-        <a href="#">
-          <img
-            src="./images/RH-BW-logo-noBG.png"
-            alt="Special Needs Resource Hub Logo"
-            class="h-16 w-auto mb-2 opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-pointer"
-          />
-        </a>
-        <p class="text-gray-400 text-sm">
-          &copy; 2026 Special Needs Resource Hub. All rights reserved.
+      <div
+        class="max-w-7xl mx-auto border-t border-white/20 pt-6 text-sm text-[#CFC9B8] text-center"
+      >
+        <p>
+          © 2026 Special Needs Resource Hub. Part of the Andy Speaks ecosystem.
         </p>
       </div>
     </footer>
-    <script src="./js/script.js"></script>
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a
+      href="https://wa.me/254734635274"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="floating-wa fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#128C7E] text-white p-4 rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center hover:-translate-y-1 focus:outline-none focus:ring-4 focus:ring-green-300"
+      aria-label="Chat with us on WhatsApp"
+    >
+      <svg
+        class="w-8 h-8"
+        fill="currentColor"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"
+        />
+      </svg>
+    </a>
+
+    <!-- SEPARATE JAVASCRIPT FILE -->
+    <script src="./js/script.js" defer></script>
   </body>
 </html>
