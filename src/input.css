@@ -108,3 +108,5 @@ a:focus-visible, button:focus-visible, select:focus-visible {
   outline: 3px solid #1b4dff;
   outline-offset: 3px;
 }
+
+@custom-variant hc (.high-contrast &);

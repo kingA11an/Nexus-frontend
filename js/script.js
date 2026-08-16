@@ -123,7 +123,7 @@
 // impact page animation 
 document.addEventListener("DOMContentLoaded", () => {
   const counters = document.querySelectorAll('.counter');
-  const animationDuration = 1500; // Animation length in milliseconds (2.5 seconds)
+  const animationDuration = 1500; // Animation length in milliseconds (1.5 seconds)
 
   const animateCounters = (entries, observer) => {
     entries.forEach(entry => {
