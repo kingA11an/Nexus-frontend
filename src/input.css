@@ -49,7 +49,7 @@ html.high-contrast article {
   border: 1px solid #ffd400 !important;
 }
 
-/* Make links and specific text cyan (Escaped brackets) */
+/* Make links and specific text cyan  */
 html.high-contrast a,
 html.high-contrast .text-teal-800,
 html.high-contrast .text-teal-900,
@@ -57,7 +57,7 @@ html.high-contrast .text-\[\#26251F\] {
   color: #7fe7d4 !important;
 }
 
-/* Fix ALL solid buttons to yellow with black text (Escaped brackets) */
+/* Fix ALL solid buttons to yellow with black text */
 html.high-contrast .bg-teal-900,
 html.high-contrast .bg-teal-800,
 html.high-contrast .bg-\[\#9C5D1E\] {
@@ -65,7 +65,7 @@ html.high-contrast .bg-\[\#9C5D1E\] {
   color: #000000 !important;
   border: none !important;
 }
-/* Fix ALL solid buttons to yellow with black text (Escaped brackets) */
+/* Fix ALL solid buttons to yellow with black text  */
 html.high-contrast .bg-teal-900,
 html.high-contrast .bg-teal-800,
 html.high-contrast .bg-\[\#9C5D1E\],
@@ -75,7 +75,7 @@ html.high-contrast .floating-wa {
   border: none !important;
 }
 
-/* Fix outlined buttons to have yellow borders (Escaped brackets) */
+/* Fix outlined buttons to have yellow borders  */
 html.high-contrast .border-teal-900,
 html.high-contrast .border-\[\#E1D8C4\] {
   border-color: #ffd400 !important;

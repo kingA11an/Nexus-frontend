@@ -6,7 +6,7 @@
     if (statusEl) statusEl.textContent = msg;
   }
 
-  /* ---- Mobile Navigation Toggle ---- */
+  // Mobile Navigation Toggle
   const navToggle = document.getElementById("nav-toggle");
   const nav = document.getElementById("primary-nav");
   if (navToggle && nav) {
@@ -22,7 +22,7 @@
     });
   }
 
-  /* ---- Text Size Adjuster ---- */
+  // Text Size Adjuster 
   const sizes = [87.5, 100, 112.5, 125, 137.5];
   let sizeIndex = 1;
   function applySize() {
@@ -42,7 +42,7 @@
     applySize();
   });
 
-  /* ---- High Contrast Toggle ---- */
+  // High Contrast Toggle 
   const contrastBtn = document.getElementById("contrast-toggle");
   contrastBtn?.addEventListener("click", function () {
     const on = document.documentElement.classList.toggle("high-contrast");
@@ -50,7 +50,7 @@
     announce(on ? "High contrast mode on." : "High contrast mode off.");
   });
 
-  /* ---- Text-to-Speech (Read Aloud) ---- */
+  //  Text-to-Speech (Read Aloud) 
   const synth = window.speechSynthesis;
   const speedSelect = document.getElementById("speed-select");
   let currentBtn = null;

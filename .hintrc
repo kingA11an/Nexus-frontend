@@ -3,6 +3,15 @@
     "development"
   ],
   "hints": {
-    "disown-opener": "off"
+    "disown-opener": "off",
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "-webkit-text-size-adjust",
+          "background-color: color-mix(in srgb, #fff 20%, transparent)"
+        ]
+      }
+    ]
   }
 }
