@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en" class="scroll-pt-35 scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Special Needs Resource Hub</title>
+    <meta
+      name="description"
+      content="Assistive products, sensory and therapy equipment, and inclusive-space design for homes, schools, therapy centres, healthcare facilities, churches, workplaces and community institutions."
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Compiled Tailwind v4 Stylesheet -->
+    <link rel="stylesheet" href="dist/output.css" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./Images/logo-large.png" />
+  </head>
+
+  <body class="bg-brand-bg text-lg leading-relaxed text-[#26251F] antialiased">
+    <!-- SKIP LINK -->
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-teal-900 focus:p-4 focus:font-bold focus:text-white"
+    >
+      Skip to main content
+    </a>
+
+    <!-- STICKY HEADER WRAPPER -->
+    <div class="sticky top-0 z-50 flex w-full flex-col shadow-md">
+      <!-- ACCESSIBILITY TOOLBAR  -->
+      <div
+        class="a11y-bar border-b border-teal-800 bg-teal-900 px-2 py-1.5 text-white sm:px-4 sm:py-2"
+        role="region"
+        aria-label="Accessibility tools"
+      >
+        <div
+          class="no-scrollbar mx-auto flex max-w-7xl flex-nowrap items-center justify-between gap-1 overflow-x-auto text-[10px] font-bold sm:justify-end sm:gap-3 sm:text-sm"
+        >
+          <span
+            class="flex shrink-0 items-center gap-0.5 sm:gap-1.5"
+            role="group"
+            aria-label="Text size"
+          >
+            <button
+              type="button"
+              id="font-dec"
+              class="min-h-8 rounded-md border border-white/40 bg-white/10 px-1.5 py-1 transition-colors hover:bg-white/20 sm:min-h-11 sm:px-3 sm:py-1.5"
+              aria-label="Decrease text size"
+            >
+              A−
+            </button>
+            <button
+              type="button"
+              id="font-reset"
+              class="min-h-8 rounded-md border border-white/40 bg-white/10 px-1.5 py-1 transition-colors hover:bg-white/20 sm:min-h-11 sm:px-3 sm:py-1.5"
+              aria-label="Reset text size"
+            >
+              A
+            </button>
+            <button
+              type="button"
+              id="font-inc"
+              class="min-h-8 rounded-md border border-white/40 bg-white/10 px-1.5 py-1 transition-colors hover:bg-white/20 sm:min-h-11 sm:px-3 sm:py-1.5"
+              aria-label="Increase text size"
+            >
+              A+
+            </button>
+          </span>
+          <button
+            type="button"
+            id="contrast-toggle"
+            class="hc:text-white flex min-h-8 shrink-0 items-center gap-1 rounded-md border border-white/40 bg-white/10 px-1.5 py-1 transition-colors hover:bg-white/20 sm:min-h-11 sm:gap-1.5 sm:px-3 sm:py-1.5"
+            aria-pressed="false"
+          >
+            <span aria-hidden="true">◐</span>
+            <span class="hidden sm:inline">High contrast</span>
+            <span class="sm:hidden">Contrast</span>
+          </button>
+          <span
+            class="flex shrink-0 items-center gap-1 sm:gap-1.5"
+            role="group"
+            aria-label="Read aloud controls"
+          >
+            <label for="speed-select" class="sr-only">Reading speed</label>
+            <select
+              id="speed-select"
+              class="hc:bg-black hc:text-white hc:border-gray-600 min-h-8 rounded-md border border-white/40 bg-white px-1 py-1 text-[10px] font-semibold text-slate-800 transition-colors sm:min-h-11 sm:px-2.5 sm:py-1.5 sm:text-sm"
+            >
+              <option value="0.8" class="hc:bg-black hc:text-white">
+                Slow
+              </option>
+              <option value="1" selected class="hc:bg-black hc:text-white">
+                Normal
+              </option>
+              <option value="1.25" class="hc:bg-black hc:text-white">
+                Fast
+              </option>
+            </select>
+            <button
+              type="button"
+              id="read-page-btn"
+              class="flex min-h-8 items-center gap-1 rounded-md border border-white/40 bg-white/10 px-1.5 py-1 transition-colors hover:bg-white/20 sm:min-h-11 sm:gap-1.5 sm:px-3 sm:py-1.5"
+              data-default-label="Read page aloud"
+              aria-pressed="false"
+            >
+              <svg
+                class="h-3 w-3 shrink-0 sm:h-4 sm:w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5 10v4a2 2 0 002 2h2.586l3.707 3.707A1 1 0 0015 19V5a1 1 0 00-1.707-.707L9.586 8H7a2 2 0 00-2 2z"
+                />
+              </svg>
+              <span class="btn-label hidden sm:inline">Read page aloud</span>
+              <span class="btn-label sm:hidden">Read page</span>
+            </button>
+          </span>
+        </div>
+        <p
+          id="a11y-status"
+          class="sr-only"
+          role="status"
+          aria-live="polite"
+        ></p>
+      </div>
+
+      <!-- SITE HEADER (SHOP VERSION) -->
+      <header
+        class="bg-brand-bg border-brand-border relative border-b"
+        role="banner"
+      >
+        <div
+          class="mx-auto flex max-w-350 flex-nowrap items-center justify-between gap-2 px-3 py-3 sm:px-6 sm:py-4 lg:gap-4"
+        >
+          <!-- LEFT SIDE: Logo, Brand Name & Emblem -->
+          <a
+            href="index.html"
+            class="group flex min-w-0 shrink-0 items-center gap-2 outline-none sm:gap-3 lg:gap-4"
+          >
+            <!-- Standard Butterfly Logo  -->
+            <img
+              src="./Images/logo-large.png"
+              alt="SNRH Logo"
+              class="hc:hidden block h-10 w-auto shrink-0 object-contain ring-teal-600 group-focus-visible:ring-4 sm:h-12 lg:h-16"
+            />
+
+            <!-- Black & White Logo (High Contrast Mode) -->
+            <img
+              src="./Images/RH-BW-logo-noBG.png"
+              alt="Special Needs Resource Hub (High Contrast)"
+              class="hc:block hidden h-10 w-auto shrink-0 object-contain sm:h-12 lg:h-16"
+            />
+
+            <div class="flex min-w-0 flex-col justify-center">
+              <span
+                class="text-[15px] leading-[1.15] font-bold tracking-tight text-[#26251F] sm:text-xl lg:text-2xl"
+                >Special Needs<br class="lg:hidden" />
+                Resource Hub</span
+              >
+              <span
+                class="lg:text-brand-accent-dark mt-0.5 text-[7px] font-bold tracking-widest whitespace-nowrap text-[#C17F49] uppercase sm:text-[0.65rem] lg:text-xs lg:tracking-[0.2em]"
+                >Design · Equip · Setup · Empower</span
+              >
+            </div>
+          </a>
+
+          <!-- Mobile Menu Button -->
+          <button
+            type="button"
+            id="nav-toggle"
+            class="border-brand-border inline-flex min-h-9 shrink-0 items-center justify-center gap-1.5 rounded-lg border-2 px-2.5 py-1.5 text-sm font-bold lg:hidden"
+          >
+            <span aria-hidden="true" class="text-lg leading-none">≡</span> Menu
+          </button>
+
+          <!-- RIGHT SIDE: Links (Streamlined for Shop) -->
+          <nav
+            id="primary-nav"
+            class="bg-brand-bg border-brand-border absolute top-full right-4 left-4 z-50 ml-auto hidden flex-col items-start gap-5 rounded-2xl border p-4 shadow-2xl sm:left-auto sm:w-80 lg:static lg:flex lg:w-auto lg:items-end lg:gap-3 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none"
+            aria-label="Primary"
+          >
+            <ul
+              class="flex w-full flex-col items-start gap-2 text-sm font-bold text-[#26251F] lg:w-auto lg:flex-row lg:items-center lg:gap-4 lg:text-base xl:gap-6"
+            >
+              <li>
+                <a
+                  href="index.html"
+                  class="block rounded-md px-3 py-1.5 whitespace-nowrap transition-colors hover:text-teal-800 lg:px-2 lg:py-1"
+                  >&larr; Back to Main Site</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#contact"
+                  class="block rounded-md px-3 py-1.5 whitespace-nowrap transition-colors hover:text-teal-800 lg:px-2 lg:py-1"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+    </div>
+    <main>
+      <section class="mx-auto max-w-7xl px-4 py-10">
+        <h1 class="mb-8 text-3xl font-bold">Assistive Devices & Resources</h1>
+
+        <!-- Category Filters (Horizontal Scroll) -->
+        <div
+          class="no-scrollbar mb-8 flex w-full gap-3 overflow-x-auto pb-2 text-sm sm:flex-wrap sm:overflow-visible"
+        >
+          <!-- Active Pill (All) -->
+          <button
+            class="rounded-full bg-teal-900 px-5 py-2 font-bold whitespace-nowrap text-white shadow-sm transition-colors hover:bg-teal-800"
+          >
+            All Products
+          </button>
+
+          <!-- Inactive Pills (Categories based on Drive folders) -->
+          <button
+            class="rounded-full border border-gray-300 bg-white px-5 py-2 font-semibold whitespace-nowrap text-gray-700 shadow-sm transition-colors hover:border-teal-600 hover:text-teal-700"
+          >
+            Fidget Toys
+          </button>
+
+          <button
+            class="rounded-full border border-gray-300 bg-white px-5 py-2 font-semibold whitespace-nowrap text-gray-700 shadow-sm transition-colors hover:border-teal-600 hover:text-teal-700"
+          >
+            Sensory Activities
+          </button>
+
+          <button
+            class="rounded-full border border-gray-300 bg-white px-5 py-2 font-semibold whitespace-nowrap text-gray-700 shadow-sm transition-colors hover:border-teal-600 hover:text-teal-700"
+          >
+            Oral Motor
+          </button>
+
+          <button
+            class="rounded-full border border-gray-300 bg-white px-5 py-2 font-semibold whitespace-nowrap text-gray-700 shadow-sm transition-colors hover:border-teal-600 hover:text-teal-700"
+          >
+            Cognitive AD
+          </button>
+        </div>
+      </section>
+    </main>
+    <!-- FOOTER -->
+    <footer
+      class="border-brand-border/20 border-t bg-[#26251F] px-4 pt-12 pb-6 lg:px-6 lg:pt-16"
+    >
+      <div class="mx-auto max-w-7xl">
+        <!-- Main Footer Layout -->
+        <div
+          class="mb-12 flex flex-col justify-between gap-8 lg:mb-16 lg:flex-row lg:gap-10"
+        >
+          <!-- Column 1: Brand Info with Logo -->
+          <div
+            class="flex w-full flex-col items-start lg:-mt-6 lg:w-1/3 lg:max-w-xs"
+          >
+            <a href="#">
+              <img
+                src="./images/RH-BW-logo-noBG.png"
+                alt="Special Needs Resource Hub Logo"
+                class="mb-2 h-16 w-auto cursor-pointer object-contain opacity-40 transition-opacity duration-300 hover:opacity-100 lg:h-20"
+              />
+            </a>
+
+            <!-- Brand Name & Description -->
+            <h4 class="mb-2 text-base font-bold text-white lg:text-lg">
+              Special Needs Resource Hub
+            </h4>
+            <p class="text-brand-border text-xs leading-relaxed lg:text-sm">
+              The assistive solutions and inclusive-environments arm of the Andy
+              Speaks ecosystem.
+            </p>
+          </div>
+
+          <!-- Link Columns Container  -->
+          <div
+            class="grid w-full grid-cols-2 gap-6 sm:grid-cols-4 lg:flex lg:w-auto lg:justify-between lg:gap-12"
+          >
+            <!-- Column 2: Shop -->
+            <div class="w-full">
+              <h4
+                class="mb-3 text-base font-bold text-white lg:mb-4 lg:text-lg"
+              >
+                Shop
+              </h4>
+              <ul class="flex flex-col gap-2.5 lg:gap-3">
+                <li>
+                  <a
+                    href="#"
+                    class="text-brand-border inline-block text-xs transition-all duration-300 hover:translate-x-1 hover:text-white lg:text-sm"
+                    >All categories</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="text-brand-border inline-block text-xs transition-all duration-300 hover:translate-x-1 hover:text-white lg:text-sm"
+                    >Shop by need</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="text-brand-border inline-block text-xs transition-all duration-300 hover:translate-x-1 hover:text-white lg:text-sm"
+                    >Shop by setting</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- Column 3: Inclusive Spaces -->
+            <div class="w-full">
+              <h4
+                class="mb-3 text-base font-bold text-white lg:mb-4 lg:text-lg"
+              >
+                Inclusive Spaces
+              </h4>
+              <ul class="flex flex-col gap-2.5 lg:gap-3">
+                <li>
+                  <a
+                    href="index.html#inclusive-spaces"
+                    class="text-brand-border inline-block text-xs transition-all duration-300 hover:translate-x-1 hover:text-white lg:text-sm"
+                    >Our approach</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="index.html#inclusive-spaces"
+                    class="text-brand-border inline-block text-xs transition-all duration-300 hover:translate-x-1 hover:text-white lg:text-sm"
+                    >Types of spaces</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="index.html#our-work"
+                    class="text-brand-border inline-block text-xs transition-all duration-300 hover:translate-x-1 hover:text-white lg:text-sm"
+                    >Completed projects</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- Column 4: Resources -->
+            <div class="w-full">
+              <h4
+                class="mb-3 text-base font-bold text-white lg:mb-4 lg:text-lg"
+              >
+                Resources
+              </h4>
+              <ul class="flex flex-col gap-2.5 lg:gap-3">
+                <li>
+                  <a
+                    href="index.html#resources"
+                    class="text-brand-border inline-block text-xs transition-all duration-300 hover:translate-x-1 hover:text-white lg:text-sm"
+                    >NeuroReHub</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="index.html#training-solutions"
+                    class="text-brand-border inline-block text-xs transition-all duration-300 hover:translate-x-1 hover:text-white lg:text-sm"
+                    >Training &amp; support</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="index.html#contact"
+                    class="text-brand-border inline-block text-xs transition-all duration-300 hover:translate-x-1 hover:text-white lg:text-sm"
+                    >Partner with us</a
+                  >
+                </li>
+              </ul>
+            </div>
+
+            <!-- Column 5: Contact -->
+            <div class="w-full">
+              <h4
+                class="mb-3 text-base font-bold text-white lg:mb-4 lg:text-lg"
+              >
+                Contact
+              </h4>
+              <ul class="flex flex-col gap-2.5 lg:gap-3">
+                <li>
+                  <a
+                    href="mailto:support@specialneedsresourcehub.org"
+                    class="text-brand-border inline-block text-xs break-all transition-all duration-300 hover:translate-x-1 hover:text-white lg:text-sm"
+                    >support@specialneedsresourcehub.org</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="index.html#contact"
+                    class="text-brand-border inline-block text-xs transition-all duration-300 hover:translate-x-1 hover:text-white lg:text-sm"
+                    >Send an enquiry</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider and Copyright -->
+        <div
+          class="flex flex-col items-center justify-center border-t border-white/10 px-3 pt-6 text-center lg:pt-8"
+        >
+          <p class="text-brand-border text-xs lg:text-sm">
+            &copy; 2026 Special Needs Resource Hub. Part of the Andy Soeaks
+            Neuroinclusion Ecosystem.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="./js/script.js"></script>
+  </body>
+</html>

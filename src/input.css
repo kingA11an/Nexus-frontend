@@ -11,6 +11,22 @@
   --color-brand-bg: #faf7f1;
   --color-brand-bg-alt: #f1eada;
   --color-brand-border: #e1d8c4;
+  --animate-marquee: marquee 50s linear infinite;
+
+ @keyframes marquee {
+    from {
+      transform: translateX(0%);
+    }
+
+    to {
+      transform: translateX(-100%);
+    }
+  }
+}
+
+/* 2. Add the custom hover pause utility */
+.group-marquee:hover .animate-marquee {
+  animation-play-state: paused;
 }
 
 /* Accessibility: High Contrast Mode Overrides */

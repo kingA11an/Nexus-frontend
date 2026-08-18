@@ -163,3 +163,95 @@ document.addEventListener("DOMContentLoaded", () => {
   const observer = new IntersectionObserver(animateCounters, { threshold: 0.5 });
   counters.forEach(counter => observer.observe(counter));
 });
+
+// project before and after animation 
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Find every sliding card on the page
+    const bnaCards = document.querySelectorAll('.bna-card');
+
+    // 2. Set up the Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const card = entry.target;
+            const wrapper = card.querySelector('.bna-slides-wrapper');
+            const pill = card.querySelector('.bna-pill');
+
+            if (!wrapper || !pill) return; // Safety check
+
+            // Read the exact labels from the HTML (Fallback to Before/After)
+            const label1 = card.getAttribute('data-label-1') || 'Before';
+            const label2 = card.getAttribute('data-label-2') || 'After';
+
+            if (entry.isIntersecting) {
+                // Start animation interval if not already running
+                if (!card.dataset.intervalId) {
+                    card.dataset.isAfter = "false"; // Initialize state
+                    
+                    const intervalId = setInterval(() => {
+                        let isAfter = card.dataset.isAfter === "true";
+                        isAfter = !isAfter; // Toggle state
+                        card.dataset.isAfter = isAfter;
+
+                        if (isAfter) {
+                            // Slide left to Image 2
+                            wrapper.classList.remove('translate-x-0');
+                            wrapper.classList.add('-translate-x-full');
+                            pill.textContent = label2;
+                            pill.classList.replace('bg-black/70', 'bg-teal-700');
+                        } else {
+                            // Slide right to Image 1
+                            wrapper.classList.remove('-translate-x-full');
+                            wrapper.classList.add('translate-x-0');
+                            pill.textContent = label1;
+                            pill.classList.replace('bg-teal-700', 'bg-black/70');
+                        }
+                    }, 4000); // 4 second loop
+                    
+                    card.dataset.intervalId = intervalId; 
+                }
+            } else {
+                // Pause animation when scrolled out of view to save battery
+                if (card.dataset.intervalId) {
+                    clearInterval(card.dataset.intervalId);
+                    card.dataset.intervalId = "";
+                    
+                    // Reset the card back to Image 1 so it looks clean when they scroll back
+                    card.dataset.isAfter = "false";
+                    wrapper.classList.remove('-translate-x-full');
+                    wrapper.classList.add('translate-x-0');
+                    pill.textContent = label1;
+                    pill.classList.replace('bg-teal-700', 'bg-black/70');
+                }
+            }
+        });
+    }, { threshold: 0.5 }); // Triggers when 50% of the card is visible
+
+    // 3. Attach observer to all cards
+    bnaCards.forEach(card => observer.observe(card));
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Auto-clone and auto-speed the gallery track
+    const galleryContainer = document.getElementById('gallery-container');
+    const marqueeTrack = galleryContainer ? galleryContainer.querySelector('.marquee-track') : null;
+
+    if (galleryContainer && marqueeTrack) {
+        // 1. Count the tiles and calculate the time
+        const itemCount = marqueeTrack.children.length;
+        const secondsPerItem = 8; // <-- TWEAK THIS: 8 seconds per image is usually the sweet spot!
+        const totalDuration = itemCount * secondsPerItem;
+
+        // 2. Apply the dynamic speed to the original track
+        marqueeTrack.style.animationDuration = `${totalDuration}s`;
+
+        // 3. Clone the track for the infinite loop
+        const clone = marqueeTrack.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true'); // Hide from screen readers
+        
+        // 4. Apply the exact same speed to the cloned track
+        clone.style.animationDuration = `${totalDuration}s`;
+
+        // 5. Add it to the page
+        galleryContainer.appendChild(clone);
+    }
+});
