@@ -3,10 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Special Needs Resource Hub</title>
+    <title>
+      Shop Assistive Devices & Resources | Special Needs Resource Hub
+    </title>
     <meta
       name="description"
-      content="Assistive products, sensory and therapy equipment, and inclusive-space design for homes, schools, therapy centres, healthcare facilities, churches, workplaces and community institutions."
+      content="Assistive products, sensory and therapy equipment, and inclusive-space design for homes, schools, therapy centres, and community institutions."
     />
 
     <!-- Fonts -->
@@ -24,35 +26,39 @@
     <link rel="icon" type="image/png" href="./Images/logo-large.png" />
   </head>
 
-  <body class="bg-brand-bg text-lg leading-relaxed text-[#26251F] antialiased">
+  <body
+    class="bg-brand-bg pb-20 text-base leading-relaxed text-[#26251F] antialiased md:pb-10"
+  >
     <!-- SKIP LINK -->
     <a
-      href="#main"
+      href="#main-shop"
       class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-teal-900 focus:p-4 focus:font-bold focus:text-white"
     >
-      Skip to main content
+      Skip to main catalog
     </a>
 
-    <!-- STICKY HEADER WRAPPER -->
-    <div class="sticky top-0 z-50 flex w-full flex-col shadow-md">
-      <!-- ACCESSIBILITY TOOLBAR  -->
+    <!-- STICKY HEADER & ACCESSIBILITY TOOLBAR      -->
+
+    <header class="sticky top-0 z-40 flex w-full flex-col shadow-sm">
+      <!-- ACCESSIBILITY TOOLBAR -->
       <div
-        class="a11y-bar border-b border-teal-800 bg-teal-900 px-2 py-1.5 text-white sm:px-4 sm:py-2"
+        class="a11y-bar w-full border-b border-teal-800 bg-teal-900 px-2 py-1.5 text-white sm:px-6 sm:py-2"
         role="region"
         aria-label="Accessibility tools"
       >
         <div
-          class="no-scrollbar mx-auto flex max-w-7xl flex-nowrap items-center justify-between gap-1 overflow-x-auto text-[10px] font-bold sm:justify-end sm:gap-3 sm:text-sm"
+          class="no-scrollbar mx-auto flex w-full max-w-7xl flex-nowrap items-center justify-between gap-2 overflow-x-auto text-[11px] font-bold sm:justify-end sm:gap-3 sm:text-sm"
         >
+          <!-- Text size -->
           <span
-            class="flex shrink-0 items-center gap-0.5 sm:gap-1.5"
+            class="flex shrink-0 items-center gap-1 sm:gap-1.5"
             role="group"
             aria-label="Text size"
           >
             <button
               type="button"
               id="font-dec"
-              class="min-h-8 rounded-md border border-white/40 bg-white/10 px-1.5 py-1 transition-colors hover:bg-white/20 sm:min-h-11 sm:px-3 sm:py-1.5"
+              class="min-h-7 rounded-md border border-white/40 bg-white/10 px-2 py-0.5 transition-colors hover:bg-white/20 sm:min-h-9 sm:px-3 sm:py-1"
               aria-label="Decrease text size"
             >
               A−
@@ -60,7 +66,7 @@
             <button
               type="button"
               id="font-reset"
-              class="min-h-8 rounded-md border border-white/40 bg-white/10 px-1.5 py-1 transition-colors hover:bg-white/20 sm:min-h-11 sm:px-3 sm:py-1.5"
+              class="min-h-7 rounded-md border border-white/40 bg-white/10 px-2 py-0.5 transition-colors hover:bg-white/20 sm:min-h-9 sm:px-3 sm:py-1"
               aria-label="Reset text size"
             >
               A
@@ -68,22 +74,26 @@
             <button
               type="button"
               id="font-inc"
-              class="min-h-8 rounded-md border border-white/40 bg-white/10 px-1.5 py-1 transition-colors hover:bg-white/20 sm:min-h-11 sm:px-3 sm:py-1.5"
+              class="min-h-7 rounded-md border border-white/40 bg-white/10 px-2 py-0.5 transition-colors hover:bg-white/20 sm:min-h-9 sm:px-3 sm:py-1"
               aria-label="Increase text size"
             >
               A+
             </button>
           </span>
+
+          <!-- Contrast Toggle -->
           <button
             type="button"
             id="contrast-toggle"
-            class="hc:text-white flex min-h-8 shrink-0 items-center gap-1 rounded-md border border-white/40 bg-white/10 px-1.5 py-1 transition-colors hover:bg-white/20 sm:min-h-11 sm:gap-1.5 sm:px-3 sm:py-1.5"
+            class="hc:text-white flex min-h-7 shrink-0 items-center gap-1 rounded-md border border-white/40 bg-white/10 px-2 py-0.5 transition-colors hover:bg-white/20 sm:min-h-9 sm:gap-1.5 sm:px-3 sm:py-1"
             aria-pressed="false"
           >
             <span aria-hidden="true">◐</span>
             <span class="hidden sm:inline">High contrast</span>
             <span class="sm:hidden">Contrast</span>
           </button>
+
+          <!-- Read Aloud -->
           <span
             class="flex shrink-0 items-center gap-1 sm:gap-1.5"
             role="group"
@@ -92,27 +102,20 @@
             <label for="speed-select" class="sr-only">Reading speed</label>
             <select
               id="speed-select"
-              class="hc:bg-black hc:text-white hc:border-gray-600 min-h-8 rounded-md border border-white/40 bg-white px-1 py-1 text-[10px] font-semibold text-slate-800 transition-colors sm:min-h-11 sm:px-2.5 sm:py-1.5 sm:text-sm"
+              class="hc:bg-black hc:text-white hc:border-gray-600 min-h-7 rounded-md border border-white/40 bg-white px-1.5 py-0.5 text-[11px] font-semibold text-slate-800 sm:min-h-9 sm:px-2.5 sm:py-1 sm:text-xs"
             >
-              <option value="0.8" class="hc:bg-black hc:text-white">
-                Slow
-              </option>
-              <option value="1" selected class="hc:bg-black hc:text-white">
-                Normal
-              </option>
-              <option value="1.25" class="hc:bg-black hc:text-white">
-                Fast
-              </option>
+              <option value="0.8">Slow</option>
+              <option value="1" selected>Normal</option>
+              <option value="1.25">Fast</option>
             </select>
             <button
               type="button"
               id="read-page-btn"
-              class="flex min-h-8 items-center gap-1 rounded-md border border-white/40 bg-white/10 px-1.5 py-1 transition-colors hover:bg-white/20 sm:min-h-11 sm:gap-1.5 sm:px-3 sm:py-1.5"
-              data-default-label="Read page aloud"
+              class="flex min-h-7 items-center gap-1 rounded-md border border-white/40 bg-white/10 px-2 py-0.5 transition-colors hover:bg-white/20 sm:min-h-9 sm:gap-1.5 sm:px-3 sm:py-1"
               aria-pressed="false"
             >
               <svg
-                class="h-3 w-3 shrink-0 sm:h-4 sm:w-4"
+                class="h-3.5 w-3.5 shrink-0"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -126,137 +129,1127 @@
                 />
               </svg>
               <span class="btn-label hidden sm:inline">Read page aloud</span>
-              <span class="btn-label sm:hidden">Read page</span>
+              <span class="btn-label sm:hidden">Read</span>
             </button>
           </span>
         </div>
-        <p
-          id="a11y-status"
-          class="sr-only"
-          role="status"
-          aria-live="polite"
-        ></p>
       </div>
 
-      <!-- SITE HEADER (SHOP VERSION) -->
-      <header
-        class="bg-brand-bg border-brand-border relative border-b"
-        role="banner"
+      <!-- MAIN BRAND & SEARCH ROW -->
+      <div
+        class="w-full border-b border-gray-200 bg-white px-2 py-3 sm:px-6 lg:py-4"
       >
         <div
-          class="mx-auto flex max-w-350 flex-nowrap items-center justify-between gap-2 px-3 py-3 sm:px-6 sm:py-4 lg:gap-4"
+          class="mx-auto flex w-full max-w-7xl items-center justify-between gap-2 sm:gap-4"
         >
-          <!-- LEFT SIDE: Logo, Brand Name & Emblem -->
+          <!-- BRAND LOGO -->
+
           <a
             href="index.html"
-            class="group flex min-w-0 shrink-0 items-center gap-2 outline-none sm:gap-3 lg:gap-4"
+            class="group flex min-w-0 flex-1 items-center gap-2 outline-none sm:gap-3"
           >
-            <!-- Standard Butterfly Logo  -->
             <img
               src="./Images/logo-large.png"
-              alt="SNRH Logo"
-              class="hc:hidden block h-10 w-auto shrink-0 object-contain ring-teal-600 group-focus-visible:ring-4 sm:h-12 lg:h-16"
+              alt="Special Needs Resource Hub"
+              class="hc:hidden block h-8 w-auto shrink-0 object-contain sm:h-12 lg:h-14"
             />
-
-            <!-- Black & White Logo (High Contrast Mode) -->
             <img
               src="./Images/RH-BW-logo-noBG.png"
-              alt="Special Needs Resource Hub (High Contrast)"
-              class="hc:block hidden h-10 w-auto shrink-0 object-contain sm:h-12 lg:h-16"
+              alt="SNRH Logo (High Contrast)"
+              class="hc:block hidden h-8 w-auto shrink-0 object-contain sm:h-12 lg:h-14"
             />
 
             <div class="flex min-w-0 flex-col justify-center">
               <span
-                class="text-[15px] leading-[1.15] font-bold tracking-tight text-[#26251F] sm:text-xl lg:text-2xl"
-                >Special Needs<br class="lg:hidden" />
-                Resource Hub</span
+                class="truncate text-xs font-bold tracking-tight text-[#26251F] sm:text-lg lg:text-xl"
               >
+                Special Needs Resource Hub
+              </span>
+
               <span
-                class="lg:text-brand-accent-dark mt-0.5 text-[7px] font-bold tracking-widest whitespace-nowrap text-[#C17F49] uppercase sm:text-[0.65rem] lg:text-xs lg:tracking-[0.2em]"
-                >Design · Equip · Setup · Empower</span
+                class="truncate text-[7px] font-bold tracking-wide text-[#C17F49] uppercase sm:text-[9px] sm:tracking-widest lg:text-[10px]"
               >
+                Assistive Devices &amp; Therapy Resources
+              </span>
             </div>
           </a>
 
-          <!-- Mobile Menu Button -->
+          <!-- SEARCH BAR (Center Desktop) -->
+          <div class="hidden max-w-2xl flex-1 px-4 lg:flex">
+            <div
+              class="flex w-full items-center overflow-hidden rounded-full border-2 border-teal-900/30 bg-white shadow-inner focus-within:border-teal-800"
+            >
+              <!-- Text Input -->
+              <input
+                type="search"
+                placeholder="Search assistive devices, sensory tools, fidgets..."
+                class="w-full px-5 py-2.5 text-sm text-gray-800 placeholder-gray-400 outline-none"
+              />
+
+              <!-- Category Selector Dropdown -->
+              <div class="relative border-l border-gray-200">
+                <select
+                  class="cursor-pointer appearance-none bg-transparent py-2.5 pr-8 pl-4 text-xs font-semibold tracking-wider text-gray-600 uppercase outline-none"
+                >
+                  <option value="all">All Categories</option>
+                  <option value="fidgets">Fidget Toys</option>
+                  <option value="sensory">Sensory Tools</option>
+                  <option value="oral">Oral Motor</option>
+                  <option value="cognitive">Cognitive AD</option>
+                  <option value="postural">Postural Supports</option>
+                </select>
+                <div
+                  class="pointer-events-none absolute inset-y-0 right-2 flex items-center text-gray-500"
+                >
+                  <svg
+                    class="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Search Icon Button -->
+              <button
+                class="bg-teal-900 px-5 py-3.5 text-white transition-colors hover:bg-teal-800"
+                aria-label="Submit search"
+              >
+                <svg
+                  class="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2.5"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- TOP RIGHT ACTIONS (Desktop) -->
+          <div class="hidden shrink-0 items-center gap-6 lg:flex">
+            <!-- WhatsApp Inquiries -->
+            <a
+              href="https://wa.me/254734635274"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2 text-xs font-bold text-gray-700 transition-colors hover:text-teal-900"
+            >
+              <div
+                class="flex h-9 w-9 items-center justify-center rounded-full bg-[#25D366]/15 text-[#25D366]"
+              >
+                <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24">
+                  <path
+                    d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.077-1.127-.061-.749-.24-1.637-.669-2.586-1.618-.949-.949-1.378-1.837-1.618-2.586-.138-.433-.106-.815-.061-1.127.05-.333.419-1.026.824-1.17.133-.048.271-.024.367.042.102.072.784.887.85 1.002.066.115.066.216.008.318-.058.102-.12.164-.207.251-.087.087-.183.195-.262.262-.09.076-.184.159-.08.337.104.178.463.765.992 1.236.682.608 1.258.796 1.436.9.178.104.261.01.337-.08.067-.079.175-.175.262-.262.087-.087.149-.149.251-.207.102-.058.203-.058.318.008.115.066.93.748 1.002.85.066.096.09.234.042.367z"
+                  />
+                </svg>
+              </div>
+              <div class="flex flex-col text-left leading-tight">
+                <span class="text-[10px] text-gray-500 uppercase"
+                  >Direct Orders</span
+                >
+                <span>WhatsApp Us</span>
+              </div>
+            </a>
+
+            <!-- Return to Main Site -->
+            <a
+              href="index.html"
+              class="rounded-xl border border-gray-300 bg-gray-50 px-4 py-2 text-xs font-bold text-gray-700 transition-colors hover:border-teal-900 hover:text-teal-900"
+            >
+              &larr; Back to Main Site
+            </a>
+          </div>
+
+          <!-- MOBILE CATEGORY DRAWER TOGGLE BUTTON -->
           <button
             type="button"
-            id="nav-toggle"
-            class="border-brand-border inline-flex min-h-9 shrink-0 items-center justify-center gap-1.5 rounded-lg border-2 px-2.5 py-1.5 text-sm font-bold lg:hidden"
+            id="mobile-drawer-toggle"
+            class="flex shrink-0 items-center gap-1.5 rounded-lg border-2 border-teal-900 px-2 py-1.5 text-xs font-bold text-teal-900 lg:hidden"
+            aria-label="Open Categories"
           >
-            <span aria-hidden="true" class="text-lg leading-none">≡</span> Menu
-          </button>
-
-          <!-- RIGHT SIDE: Links (Streamlined for Shop) -->
-          <nav
-            id="primary-nav"
-            class="bg-brand-bg border-brand-border absolute top-full right-4 left-4 z-50 ml-auto hidden flex-col items-start gap-5 rounded-2xl border p-4 shadow-2xl sm:left-auto sm:w-80 lg:static lg:flex lg:w-auto lg:items-end lg:gap-3 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none"
-            aria-label="Primary"
-          >
-            <ul
-              class="flex w-full flex-col items-start gap-2 text-sm font-bold text-[#26251F] lg:w-auto lg:flex-row lg:items-center lg:gap-4 lg:text-base xl:gap-6"
+            <svg
+              class="h-4 w-4 shrink-0"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <li>
-                <a
-                  href="index.html"
-                  class="block rounded-md px-3 py-1.5 whitespace-nowrap transition-colors hover:text-teal-800 lg:px-2 lg:py-1"
-                  >&larr; Back to Main Site</a
-                >
-              </li>
-              <li>
-                <a
-                  href="index.html#contact"
-                  class="block rounded-md px-3 py-1.5 whitespace-nowrap transition-colors hover:text-teal-800 lg:px-2 lg:py-1"
-                  >Contact</a
-                >
-              </li>
-            </ul>
-          </nav>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+                d="M4 6h16M4 12h16M4 18h7"
+              />
+            </svg>
+            <span>Menu</span>
+          </button>
         </div>
-      </header>
-    </div>
-    <main>
-      <section class="mx-auto max-w-7xl px-4 py-10">
-        <h1 class="mb-8 text-3xl font-bold">Assistive Devices & Resources</h1>
 
-        <!-- Category Filters (Horizontal Scroll) -->
-        <div
-          class="no-scrollbar mb-8 flex w-full gap-3 overflow-x-auto pb-2 text-sm sm:flex-wrap sm:overflow-visible"
+        <!-- MOBILE SEARCH BAR (Visible below 1024px) -->
+        <div class="mx-auto mt-3 block w-full max-w-7xl lg:hidden">
+          <div
+            class="flex w-full items-center overflow-hidden rounded-full border border-gray-300 bg-gray-50 px-3 py-1.5 focus-within:border-teal-900"
+          >
+            <svg
+              class="h-4 w-4 shrink-0 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+            <input
+              type="search"
+              placeholder="Search devices, fidgets, therapy tools..."
+              class="min-w-0 flex-1 bg-transparent px-2 text-xs text-gray-800 placeholder-gray-400 outline-none"
+            />
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+
+    <main id="main-shop" class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:py-8">
+      <!-- DESKTOP TOP HERO & BROWSE CATEGORIES ROW -->
+      <section class="grid grid-cols-1 gap-6 lg:grid-cols-4 lg:gap-8">
+        <!-- LEFT SIDEBAR: BROWSE CATEGORIES (High Elevation) -->
+        <aside
+          class="hidden rounded-2xl border border-gray-200 bg-white shadow-sm lg:block"
         >
-          <!-- Active Pill (All) -->
-          <button
-            class="rounded-full bg-teal-900 px-5 py-2 font-bold whitespace-nowrap text-white shadow-sm transition-colors hover:bg-teal-800"
+          <!-- Sidebar Header -->
+          <div
+            class="flex items-center gap-3 rounded-t-2xl bg-teal-900 px-5 py-4 text-white"
           >
-            All Products
-          </button>
+            <svg
+              class="h-5 w-5 shrink-0 text-teal-300"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2.5"
+                d="M4 6h16M4 12h16M4 18h7"
+              />
+            </svg>
+            <h2 class="text-sm font-bold tracking-wider uppercase">
+              Categories
+            </h2>
+          </div>
 
-          <!-- Inactive Pills (Categories based on Drive folders) -->
-          <button
-            class="rounded-full border border-gray-300 bg-white px-5 py-2 font-semibold whitespace-nowrap text-gray-700 shadow-sm transition-colors hover:border-teal-600 hover:text-teal-700"
+          <!-- Category List Items  -->
+          <nav
+            class="no-scrollbar flex max-h-[380px] flex-col divide-y divide-gray-100 overflow-y-auto p-2 text-[13px] font-bold text-gray-700"
           >
-            Fidget Toys
-          </button>
+            <a
+              href="#adl-training"
+              class="group flex items-center gap-3 rounded-xl px-4 py-3 transition-colors hover:bg-teal-50 hover:text-teal-900"
+            >
+              <svg
+                class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                />
+              </svg>
+              <span>ADL Training</span>
+            </a>
 
-          <button
-            class="rounded-full border border-gray-300 bg-white px-5 py-2 font-semibold whitespace-nowrap text-gray-700 shadow-sm transition-colors hover:border-teal-600 hover:text-teal-700"
-          >
-            Sensory Activities
-          </button>
+            <a
+              href="#cognitive-ad"
+              class="group flex items-center gap-3 rounded-xl px-4 py-3 transition-colors hover:bg-teal-50 hover:text-teal-900"
+            >
+              <svg
+                class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                />
+              </svg>
+              <span>Cognitive AD</span>
+            </a>
 
-          <button
-            class="rounded-full border border-gray-300 bg-white px-5 py-2 font-semibold whitespace-nowrap text-gray-700 shadow-sm transition-colors hover:border-teal-600 hover:text-teal-700"
-          >
-            Oral Motor
-          </button>
+            <a
+              href="#communication"
+              class="group flex items-center gap-3 rounded-xl px-4 py-3 transition-colors hover:bg-teal-50 hover:text-teal-900"
+            >
+              <svg
+                class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                />
+              </svg>
+              <span>Communication & Speech</span>
+            </a>
 
-          <button
-            class="rounded-full border border-gray-300 bg-white px-5 py-2 font-semibold whitespace-nowrap text-gray-700 shadow-sm transition-colors hover:border-teal-600 hover:text-teal-700"
+            <a
+              href="#education-ad"
+              class="group flex items-center gap-3 rounded-xl px-4 py-3 transition-colors hover:bg-teal-50 hover:text-teal-900"
+            >
+              <svg
+                class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+                />
+              </svg>
+              <span>Education AD</span>
+            </a>
+
+            <a
+              href="#fidget-toys"
+              class="group flex items-center gap-3 rounded-xl px-4 py-3 transition-colors hover:bg-teal-50 hover:text-teal-900"
+            >
+              <svg
+                class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>Fidget Toys</span>
+            </a>
+
+            <a
+              href="#printables"
+              class="group flex items-center gap-3 rounded-xl px-4 py-3 transition-colors hover:bg-teal-50 hover:text-teal-900"
+            >
+              <svg
+                class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+              <span>Learning Printables</span>
+            </a>
+
+            <a
+              href="#motor-skills"
+              class="group flex items-center gap-3 rounded-xl px-4 py-3 transition-colors hover:bg-teal-50 hover:text-teal-900"
+            >
+              <svg
+                class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11"
+                />
+              </svg>
+              <span>Motor Skills</span>
+            </a>
+
+            <a
+              href="#oral-motor"
+              class="group flex items-center gap-3 rounded-xl px-4 py-3 transition-colors hover:bg-teal-50 hover:text-teal-900"
+            >
+              <svg
+                class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>Oral Motor</span>
+            </a>
+
+            <a
+              href="#safety-ad"
+              class="group flex items-center gap-3 rounded-xl px-4 py-3 transition-colors hover:bg-teal-50 hover:text-teal-900"
+            >
+              <svg
+                class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
+              </svg>
+              <span>Safety AD</span>
+            </a>
+
+            <a
+              href="#sensory"
+              class="group flex items-center gap-3 rounded-xl px-4 py-3 transition-colors hover:bg-teal-50 hover:text-teal-900"
+            >
+              <svg
+                class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                />
+              </svg>
+              <span>Sensory & Furniture</span>
+            </a>
+
+            <a
+              href="#swings"
+              class="group flex items-center gap-3 rounded-xl px-4 py-3 transition-colors hover:bg-teal-50 hover:text-teal-900"
+            >
+              <svg
+                class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>Swings</span>
+            </a>
+          </nav>
+        </aside>
+
+        <!-- RIGHT HERO BANNER  -->
+        <div
+          class="relative flex flex-col justify-center overflow-hidden rounded-2xl bg-gradient-to-r from-teal-950 via-teal-900 to-slate-900 p-6 text-white shadow-md sm:p-10 lg:col-span-3"
+        >
+          <div class="relative z-10 max-w-xl">
+            <span
+              class="inline-block rounded-full bg-[#C17F49] px-3 py-1 text-[11px] font-bold tracking-wider text-white uppercase"
+            >
+              Official Catalog
+            </span>
+            <h1
+              class="mt-3 text-2xl font-bold tracking-tight text-white sm:text-4xl"
+            >
+              Assistive Devices &amp; Inclusive Equipment
+            </h1>
+            <p
+              class="mt-2 text-xs leading-relaxed text-teal-100/90 sm:text-base"
+            >
+              Certified sensory tools, tactile boards, and classroom aids
+              designed to empower individuals with special learning needs.
+            </p>
+            <div class="mt-6 flex flex-wrap items-center gap-3">
+              <a
+                href="#catalog-grid"
+                class="rounded-xl bg-[#25D366] px-5 py-2.5 text-xs font-bold text-white shadow transition-transform hover:scale-105 sm:text-sm"
+              >
+                Browse All Products
+              </a>
+              <a
+                href="index.html#contact"
+                class="rounded-xl border border-white/30 bg-white/10 px-5 py-2.5 text-xs font-bold text-white backdrop-blur transition-colors hover:bg-white/20 sm:text-sm"
+              >
+                Request Custom Setup
+              </a>
+            </div>
+          </div>
+
+          <!-- Subtle Background Decoration -->
+          <div
+            class="pointer-events-none absolute -right-10 -bottom-10 h-64 w-64 rounded-full bg-teal-800/30 blur-3xl"
+          ></div>
+        </div>
+      </section>
+
+      <!-- PRODUCT CATALOG GRID & SUBCATEGORY TABS    -->
+
+      <section id="catalog-grid" class="mt-10 lg:mt-14">
+        <div id="catalog-grid" class="mt-10 lg:mt-14">
+          <!-- SUBCATEGORY FILTER TABS -->
+          <div class="mb-8 border-b border-gray-200 pb-3">
+            <div
+              class="no-scrollbar flex gap-4 overflow-x-auto text-sm font-bold md:justify-center"
+            >
+              <button
+                class="shrink-0 border-b-2 border-teal-900 pb-3 text-teal-900 transition-colors"
+              >
+                ALL PRODUCTS
+              </button>
+              <button
+                class="shrink-0 pb-3 text-gray-500 transition-colors hover:text-teal-900"
+              >
+                FIDGET TOYS
+              </button>
+              <button
+                class="shrink-0 pb-3 text-gray-500 transition-colors hover:text-teal-900"
+              >
+                SENSORY ROOM
+              </button>
+              <button
+                class="shrink-0 pb-3 text-gray-500 transition-colors hover:text-teal-900"
+              >
+                ORAL MOTOR
+              </button>
+              <button
+                class="shrink-0 pb-3 text-gray-500 transition-colors hover:text-teal-900"
+              >
+                COGNITIVE AD
+              </button>
+              <button
+                class="shrink-0 pb-3 text-gray-500 transition-colors hover:text-teal-900"
+              >
+                POSTURAL SUPPORTS
+              </button>
+            </div>
+          </div>
+
+          <!-- THE UNIFIED PRODUCT GRID -->
+
+          <div
+            class="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4"
           >
-            Cognitive AD
-          </button>
+            <!-- DUMMY CARD 1 (Fidget) -->
+            <article
+              class="group flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-lg"
+            >
+              <div
+                class="relative aspect-square w-full overflow-hidden bg-gray-100"
+              >
+                <img
+                  src="./images/dummy-fidget.jpg"
+                  alt="Sensory Pop-it Board"
+                  class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <span
+                  class="absolute top-2.5 left-2.5 rounded-full bg-teal-900 px-2.5 py-0.5 text-[9px] font-bold tracking-wide text-white uppercase shadow"
+                  >Fidget Toys</span
+                >
+              </div>
+              <div class="flex flex-1 flex-col justify-between p-3 sm:p-4">
+                <div>
+                  <h3
+                    class="line-clamp-2 text-xs font-bold text-gray-900 sm:text-sm"
+                  >
+                    Sensory Pop-it Board (Tactile Focus Tool)
+                  </h3>
+                  <p class="mt-2 text-sm font-bold text-teal-900 sm:text-base">
+                    KSh 1,200
+                  </p>
+                </div>
+                <a
+                  href="#"
+                  class="mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#25D366] py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#20b858]"
+                  >Order via WhatsApp</a
+                >
+              </div>
+              <a
+                href="#"
+                class="flex items-center justify-center gap-1.5 border-t border-gray-100 bg-[#26251F] py-2 text-[10px] font-bold text-white transition-colors hover:bg-black sm:text-xs"
+              >
+                <svg
+                  class="h-3 w-3 fill-current text-[#25D366]"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771z"
+                  />
+                </svg>
+                <span>ASK QUESTION</span>
+              </a>
+            </article>
+
+            <!-- DUMMY CARD 2 (Sensory) -->
+            <article
+              class="group flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-lg"
+            >
+              <div
+                class="relative aspect-square w-full overflow-hidden bg-gray-100"
+              >
+                <img
+                  src="./images/dummy-swing.jpg"
+                  alt="Therapy Sensory Swing"
+                  class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <span
+                  class="absolute top-2.5 left-2.5 rounded-full bg-teal-900 px-2.5 py-0.5 text-[9px] font-bold tracking-wide text-white uppercase shadow"
+                  >Sensory Room</span
+                >
+              </div>
+              <div class="flex flex-1 flex-col justify-between p-3 sm:p-4">
+                <div>
+                  <h3
+                    class="line-clamp-2 text-xs font-bold text-gray-900 sm:text-sm"
+                  >
+                    Therapy Sensory Swing (Vestibular Calm)
+                  </h3>
+                  <p class="mt-2 text-sm font-bold text-teal-900 sm:text-base">
+                    KSh 7,500
+                  </p>
+                </div>
+                <a
+                  href="#"
+                  class="mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#25D366] py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#20b858]"
+                  >Order via WhatsApp</a
+                >
+              </div>
+              <a
+                href="#"
+                class="flex items-center justify-center gap-1.5 border-t border-gray-100 bg-[#26251F] py-2 text-[10px] font-bold text-white transition-colors hover:bg-black sm:text-xs"
+              >
+                <svg
+                  class="h-3 w-3 fill-current text-[#25D366]"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771z"
+                  />
+                </svg>
+                <span>ASK QUESTION</span>
+              </a>
+            </article>
+
+            <!-- DUMMY CARD 3 (Oral Motor) -->
+            <article
+              class="group flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-lg"
+            >
+              <div
+                class="relative aspect-square w-full overflow-hidden bg-gray-100"
+              >
+                <img
+                  src="./images/dummy-chewy.jpg"
+                  alt="Oral Motor Chewy Tool"
+                  class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <span
+                  class="absolute top-2.5 left-2.5 rounded-full bg-teal-900 px-2.5 py-0.5 text-[9px] font-bold tracking-wide text-white uppercase shadow"
+                  >Oral Motor</span
+                >
+              </div>
+              <div class="flex flex-1 flex-col justify-between p-3 sm:p-4">
+                <div>
+                  <h3
+                    class="line-clamp-2 text-xs font-bold text-gray-900 sm:text-sm"
+                  >
+                    Textured Oral Motor Chew Necklace
+                  </h3>
+                  <p class="mt-2 text-sm font-bold text-teal-900 sm:text-base">
+                    KSh 850
+                  </p>
+                </div>
+                <a
+                  href="#"
+                  class="mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#25D366] py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#20b858]"
+                  >Order via WhatsApp</a
+                >
+              </div>
+              <a
+                href="#"
+                class="flex items-center justify-center gap-1.5 border-t border-gray-100 bg-[#26251F] py-2 text-[10px] font-bold text-white transition-colors hover:bg-black sm:text-xs"
+              >
+                <svg
+                  class="h-3 w-3 fill-current text-[#25D366]"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771z"
+                  />
+                </svg>
+                <span>ASK QUESTION</span>
+              </a>
+            </article>
+
+            <!-- DUMMY CARD 4 (Cognitive) -->
+            <article
+              class="group flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-lg"
+            >
+              <div
+                class="relative aspect-square w-full overflow-hidden bg-gray-100"
+              >
+                <img
+                  src="./images/dummy-puzzle.jpg"
+                  alt="Cognitive Sorting Board"
+                  class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+                <span
+                  class="absolute top-2.5 left-2.5 rounded-full bg-teal-900 px-2.5 py-0.5 text-[9px] font-bold tracking-wide text-white uppercase shadow"
+                  >Cognitive AD</span
+                >
+              </div>
+              <div class="flex flex-1 flex-col justify-between p-3 sm:p-4">
+                <div>
+                  <h3
+                    class="line-clamp-2 text-xs font-bold text-gray-900 sm:text-sm"
+                  >
+                    Wooden Shape &amp; Colour Sorting Matrix
+                  </h3>
+                  <p class="mt-2 text-sm font-bold text-teal-900 sm:text-base">
+                    KSh 2,400
+                  </p>
+                </div>
+                <a
+                  href="#"
+                  class="mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#25D366] py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#20b858]"
+                  >Order via WhatsApp</a
+                >
+              </div>
+              <a
+                href="#"
+                class="flex items-center justify-center gap-1.5 border-t border-gray-100 bg-[#26251F] py-2 text-[10px] font-bold text-white transition-colors hover:bg-black sm:text-xs"
+              >
+                <svg
+                  class="h-3 w-3 fill-current text-[#25D366]"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771z"
+                  />
+                </svg>
+                <span>ASK QUESTION</span>
+              </a>
+            </article>
+          </div>
         </div>
       </section>
     </main>
+
+    <!-- MOBILE CATEGORY SLIDE-OVER DRAWER          -->
+
+    <div
+      id="category-drawer"
+      class="pointer-events-none fixed inset-0 z-50 flex opacity-0 transition-opacity duration-300 lg:hidden"
+      aria-hidden="true"
+    >
+      <!-- Backdrop -->
+      <div
+        id="drawer-backdrop"
+        class="fixed inset-0 bg-black/60 backdrop-blur-xs"
+      ></div>
+
+      <!-- Drawer Content Panel -->
+      <div
+        class="relative ml-auto flex h-full w-4/5 max-w-sm translate-x-full flex-col bg-white p-6 shadow-2xl transition-transform duration-300"
+      >
+        <div
+          class="flex items-center justify-between border-b border-gray-200 pb-4"
+        >
+          <h2 class="text-base font-bold text-teal-900">Categories</h2>
+          <button
+            id="close-drawer-btn"
+            class="rounded-lg p-1.5 text-gray-500 hover:bg-gray-100"
+          >
+            <svg
+              class="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <nav
+          class="no-scrollbar mt-4 flex flex-col divide-y divide-gray-100 overflow-y-auto pb-6 text-[13px] font-bold text-gray-700"
+        >
+          <a
+            href="#adl-training"
+            class="group flex items-center gap-3 py-3.5 transition-colors hover:text-teal-900"
+          >
+            <svg
+              class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              />
+            </svg>
+            <span>ADL Training</span>
+          </a>
+
+          <a
+            href="#cognitive-ad"
+            class="group flex items-center gap-3 py-3.5 transition-colors hover:text-teal-900"
+          >
+            <svg
+              class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+              />
+            </svg>
+            <span>Cognitive AD</span>
+          </a>
+
+          <a
+            href="#communication"
+            class="group flex items-center gap-3 py-3.5 transition-colors hover:text-teal-900"
+          >
+            <svg
+              class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+              />
+            </svg>
+            <span>Communication & Speech</span>
+          </a>
+
+          <a
+            href="#education-ad"
+            class="group flex items-center gap-3 py-3.5 transition-colors hover:text-teal-900"
+          >
+            <svg
+              class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 14l9-5-9-5-9 5 9 5z M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"
+              />
+            </svg>
+            <span>Education AD</span>
+          </a>
+
+          <a
+            href="#fidget-toys"
+            class="group flex items-center gap-3 py-3.5 transition-colors hover:text-teal-900"
+          >
+            <svg
+              class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span>Fidget Toys</span>
+          </a>
+
+          <a
+            href="#printables"
+            class="group flex items-center gap-3 py-3.5 transition-colors hover:text-teal-900"
+          >
+            <svg
+              class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+              />
+            </svg>
+            <span>Learning Printables</span>
+          </a>
+
+          <a
+            href="#motor-skills"
+            class="group flex items-center gap-3 py-3.5 transition-colors hover:text-teal-900"
+          >
+            <svg
+              class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11"
+              />
+            </svg>
+            <span>Motor Skills</span>
+          </a>
+
+          <a
+            href="#oral-motor"
+            class="group flex items-center gap-3 py-3.5 transition-colors hover:text-teal-900"
+          >
+            <svg
+              class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span>Oral Motor</span>
+          </a>
+
+          <a
+            href="#safety-ad"
+            class="group flex items-center gap-3 py-3.5 transition-colors hover:text-teal-900"
+          >
+            <svg
+              class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+              />
+            </svg>
+            <span>Safety AD</span>
+          </a>
+
+          <a
+            href="#sensory"
+            class="group flex items-center gap-3 py-3.5 transition-colors hover:text-teal-900"
+          >
+            <svg
+              class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+              />
+            </svg>
+            <span>Sensory & Furniture</span>
+          </a>
+
+          <a
+            href="#swings"
+            class="group flex items-center gap-3 py-3.5 transition-colors hover:text-teal-900"
+          >
+            <svg
+              class="h-4 w-4 shrink-0 text-gray-400 group-hover:text-teal-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <span>Swings</span>
+          </a>
+        </nav>
+
+        <div class="mt-auto border-t border-gray-200 pt-4">
+          <a
+            href="index.html"
+            class="flex w-full items-center justify-center rounded-xl bg-teal-900 py-3 text-center text-xs font-bold text-white"
+          >
+            &larr; Back to Main Website
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile navigation -->
+    <nav
+      class="fixed right-0 bottom-0 left-0 z-40 flex h-16 items-center justify-around border-t border-gray-200 bg-white/95 px-2 backdrop-blur-md lg:hidden"
+      aria-label="Mobile Navigation Dock"
+    >
+      <!-- Shop Tab (Active) -->
+      <a
+        href="#main-shop"
+        class="flex flex-col items-center gap-0.5 text-teal-900"
+      >
+        <svg
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+          />
+        </svg>
+        <span class="text-[10px] font-bold">Shop</span>
+      </a>
+
+      <!-- Category Drawer Trigger -->
+      <button
+        type="button"
+        id="bottom-bar-categories"
+        class="flex flex-col items-center gap-0.5 text-gray-500 hover:text-teal-900"
+      >
+        <svg
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h7"
+          />
+        </svg>
+        <span class="text-[10px] font-semibold">Categories</span>
+      </button>
+
+      <!-- WhatsApp Orders -->
+      <a
+        href="https://wa.me/254734635274"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex flex-col items-center gap-0.5 text-[#25D366]"
+      >
+        <svg class="h-5 w-5 fill-current" viewBox="0 0 24 24">
+          <path
+            d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771z"
+          />
+        </svg>
+        <span class="text-[10px] font-bold">WhatsApp</span>
+      </a>
+
+      <!-- Main Site Link -->
+      <a
+        href="index.html"
+        class="flex flex-col items-center gap-0.5 text-gray-500 hover:text-teal-900"
+      >
+        <svg
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"
+          />
+        </svg>
+        <span class="text-[10px] font-semibold">Main Site</span>
+      </a>
+    </nav>
     <!-- FOOTER -->
     <footer
       class="border-brand-border/20 border-t bg-[#26251F] px-4 pt-12 pb-6 lg:px-6 lg:pt-16"
@@ -427,5 +1420,6 @@
       </div>
     </footer>
     <script src="./js/script.js"></script>
+    <script src="./js/shop-script.js"></script>
   </body>
 </html>
