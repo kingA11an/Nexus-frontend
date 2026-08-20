@@ -1,12 +1,15 @@
 (function () {
   "use strict";
 
+
+  // 1. ACCESSIBILITY & MAIN SITE NAVIGATION
+
   const statusEl = document.getElementById("a11y-status");
   function announce(msg) {
     if (statusEl) statusEl.textContent = msg;
   }
 
-  // Mobile Navigation Toggle
+  // Main Site Mobile Navigation Toggle (Home Page)
   const navToggle = document.getElementById("nav-toggle");
   const nav = document.getElementById("primary-nav");
   if (navToggle && nav) {
@@ -50,7 +53,8 @@
     announce(on ? "High contrast mode on." : "High contrast mode off.");
   });
 
-  //  Text-to-Speech (Read Aloud) 
+  // Text-to-Speech / Read Aloud
+
   const synth = window.speechSynthesis;
   const speedSelect = document.getElementById("speed-select");
   let currentBtn = null;
@@ -64,8 +68,16 @@
 
   function resetButton(btn) {
     btn.setAttribute("aria-pressed", "false");
-    const label = btn.querySelector(".btn-label");
-    if (label) label.textContent = btn.dataset.defaultLabel || "Listen";
+    
+    // Find ALL labels (desktop and mobile) inside the button
+    btn.querySelectorAll(".btn-label").forEach(label => {
+      // Restore the exact original text, or default to "Listen"
+      if (label.dataset.originalText) {
+        label.textContent = label.dataset.originalText;
+      } else {
+        label.textContent = btn.dataset.defaultLabel || "Listen";
+      }
+    });
   }
 
   function getReadableText(el) {
@@ -101,8 +113,22 @@
 
     synth.speak(utter);
     btn.setAttribute("aria-pressed", "true");
-    const label = btn.querySelector(".btn-label");
-    if (label) label.textContent = "Stop reading";
+
+    // Update ALL labels when reading starts
+    btn.querySelectorAll(".btn-label").forEach(label => {
+      // Memorize the original text before overwriting it!
+      if (!label.dataset.originalText) {
+        label.dataset.originalText = label.textContent;
+      }
+      
+      // Give the mobile button a short text, and desktop a long text
+      if (label.classList.contains("sm:hidden")) {
+        label.textContent = "Stop"; // Mobile view
+      } else {
+        label.textContent = "Stop reading"; // Desktop view
+      }
+    });
+
     currentBtn = btn;
     announce("Reading started.");
   }
@@ -119,139 +145,151 @@
     const main = document.getElementById("main");
     if (main) toggleSpeech(getReadableText(main), readPageBtn);
   });
-})();
-// impact page animation 
-document.addEventListener("DOMContentLoaded", () => {
+
+
+  // 2. MAIN SITE ANIMATIONS
+
+  
+  // Impact Page Animation 
   const counters = document.querySelectorAll('.counter');
-  const animationDuration = 1500; // Animation length in milliseconds (1.5 seconds)
+  if (counters.length > 0 && 'IntersectionObserver' in window) {
+    const animationDuration = 1500; 
+    const animateCounters = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = +counter.getAttribute('data-target');
+          let startTime = null;
 
-  const animateCounters = (entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const counter = entry.target;
-        const target = +counter.getAttribute('data-target');
-        let startTime = null;
+          const step = (currentTime) => {
+            if (!startTime) startTime = currentTime;
+            const progress = Math.min((currentTime - startTime) / animationDuration, 1);
+            const easeProgress = progress < 0.5 
+              ? 8 * progress * progress * progress * progress 
+              : 1 - Math.pow(-2 * progress + 2, 4) / 2;
+            
+            const currentCount = Math.floor(easeProgress * target);
+            counter.innerText = currentCount.toLocaleString();
 
-        const step = (currentTime) => {
-          if (!startTime) startTime = currentTime;
-          const progress = Math.min((currentTime - startTime) / animationDuration, 1);
-          
-          // Smooth ease-in-out easing formula
-          const easeProgress = progress < 0.5 
-            ? 8 * progress * progress * progress * progress 
-            : 1 - Math.pow(-2 * progress + 2, 4) / 2;
-          
-          const currentCount = Math.floor(easeProgress * target);
-          
-          // Formats numbers with commas automatically
-          counter.innerText = currentCount.toLocaleString();
-
-          if (progress < 1) {
-            window.requestAnimationFrame(step);
-          } else {
-            counter.innerText = target.toLocaleString(); 
-          }
-        };
-
-        window.requestAnimationFrame(step);
-        observer.unobserve(counter);
-      }
-    });
-  };
-
-  // Triggers when 50% of the section is visible on screen
-  const observer = new IntersectionObserver(animateCounters, { threshold: 0.5 });
-  counters.forEach(counter => observer.observe(counter));
-});
-
-// project before and after animation 
-document.addEventListener('DOMContentLoaded', () => {
-    // 1. Find every sliding card on the page
-    const bnaCards = document.querySelectorAll('.bna-card');
-
-    // 2. Set up the Intersection Observer
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const card = entry.target;
-            const wrapper = card.querySelector('.bna-slides-wrapper');
-            const pill = card.querySelector('.bna-pill');
-
-            if (!wrapper || !pill) return; // Safety check
-
-            // Read the exact labels from the HTML (Fallback to Before/After)
-            const label1 = card.getAttribute('data-label-1') || 'Before';
-            const label2 = card.getAttribute('data-label-2') || 'After';
-
-            if (entry.isIntersecting) {
-                // Start animation interval if not already running
-                if (!card.dataset.intervalId) {
-                    card.dataset.isAfter = "false"; // Initialize state
-                    
-                    const intervalId = setInterval(() => {
-                        let isAfter = card.dataset.isAfter === "true";
-                        isAfter = !isAfter; // Toggle state
-                        card.dataset.isAfter = isAfter;
-
-                        if (isAfter) {
-                            // Slide left to Image 2
-                            wrapper.classList.remove('translate-x-0');
-                            wrapper.classList.add('-translate-x-full');
-                            pill.textContent = label2;
-                            pill.classList.replace('bg-black/70', 'bg-teal-700');
-                        } else {
-                            // Slide right to Image 1
-                            wrapper.classList.remove('-translate-x-full');
-                            wrapper.classList.add('translate-x-0');
-                            pill.textContent = label1;
-                            pill.classList.replace('bg-teal-700', 'bg-black/70');
-                        }
-                    }, 4000); // 4 second loop
-                    
-                    card.dataset.intervalId = intervalId; 
-                }
+            if (progress < 1) {
+              window.requestAnimationFrame(step);
             } else {
-                // Pause animation when scrolled out of view to save battery
-                if (card.dataset.intervalId) {
-                    clearInterval(card.dataset.intervalId);
-                    card.dataset.intervalId = "";
-                    
-                    // Reset the card back to Image 1 so it looks clean when they scroll back
-                    card.dataset.isAfter = "false";
-                    wrapper.classList.remove('-translate-x-full');
-                    wrapper.classList.add('translate-x-0');
-                    pill.textContent = label1;
-                    pill.classList.replace('bg-teal-700', 'bg-black/70');
-                }
+              counter.innerText = target.toLocaleString(); 
             }
-        });
-    }, { threshold: 0.5 }); // Triggers when 50% of the card is visible
+          };
+          window.requestAnimationFrame(step);
+          observer.unobserve(counter);
+        }
+      });
+    };
+    const observer = new IntersectionObserver(animateCounters, { threshold: 0.5 });
+    counters.forEach(counter => observer.observe(counter));
+  }
 
-    // 3. Attach observer to all cards
-    bnaCards.forEach(card => observer.observe(card));
-});
+  // Project Before and After Animation 
+  const bnaCards = document.querySelectorAll('.bna-card');
+  if (bnaCards.length > 0 && 'IntersectionObserver' in window) {
+    const bnaObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const card = entry.target;
+        const wrapper = card.querySelector('.bna-slides-wrapper');
+        const pill = card.querySelector('.bna-pill');
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Auto-clone and auto-speed the gallery track
-    const galleryContainer = document.getElementById('gallery-container');
-    const marqueeTrack = galleryContainer ? galleryContainer.querySelector('.marquee-track') : null;
+        if (!wrapper || !pill) return; 
 
-    if (galleryContainer && marqueeTrack) {
-        // 1. Count the tiles and calculate the time
-        const itemCount = marqueeTrack.children.length;
-        const secondsPerItem = 8; // <-- TWEAK THIS: 8 seconds per image is usually the sweet spot!
-        const totalDuration = itemCount * secondsPerItem;
+        const label1 = card.getAttribute('data-label-1') || 'Before';
+        const label2 = card.getAttribute('data-label-2') || 'After';
 
-        // 2. Apply the dynamic speed to the original track
-        marqueeTrack.style.animationDuration = `${totalDuration}s`;
+        if (entry.isIntersecting) {
+          if (!card.dataset.intervalId) {
+            card.dataset.isAfter = "false"; 
+            
+            const intervalId = setInterval(() => {
+              let isAfter = card.dataset.isAfter === "true";
+              isAfter = !isAfter; 
+              card.dataset.isAfter = isAfter;
 
-        // 3. Clone the track for the infinite loop
-        const clone = marqueeTrack.cloneNode(true);
-        clone.setAttribute('aria-hidden', 'true'); // Hide from screen readers
-        
-        // 4. Apply the exact same speed to the cloned track
-        clone.style.animationDuration = `${totalDuration}s`;
+              if (isAfter) {
+                wrapper.classList.remove('translate-x-0');
+                wrapper.classList.add('-translate-x-full');
+                pill.textContent = label2;
+                pill.classList.replace('bg-black/70', 'bg-teal-700');
+              } else {
+                wrapper.classList.remove('-translate-x-full');
+                wrapper.classList.add('translate-x-0');
+                pill.textContent = label1;
+                pill.classList.replace('bg-teal-700', 'bg-black/70');
+              }
+            }, 4000); 
+            
+            card.dataset.intervalId = intervalId; 
+          }
+        } else {
+          if (card.dataset.intervalId) {
+            clearInterval(card.dataset.intervalId);
+            card.dataset.intervalId = "";
+            card.dataset.isAfter = "false";
+            wrapper.classList.remove('-translate-x-full');
+            wrapper.classList.add('translate-x-0');
+            pill.textContent = label1;
+            pill.classList.replace('bg-teal-700', 'bg-black/70');
+          }
+        }
+      });
+    }, { threshold: 0.5 }); 
+    bnaCards.forEach(card => bnaObserver.observe(card));
+  }
 
-        // 5. Add it to the page
-        galleryContainer.appendChild(clone);
+  // Auto-clone and auto-speed the gallery track
+  const galleryContainer = document.getElementById('gallery-container');
+  const marqueeTrack = galleryContainer ? galleryContainer.querySelector('.marquee-track') : null;
+  if (galleryContainer && marqueeTrack) {
+    const itemCount = marqueeTrack.children.length;
+    const secondsPerItem = 8; 
+    const totalDuration = itemCount * secondsPerItem;
+
+    marqueeTrack.style.animationDuration = `${totalDuration}s`;
+    
+    const clone = marqueeTrack.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true'); 
+    clone.style.animationDuration = `${totalDuration}s`;
+    
+    galleryContainer.appendChild(clone);
+  }
+
+
+  // 3. SHOP SPECIFIC - Mobile Drawer Toggle
+ 
+  const shopDrawer = document.getElementById('category-drawer');
+  const openDrawerBtn = document.getElementById('mobile-drawer-toggle');
+  const bottomOpenDrawerBtn = document.getElementById('bottom-bar-categories');
+  const closeDrawerBtn = document.getElementById('close-drawer-btn');
+  const drawerBackdrop = document.getElementById('drawer-backdrop');
+
+  if (shopDrawer) {
+    function openShopDrawer() {
+      shopDrawer.classList.remove('pointer-events-none', 'opacity-0');
+      shopDrawer.classList.add('opacity-100');
+      const maxW = shopDrawer.querySelector('.max-w-sm');
+      if (maxW) maxW.classList.remove('translate-x-full');
     }
-});
+
+    function closeShopDrawer() {
+      shopDrawer.classList.add('pointer-events-none', 'opacity-0');
+      shopDrawer.classList.remove('opacity-100');
+      const maxW = shopDrawer.querySelector('.max-w-sm');
+      if (maxW) maxW.classList.add('translate-x-full');
+    }
+
+    if (openDrawerBtn) openDrawerBtn.addEventListener('click', openShopDrawer);
+    if (bottomOpenDrawerBtn) bottomOpenDrawerBtn.addEventListener('click', openShopDrawer);
+    if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeShopDrawer);
+    if (drawerBackdrop) drawerBackdrop.addEventListener('click', closeShopDrawer);
+
+    // Close drawer when a category link is clicked
+    shopDrawer.querySelectorAll('a[href^="?"]').forEach(link => {
+      link.addEventListener('click', closeShopDrawer);
+    });
+  }
+
+})();

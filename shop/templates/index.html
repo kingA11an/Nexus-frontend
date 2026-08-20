@@ -8,7 +8,7 @@
       name="description"
       content="Assistive products, sensory and therapy equipment, and inclusive-space design for homes, schools, therapy centres, healthcare facilities, churches, workplaces and community institutions."
     />
-
+    {% load static %}
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,12 +16,12 @@
       href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
       rel="stylesheet"
     />
-
+    
     <!-- Compiled Tailwind v4 Stylesheet -->
-    <link rel="stylesheet" href="dist/output.css" />
+    <link rel="stylesheet" href="{% static 'output.css' %}" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="./Images/logo-large.png" />
+    <link rel="icon" type="image/png" href="{% static 'logo-large.png' %}" />
   </head>
 
   <body class="bg-brand-bg text-lg leading-relaxed text-[#26251F] antialiased">
@@ -153,14 +153,14 @@
           >
             <!-- Standard Butterfly Logo  -->
             <img
-              src="./Images/logo-large.png"
+              src="{% static 'logo-large.png' %}"
               alt="SNRH Logo"
               class="hc:hidden block h-10 w-auto shrink-0 object-contain ring-teal-600 group-focus-visible:ring-4 sm:h-12 lg:h-16"
             />
 
             <!-- Black & White Logo (High Contrast Mode) -->
             <img
-              src="./Images/RH-BW-logo-noBG.png"
+              src="{% static 'RH-BW-logo-noBG.png' %}"
               alt="Special Needs Resource Hub (High Contrast)"
               class="hc:block hidden h-10 w-auto shrink-0 object-contain sm:h-12 lg:h-16"
             />
@@ -206,8 +206,8 @@
               </li>
               <li>
                 <a
-                  href="shop.html"
-                  target="_blank"
+                  href="#shop"
+                  
                   class="block rounded-md px-3 py-1.5 whitespace-nowrap transition-colors hover:text-teal-800 lg:px-2 lg:py-1"
                   >Shop</a
                 >
@@ -254,7 +254,7 @@
               class="border-brand-border mt-3 grid w-full shrink-0 grid-cols-2 gap-2 border-t pt-3 lg:mt-0 lg:flex lg:w-auto lg:flex-row lg:items-center lg:gap-3 lg:border-none lg:pt-0"
             >
               <a
-                href="shop.html"
+                href="{% url 'shop' %}"
                 target="_blank"
                 class="inline-flex min-h-10 w-full items-center justify-center rounded-lg bg-teal-900 px-2 py-2 text-center text-xs font-bold whitespace-nowrap text-white shadow-sm transition-colors hover:bg-teal-800 lg:min-h-11 lg:w-auto lg:px-6 lg:py-2.5 lg:text-sm"
                 >Shop now</a
@@ -309,7 +309,7 @@
               class="flex flex-col items-stretch gap-3 sm:flex-row sm:items-start lg:gap-4"
             >
               <a
-                href="shop.html"
+                href="{% url 'shop' %}"
                 target="_blank"
                 class="inline-flex min-h-11 items-center justify-center rounded-lg bg-teal-900 px-4 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-teal-800 lg:px-6 lg:py-3 lg:text-base"
               >
@@ -368,7 +368,7 @@
             <!-- Image Container  -->
             <div class="relative flex w-full items-center justify-center">
               <img
-                src="./Images/tumaini-autism-center.jpeg"
+                src="{% static 'tumaini-autism-center.jpeg' %}"
                 alt="Completed sensory inclusive space"
                 class="border-brand-border z-10 aspect-4/3 h-auto w-full rounded-2xl border object-cover shadow-md"
               />
@@ -617,35 +617,35 @@
             class="mb-5 grid list-none grid-cols-2 gap-x-3 gap-y-3 p-0 lg:mb-6 lg:flex lg:flex-wrap lg:gap-3"
           >
             <a
-              href="shop.html#catalog-grid"
+              href="{% url 'shop' %}?category=Sensory%20%26%20Furniture#catalog-grid"
               target="_blank"
               rel="noopener noreferrer"
               class="border-brand-border/50 lg:border-brand-border block border-b pb-1.5 text-[11px] font-bold text-teal-800 transition-all duration-200 sm:text-xs lg:inline-flex lg:items-center lg:rounded-full lg:border lg:border-solid lg:bg-white lg:px-5 lg:py-2 lg:pb-0 lg:text-sm lg:text-[#4E4C42] lg:hover:-translate-y-0.5 lg:hover:bg-teal-900 lg:hover:text-white lg:hover:shadow-md"
-              >Sensory &amp; Regulation</a
+              >Sensory &amp; Furniture</a
             >
             <a
-              href="shop.html#catalog-grid"
+              href=href="{% url 'shop' %}?category=Oral%20Motor#catalog-grid"
               target="_blank"
               rel="noopener noreferrer"
               class="border-brand-border/50 lg:border-brand-border block border-b pb-1.5 text-[11px] font-bold text-teal-800 transition-all duration-200 sm:text-xs lg:inline-flex lg:items-center lg:rounded-full lg:border lg:border-solid lg:bg-white lg:px-5 lg:py-2 lg:pb-0 lg:text-sm lg:text-[#4E4C42] lg:hover:-translate-y-0.5 lg:hover:bg-teal-900 lg:hover:text-white lg:hover:shadow-md"
-              >Therapy &amp; Rehabilitation</a
+              >Oral motor</a
             >
             <a
-              href="shop.html#catalog-grid"
+              href="{% url 'shop' %}?category=Education%20%26%20Speech#catalog-grid"
               target="_blank"
               rel="noopener noreferrer"
               class="border-brand-border/50 lg:border-brand-border block border-b pb-1.5 text-[11px] font-bold text-teal-800 transition-all duration-200 sm:text-xs lg:inline-flex lg:items-center lg:rounded-full lg:border lg:border-solid lg:bg-white lg:px-5 lg:py-2 lg:pb-0 lg:text-sm lg:text-[#4E4C42] lg:hover:-translate-y-0.5 lg:hover:bg-teal-900 lg:hover:text-white lg:hover:shadow-md"
-              >Learning &amp; Education</a
+              >Education &amp; speech</a
             >
             <a
-              href="shop.html#catalog-grid"
+              href="{% url 'shop' %}?category=Fidget%20Toys#catalog-grid"
               target="_blank"
               rel="noopener noreferrer"
               class="border-brand-border/50 lg:border-brand-border block border-b pb-1.5 text-[11px] font-bold text-teal-800 transition-all duration-200 sm:text-xs lg:inline-flex lg:items-center lg:rounded-full lg:border lg:border-solid lg:bg-white lg:px-5 lg:py-2 lg:pb-0 lg:text-sm lg:text-[#4E4C42] lg:hover:-translate-y-0.5 lg:hover:bg-teal-900 lg:hover:text-white lg:hover:shadow-md"
               >Montessori</a
             >
             <a
-              href="shop.html#catalog-grid"
+            href="{% url 'shop' %}?category=ADL%20Training#catalog-grid"
               target="_blank"
               rel="noopener noreferrer"
               class="border-brand-border/50 lg:border-brand-border col-span-2 block border-b pb-1.5 text-[11px] font-bold text-teal-800 transition-all duration-200 sm:text-xs lg:col-span-1 lg:inline-flex lg:items-center lg:rounded-full lg:border lg:border-solid lg:bg-white lg:px-5 lg:py-2 lg:pb-0 lg:text-sm lg:text-[#4E4C42] lg:hover:-translate-y-0.5 lg:hover:bg-teal-900 lg:hover:text-white lg:hover:shadow-md"
@@ -679,7 +679,7 @@
         >
           <!-- Product Card 1 -->
           <a
-            href="shop.html#catalog-grid"
+            href="{% url 'shop' %}?category=Sensory%20%26%20Furniture#catalog-grid"
             target="_blank"
             rel="noopener noreferrer"
             class="group border-brand-border flex h-full flex-col overflow-hidden rounded-xl border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg lg:rounded-2xl"
@@ -688,22 +688,22 @@
               class="grid h-28 w-full grid-cols-2 grid-rows-2 overflow-hidden bg-slate-100 sm:h-36 lg:h-48"
             >
               <img
-                src="./Images/sensory-1.jpg"
+                src="{% static 'sensory-1.jpg' %}"
                 class="h-full w-full border-r border-b border-white object-cover transition-transform duration-500 group-hover:scale-105"
                 alt="Item 1"
               />
               <img
-                src="./Images/sensory-2.jpg"
+                src="{% static 'sensory-2.jpg' %}"
                 class="h-full w-full border-b border-white object-cover transition-transform duration-500 group-hover:scale-105"
                 alt="Item 2"
               />
               <img
-                src="./Images/sensory-3.jpg"
+                src="{% static 'sensory-3.jpg' %}"
                 class="h-full w-full border-r border-white object-cover transition-transform duration-500 group-hover:scale-105"
                 alt="Item 3"
               />
               <img
-                src="./Images/sensory-4.jpg"
+                src="{% static 'sensory-4.jpg' %}"
                 class="h-full w-full border-white object-cover transition-transform duration-500 group-hover:scale-105"
                 alt="Item 4"
               />
@@ -731,7 +731,7 @@
 
           <!-- Product Card 2 -->
           <a
-            href="shop.html#catalog-grid"
+            href="{% url 'shop' %}?category=Motor%20Skills#catalog-grid"
             target="_blank"
             rel="noopener noreferrer"
             class="group border-brand-border flex h-full flex-col overflow-hidden rounded-xl border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg lg:rounded-2xl"
@@ -740,22 +740,22 @@
               class="grid h-28 w-full grid-cols-2 grid-rows-2 overflow-hidden bg-slate-100 sm:h-36 lg:h-48"
             >
               <img
-                src="./Images/therapy-1.jpg"
+                src="{% static 'therapy-1.jpg' %}"
                 class="h-full w-full border-r border-b border-white object-cover transition-transform duration-500 group-hover:scale-105"
                 alt="Therapy Item 1"
               />
               <img
-                src="./Images/therapy-2.jpg"
+                src="{% static 'therapy-2.jpg' %}"
                 class="h-full w-full border-b border-white object-cover transition-transform duration-500 group-hover:scale-105"
                 alt="Therapy Item 2"
               />
               <img
-                src="./Images/therapy-3.jpg"
+                src="{% static 'therapy-3.jpg' %}"
                 class="h-full w-full border-r border-white object-cover transition-transform duration-500 group-hover:scale-105"
                 alt="Therapy Item 3"
               />
               <img
-                src="./Images/therapy-4.jpg"
+                src="{% static 'therapy-4.jpg' %}"
                 class="h-full w-full border-white object-cover transition-transform duration-500 group-hover:scale-105"
                 alt="Therapy Item 4"
               />
@@ -783,7 +783,7 @@
 
           <!-- Product Card 3 -->
           <a
-            href="shop.html#catalog-grid"
+            href="{% url 'shop' %}?category=Education%20%26%20Speech#catalog-grid"
             target="_blank"
             rel="noopener noreferrer"
             class="group border-brand-border flex h-full flex-col overflow-hidden rounded-xl border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg lg:rounded-2xl"
@@ -792,22 +792,22 @@
               class="grid h-28 w-full grid-cols-2 grid-rows-2 overflow-hidden bg-slate-100 sm:h-36 lg:h-48"
             >
               <img
-                src="./Images/learning-1.jpg"
+                src="{% static 'learning-1.jpg' %}"
                 class="h-full w-full border-r border-b border-white object-cover transition-transform duration-500 group-hover:scale-105"
                 alt="Learning Item 1"
               />
               <img
-                src="./Images/learning-2.jpg"
+                src="{% static 'learning-2.jpg' %}"
                 class="h-full w-full border-b border-white object-cover transition-transform duration-500 group-hover:scale-105"
                 alt="Learning Item 2"
               />
               <img
-                src="./Images/learning-3.jpg"
+                src="{% static 'learning-3.jpg' %}"
                 class="h-full w-full border-r border-white object-cover transition-transform duration-500 group-hover:scale-105"
                 alt="Learning Item 3"
               />
               <img
-                src="./Images/learning-4.jpg"
+                src="{% static 'learning-4.jpg' %}"
                 class="h-full w-full border-white object-cover transition-transform duration-500 group-hover:scale-105"
                 alt="Learning Item 4"
               />
@@ -835,7 +835,7 @@
 
           <!-- Product Card 4 -->
           <a
-            href="shop.html#catalog-grid"
+            href="{% url 'shop' %}?category=ADL%20Training#catalog-grid"
             target="_blank"
             rel="noopener noreferrer"
             class="group border-brand-border flex h-full flex-col overflow-hidden rounded-xl border bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg lg:rounded-2xl"
@@ -844,22 +844,22 @@
               class="grid h-28 w-full grid-cols-2 grid-rows-2 overflow-hidden bg-slate-100 sm:h-36 lg:h-48"
             >
               <img
-                src="./Images/adl-1.jpg"
+                src="{% static 'adl-1.jpg' %}"
                 class="h-full w-full border-r border-b border-white object-cover transition-transform duration-500 group-hover:scale-105"
                 alt="ADL Item 1"
               />
               <img
-                src="./Images/adl-2.jpg"
+                src="{% static 'adl-2.jpg' %}"
                 class="h-full w-full border-b border-white object-cover transition-transform duration-500 group-hover:scale-105"
                 alt="ADL Item 2"
               />
               <img
-                src="./Images/adl-3.jpg"
+                src="{% static 'adl-3.jpg' %}"
                 class="h-full w-full border-r border-white object-cover transition-transform duration-500 group-hover:scale-105"
                 alt="ADL Item 3"
               />
               <img
-                src="./Images/adl-4.jpg"
+                src="{% static 'adl-4.jpg' %}"
                 class="h-full w-full border-white object-cover transition-transform duration-500 group-hover:scale-105"
                 alt="ADL Item 4"
               />
@@ -1375,12 +1375,12 @@
                     class="bna-slides-wrapper flex h-full w-full translate-x-0 transform transition-transform duration-1000 ease-in-out"
                   >
                     <img
-                      src="./images/pangani-special-school-before.jpeg"
+                      src="{% static 'pangani-special-school-before.jpeg' %}"
                       alt="Pangani School Before"
                       class="h-full w-full shrink-0 object-cover"
                     />
                     <img
-                      src="./images/pangani-special-school-after.jpeg"
+                      src="{% static 'pangani-special-school-after.jpeg' %}"
                       alt="Pangani School After"
                       class="h-full w-full shrink-0 object-cover"
                     />
@@ -1422,12 +1422,12 @@
                     class="bna-slides-wrapper flex h-full w-full translate-x-0 transform transition-transform duration-1000 ease-in-out"
                   >
                     <img
-                      src="./Images/kasarani-school-before.jpg"
+                      src="{% static 'kasarani-school-before.jpg' %}"
                       alt="Kasarani School Before"
                       class="h-full w-full shrink-0 object-cover"
                     />
                     <img
-                      src="./images/kasarani-school-after.jpg"
+                      src="{% static 'kasarani-school-after.jpg' %}"
                       alt="Kasarani School After"
                       class="h-full w-full shrink-0 object-cover"
                     />
@@ -1471,12 +1471,12 @@
                     class="bna-slides-wrapper flex h-full w-full translate-x-0 transform transition-transform duration-1000 ease-in-out"
                   >
                     <img
-                      src="./images/dagoretti-special-school-after.JPEG"
+                      src="{% static 'dagoretti-special-school-after.JPEG' %}"
                       alt="Dagoretti School View 1"
                       class="h-full w-full shrink-0 object-cover"
                     />
                     <img
-                      src="./images/dagoretti-special-school-after-1.jpeg"
+                      src="{% static 'dagoretti-special-school-after-1.jpeg' %}"
                       alt="Dagoretti School View 2"
                       class="h-full w-full shrink-0 object-cover"
                     />
@@ -1499,7 +1499,7 @@
                 </div>
               </article>
 
-              <!-- Card: Mnarani (Before & After) -->
+              <!-- Card: Mnarani (view 1 & 2) -->
               <article
                 class="bna-card group border-brand-border flex h-auto w-70 shrink-0 snap-start flex-col overflow-hidden rounded-2xl border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[320px] lg:w-auto"
                  data-label-1="View 1"
@@ -1520,12 +1520,12 @@
                     class="bna-slides-wrapper flex h-full w-full translate-x-0 transform transition-transform duration-1000 ease-in-out"
                   >
                     <img
-                      src="./images/mnarani-school.jpeg"
+                      src="{% static 'mnarani-equipment-donation.jpeg' %}"
                       alt="Mnarani School Before"
                       class="h-full w-full shrink-0 object-cover"
                     />
                     <img
-                      src="./images/mnarani-school.jpeg"
+                      src="{% static 'mnarani-donation.jpeg' %}"
                       alt="Mnarani School After"
                       class="h-full w-full shrink-0 object-cover"
                     />
@@ -1588,12 +1588,12 @@
                     class="bna-slides-wrapper flex h-full w-full translate-x-0 transform transition-transform duration-1000 ease-in-out"
                   >
                     <img
-                      src="./images/tumaini-autism-center.jpeg"
+                      src="{% static 'tumaini-autism-center.jpeg' %}"
                       alt="Tumaini View 1"
                       class="h-full w-full shrink-0 object-cover"
                     />
                     <img
-                      src="./images/tumaini-autism-center.jpeg"
+                      src="{% static 'tumaini-autism-center.jpeg' %}"
                       alt="Tumaini View 2"
                       class="h-full w-full shrink-0 object-cover"
                     />
@@ -1637,12 +1637,12 @@
                     class="bna-slides-wrapper flex h-full w-full translate-x-0 transform transition-transform duration-1000 ease-in-out"
                   >
                     <img
-                      src="./images/carovana-school-2.jpeg"
+                      src="{% static 'carovana-school-2.jpeg' %}"
                       alt="Urafiki Before"
                       class="h-full w-full shrink-0 object-cover"
                     />
                     <img
-                      src="./images/carovana-school-4.jpeg"
+                      src="{% static 'carovana-school-4.jpeg' %}"
                       alt="Urafiki After"
                       class="h-full w-full shrink-0 object-cover"
                     />
@@ -1686,12 +1686,12 @@
                     class="bna-slides-wrapper flex h-full w-full translate-x-0 transform transition-transform duration-1000 ease-in-out"
                   >
                     <img
-                      src="./images/nexus-therapy-center.jpeg"
+                      src="{% static 'nexus-therapy-center.jpeg' %}"
                       alt="Nexus therapy center View 1"
                       class="h-full w-full shrink-0 object-cover"
                     />
                     <img
-                      src="./images/nexus-therapy-center (2).jpeg"
+                      src="{% static 'nexus-therapy-center (2).jpeg' %}"
                       alt="Nexus therapy center View 2"
                       class="h-full w-full shrink-0 object-cover"
                     />
@@ -1768,7 +1768,7 @@
                   class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
-                    src="./images/project gallery/ntc-nairobi.jpeg"
+                    src="{% static 'project gallery/ntc-nairobi.jpeg' %}"
                     alt="ntc Nairobi 1"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
@@ -1781,7 +1781,7 @@
                   class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
-                    src="./images/project gallery/ntc-nairobi (1).jpeg"
+                    src="{% static 'project gallery/ntc-nairobi (1).jpeg' %}"
                     alt="ntc Nairobi 2"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
@@ -1794,7 +1794,7 @@
                   class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
-                    src="./images/project gallery/ntc-nairobi (2).jpeg"
+                    src="{% static 'project gallery/ntc-nairobi (2).jpeg' %}"
                     alt="ntc Nairobi 3"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
@@ -1807,7 +1807,7 @@
                   class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
-                    src="./images/project gallery/ntc-nairobi (3).jpeg"
+                    src="{% static 'project gallery/ntc-nairobi (3).jpeg' %}"
                     alt="ntc Nairobi 3"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
@@ -1820,7 +1820,7 @@
                   class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
-                    src="./images/project gallery/andySpeaksHq.jpeg"
+                    src="{% static 'project gallery/andySpeaksHq.jpeg' %}"
                     alt="andySpeaksHq"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
@@ -1833,7 +1833,7 @@
                   class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
-                    src="./images/project gallery/ntc-nakuru.jpeg"
+                    src="{% static 'project gallery/ntc-nakuru.jpeg' %}"
                     alt="ntc Nakuru"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
@@ -1846,7 +1846,7 @@
                   class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
-                    src="./images/project gallery/pangani-highlight.jpeg"
+                    src="{% static 'project gallery/pangani-highlight.jpeg' %}"
                     alt="pangani highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
@@ -1859,7 +1859,7 @@
                   class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
-                    src="./images/project gallery/pangani-highlight (1).jpg"
+                    src="{% static 'project gallery/pangani-highlight (1).jpg' %}"
                     alt="pangani highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
@@ -1872,7 +1872,7 @@
                   class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
-                    src="./images/project gallery/pangani-highlight (2).jpg"
+                    src="{% static 'project gallery/pangani-highlight (2).jpg' %}"
                     alt="pangani highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
@@ -1885,7 +1885,7 @@
                   class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
-                    src="./images/project gallery/pangani-highlight (3).jpg"
+                    src="{% static 'project gallery/pangani-highlight (3).jpg' %}"
                     alt="pangani highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
@@ -1898,7 +1898,7 @@
                   class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
-                    src="./images/project gallery/kasarani-highlight.jpg"
+                    src="{% static 'project gallery/kasarani-highlight.jpg' %}"
                     alt="kasarani highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
@@ -1911,20 +1911,20 @@
                   class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
-                    src="./images/project gallery/kasarani-highlight (1).jpg"
+                    src="{% static 'project gallery/kasarani-highlight (1).jpg' %}"
                     alt="kasarani highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
                   <span
                     class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
-                    >kasarani room Setup</span
+                    >Kasarani classroom Setup</span
                   >
                 </div>
                 <div
                   class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
-                    src="./images/project gallery/garissa-highlight.jpg"
+                    src="{% static 'project gallery/garissa-highlight.jpg' %}"
                     alt="garissa highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
@@ -1937,20 +1937,20 @@
                   class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
-                    src="./images/project gallery/garissa-highlight (1).jpg"
+                    src="{% static 'project gallery/garissa-highlight (1).jpg' %}"
                     alt="garissa highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
                   <span
                     class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
-                    >Garissa awareness event</span
+                    >Garissa parent training</span
                   >
                 </div>
                 <div
                   class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
-                    src="./images/project gallery/garissa-highlight (2).jpg"
+                    src="{% static 'project gallery/garissa-highlight (2).jpg' %}"
                     alt="garissa highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
@@ -1963,7 +1963,7 @@
                   class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
-                    src="./images/project gallery/carovana-school.jpeg"
+                    src="{% static 'project gallery/carovana-school.jpeg' %}"
                     alt="urafiki carovana highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
@@ -1976,7 +1976,7 @@
                   class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
-                    src="./images/project gallery/carovana-school-3.jpeg"
+                    src="{% static 'project gallery/carovana-school-3.jpeg' %}"
                     alt="urafiki carovana highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
@@ -1989,13 +1989,130 @@
                   class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
-                    src="./images/project gallery/carovana-school-5.jpeg"
+                    src="{% static 'project gallery/carovana-school-5.jpeg' %}"
                     alt="urafiki carovana highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
                   <span
                     class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Urafiki Carovana school</span
+                  >
+                </div>
+                <div
+                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                >
+                  <img
+                    src="{% static 'project gallery/kasarani-furniture-repaint.jpeg' %}"
+                    alt="urafiki carovana highlight"
+                    class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                  <span
+                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    >Kasarani furniture repaint</span
+                  >
+                </div>
+                <div
+                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                >
+                  <img
+                    src="{% static 'project gallery/kasarani-complete.jpeg' %}"
+                    alt="urafiki carovana highlight"
+                    class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                  <span
+                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    >Kasarani completed setup</span
+                  >
+                </div>
+                <div
+                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                >
+                  <img
+                    src="{% static 'project gallery/home-setup-nrb-sensory-space.jpeg' %}"
+                    alt="urafiki carovana highlight"
+                    class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                  <span
+                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    >home setup nrb - sesnsory space</span
+                  >
+                </div>
+                <div
+                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                >
+                  <img
+                    src="{% static 'project gallery/home-setup-nrb-sensory-room.jpeg' %}"
+                    alt="urafiki carovana highlight"
+                    class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                  <span
+                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    >home setup nrb - sesnsory space</span
+                  >
+                </div>
+                <div
+                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                >
+                  <img
+                    src="{% static 'project gallery/home-setup-nairobi-sensory-garden.jpeg' %}"
+                    alt="urafiki carovana highlight"
+                    class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                  <span
+                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    >home setup nrb - sesnsory garden</span
+                  >
+                </div>
+                <div
+                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                >
+                  <img
+                    src="{% static 'project gallery/home-setup-nairobi-room-setup.jpeg' %}"
+                    alt="urafiki carovana highlight"
+                    class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                  <span
+                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    >home setup - nairobi</span
+                  >
+                </div>
+                <div
+                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                >
+                  <img
+                    src="{% static 'project gallery/garissa-doctor-training.jpeg' %}"
+                    alt="urafiki carovana highlight"
+                    class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                  <span
+                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    >Garissa doctor training</span
+                  >
+                </div>
+                <div
+                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                >
+                  <img
+                    src="{% static 'project gallery/nairobi-autism-classroom.jpeg' %}"
+                    alt="urafiki carovana highlight"
+                    class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                  <span
+                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    >nairobi - autism classroom</span
+                  >
+                </div>
+                <div
+                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                >
+                  <img
+                    src="{% static 'project gallery/garissa-parent-training.jpeg' %}"
+                    alt="urafiki carovana highlight"
+                    class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                  />
+                  <span
+                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    >Garissa parent training</span
                   >
                 </div>
               </div> 
@@ -2057,7 +2174,7 @@
             class="border-brand-border mx-auto flex h-auto w-3/4 items-center justify-center overflow-hidden rounded-2xl border bg-white shadow-sm sm:w-1/2 lg:w-full lg:rounded-3xl"
           >
             <img
-              src="./Images/neuroRehub-app.jpeg"
+              src="{% static 'neuroRehub-app.jpeg' %}"
               alt="NeuroReHub Digital Support App"
               class="h-auto w-full object-contain"
             />
@@ -3187,7 +3304,7 @@
           >
             <a href="#">
               <img
-                src="./images/RH-BW-logo-noBG.png"
+                src="{% static 'RH-BW-logo-noBG.png' %}"
                 alt="Special Needs Resource Hub Logo"
                 class="mb-2 h-16 w-auto cursor-pointer object-contain opacity-40 transition-opacity duration-300 hover:opacity-100 lg:h-20"
               />
@@ -3217,21 +3334,21 @@
               <ul class="flex flex-col gap-2.5 lg:gap-3">
                 <li>
                   <a
-                    href="shop.html#catalog-grid"
+                    href="{% url 'shop' %}/?#catalog-grid"
                     class="text-brand-border inline-block text-xs transition-all duration-300 hover:translate-x-1 hover:text-white lg:text-sm"
                     >All categories</a
                   >
                 </li>
                 <li>
                   <a
-                    href="shop.html"
+                    href="{% url 'shop' %}"
                     class="text-brand-border inline-block text-xs transition-all duration-300 hover:translate-x-1 hover:text-white lg:text-sm"
                     >Shop by need</a
                   >
                 </li>
                 <li>
                   <a
-                    href="shop.html"
+                    href="{% url 'shop' %}"
                     class="text-brand-border inline-block text-xs transition-all duration-300 hover:translate-x-1 hover:text-white lg:text-sm"
                     >Shop by setting</a
                   >
@@ -3361,7 +3478,7 @@
       </svg>
     </a>
 
-    <!-- SEPARATE JAVASCRIPT FILE -->
-    <script src="./js/script.js" defer></script>
+    <!-- JAVASCRIPT FILE -->
+    <script src="{% static 'script.js' %}" defer></script>
   </body>
 </html>

@@ -3,7 +3,7 @@
 @theme {
   --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
   
-  /* Brand Theme Tokens based on the deep turquoise/teal palette */
+  /* Brand Theme Tokens */
   --color-brand-teal: #1f4f46;
   --color-brand-teal-light: #2b6f63;
   --color-brand-accent: #c97b2e;
@@ -11,20 +11,20 @@
   --color-brand-bg: #faf7f1;
   --color-brand-bg-alt: #f1eada;
   --color-brand-border: #e1d8c4;
+  
   --animate-marquee: marquee 50s linear infinite;
 
- @keyframes marquee {
+  @keyframes marquee {
     from {
       transform: translateX(0%);
     }
-
     to {
       transform: translateX(-100%);
     }
   }
 }
 
-/* 2. Add the custom hover pause utility */
+/* Pause marquee on hover */
 .group-marquee:hover .animate-marquee {
   animation-play-state: paused;
 }
@@ -38,8 +38,9 @@ html.high-contrast {
   color: #ffffff !important;
 }
 
-/* Force backgrounds to black and borders to yellow (Escaped brackets) */
+/* Force backgrounds to black and borders to yellow */
 html.high-contrast header,
+html.high-contrast nav,
 html.high-contrast section,
 html.high-contrast footer,
 html.high-contrast .bg-\[\#FAF7F1\],
@@ -65,7 +66,7 @@ html.high-contrast article {
   border: 1px solid #ffd400 !important;
 }
 
-/* Make links and specific text cyan  */
+/* Make links and specific text cyan */
 html.high-contrast a,
 html.high-contrast .text-teal-800,
 html.high-contrast .text-teal-900,
@@ -76,14 +77,6 @@ html.high-contrast .text-\[\#26251F\] {
 /* Fix ALL solid buttons to yellow with black text */
 html.high-contrast .bg-teal-900,
 html.high-contrast .bg-teal-800,
-html.high-contrast .bg-\[\#9C5D1E\] {
-  background-color: #ffd400 !important;
-  color: #000000 !important;
-  border: none !important;
-}
-/* Fix ALL solid buttons to yellow with black text  */
-html.high-contrast .bg-teal-900,
-html.high-contrast .bg-teal-800,
 html.high-contrast .bg-\[\#9C5D1E\],
 html.high-contrast .floating-wa {
   background-color: #ffd400 !important;
@@ -91,7 +84,7 @@ html.high-contrast .floating-wa {
   border: none !important;
 }
 
-/* Fix outlined buttons to have yellow borders  */
+/* Fix outlined buttons to have yellow borders */
 html.high-contrast .border-teal-900,
 html.high-contrast .border-\[\#E1D8C4\] {
   border-color: #ffd400 !important;
@@ -125,4 +118,5 @@ a:focus-visible, button:focus-visible, select:focus-visible {
   outline-offset: 3px;
 }
 
+/* Tailwind Custom Variant for High Contrast */
 @custom-variant hc (.high-contrast &);
