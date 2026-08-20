@@ -481,7 +481,7 @@
       <!-- Image & Category Pill Container -->
       <div class="relative aspect-square w-full overflow-hidden bg-gray-100">
         {% if product.image %}
-          <img src="{{ product.image.url }}" alt="{{ product.product_name }}" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+          <img src="/static/{{ product.image }}" alt="{{ product.product_name }}" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
         {% else %}
           <div class="flex h-full w-full items-center justify-center text-xs text-gray-400">No Image</div>
         {% endif %}
