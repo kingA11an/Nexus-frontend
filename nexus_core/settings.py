@@ -121,8 +121,9 @@ MAILERS = {
     },
 }
 
-# Trick Django into serving media through WhiteNoise's static route
-MEDIA_URL = '/static/'
+# The URL the browser will request
+MEDIA_URL = '/media/'
+# The physical folder where the images actually live in GitHub
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Images')
 
 # Static files configuration
