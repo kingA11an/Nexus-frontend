@@ -3,6 +3,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 # Import BOTH of your views
 from shop.views import shop_view, home_view 
 
@@ -12,5 +13,5 @@ urlpatterns = [
     path('shop/', shop_view, name='shop'),    # This maps to shop.html
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve media files properly on Render
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

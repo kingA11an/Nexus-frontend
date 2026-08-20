@@ -120,9 +120,10 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
-# Media files configuration 
-MEDIA_URL = '/images/product_images/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'images/product_images')
+
+# Media files configuration (Capital I for Linux servers!)
+MEDIA_URL = '/Images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'Images')
 
 # Static files configuration
 STATIC_URL = 'static/'
