@@ -121,8 +121,8 @@ MAILERS = {
     },
 }
 
-# Media files configuration (Capital I for Linux servers!)
-MEDIA_URL = '/Images/'
+# Trick Django into serving media through WhiteNoise's static route
+MEDIA_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'Images')
 
 # Static files configuration
