@@ -1,17 +1,19 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from django.conf import settings
-from django.conf.urls.static import static
+from django.views.static import serve
 
-
-# Import BOTH of your views
+# Import your views
 from shop.views import shop_view, home_view 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_view, name='home'),         # This maps to index.html
-    path('shop/', shop_view, name='shop'),    # This maps to shop.html
+    path('', home_view, name='home'),         
+    path('shop/', shop_view, name='shop'),    
 ]
 
-# Serve media files properly on Render
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# This forces the production server to serve your product images from the Images folder
+urlpatterns += [
+    re_path(r'^Images/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+]
