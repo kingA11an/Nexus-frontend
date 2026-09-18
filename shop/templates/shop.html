@@ -216,7 +216,6 @@
                 </div>
               </div>
 
-             
               <button
                 type="submit"
                 class="bg-teal-900 px-5 py-3.5 text-white transition-colors hover:bg-teal-800"
@@ -323,7 +322,6 @@
               </svg>
             </button>
 
-            
             <input
               type="search"
               name="q"
@@ -456,95 +454,143 @@
         </div>
       </section>
 
-     <section id="catalog-grid" class="mt-10 pb-10 lg:mt-14">
-  <div class="mb-8 border-b border-gray-200 pb-3">
-    <div class="no-scrollbar flex gap-4 overflow-x-auto pl-1 text-sm font-bold md:justify-center">
-      <!--  ADDED #catalog-grid TO URL -->
-      <a href="?#catalog-grid" class="{% if active_category == 'all' %}border-b-2 text-teal-900{% else %}text-gray-500 hover:text-teal-900{% endif %} shrink-0 border-teal-900 pb-3 uppercase transition-colors">
-        ALL PRODUCTS
-      </a>
+      <section id="catalog-grid" class="mt-10 pb-10 lg:mt-14">
+        <div class="mb-8 border-b border-gray-200 pb-3">
+          <div
+            class="no-scrollbar flex gap-4 overflow-x-auto pl-1 text-sm font-bold md:justify-center"
+          >
+            <!--  ADDED #catalog-grid TO URL -->
+            <a
+              href="?#catalog-grid"
+              class="{% if active_category == 'all' %}border-b-2 text-teal-900{% else %}text-gray-500 hover:text-teal-900{% endif %} shrink-0 border-teal-900 pb-3 uppercase transition-colors"
+            >
+              ALL PRODUCTS
+            </a>
 
-      <!--  ADDED #catalog-grid TO URL -->
-      {% for cat in categories %}
-      <a href="?category={{ cat.name|urlencode }}#catalog-grid" class="{% if active_category == cat.name %}border-b-2 text-teal-900{% else %}text-gray-500 hover:text-teal-900{% endif %} shrink-0 border-teal-900 pb-3 uppercase transition-colors">
-        {{ cat.name }}
-      </a>
-      {% endfor %}
-    </div>
-  </div>
-
-  <div class="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4">
-    
-    {% for product in products %}
-    <article class="group flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-lg">
-      
-      <!-- Image & Category Pill Container -->
-      <div class="relative aspect-square w-full overflow-hidden bg-gray-100">
-        {% if product.image %}
-          <img src="/static/product_images/{{ product.image }}" alt="{{ product.product_name }}" class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
-        {% else %}
-          <div class="flex h-full w-full items-center justify-center text-xs text-gray-400">No Image</div>
-        {% endif %}
-        
-        <!-- Category Pill -->
-        <span class="absolute top-2.5 left-2.5 rounded-full bg-teal-900 px-2.5 py-0.5 text-[9px] font-bold tracking-wide text-white uppercase shadow">
-          {% for cat in product.categories.all|slice:":1" %}
-            {{ cat.name }}
-          {% empty %}
-            Product
-          {% endfor %}
-        </span>
-      </div>
-
-      <div class="flex flex-1 flex-col justify-between p-3 sm:p-4">
-        <div>
-          <h3 class="line-clamp-2 text-xs font-bold text-gray-900 sm:text-sm">
-            {{ product.product_name }}
-          </h3>
-          
-          <!-- Descriptions -->
-          {% if product.short_description %}
-            <p class="mt-1.5 line-clamp-2 text-[10px] text-gray-600 sm:text-xs">
-              {{ product.short_description }}
-            </p>
-          {% elif product.long_description %}
-            <p class="mt-1.5 line-clamp-2 text-[10px] text-gray-600 sm:text-xs">
-              {{ product.long_description }}
-            </p>
-          {% endif %}
-
-          <!--  THE FIXED PRICE LOGIC  -->
-          <p class="mt-2 text-sm font-bold text-teal-900 sm:text-base">
-            {% if product.price %}
-              KSh {{ product.price|floatformat:0 }}
-            {% else %}
-              Contact for Price
-            {% endif %}
-          </p>
+            <!--  ADDED #catalog-grid TO URL -->
+            {% for cat in categories %}
+            <a
+              href="?category={{ cat.name|urlencode }}#catalog-grid"
+              class="{% if active_category == cat.name %}border-b-2 text-teal-900{% else %}text-gray-500 hover:text-teal-900{% endif %} shrink-0 border-teal-900 pb-3 uppercase transition-colors"
+            >
+              {{ cat.name }}
+            </a>
+            {% endfor %}
+          </div>
         </div>
-        
-        <!-- WhatsApp Buttons  -->
-        <a href="https://wa.me/254734635274?text=Hello,%20I%20am%20interested%20in%20{{ product.product_name|urlencode }}" target="_blank" rel="noopener noreferrer" class="hc:bg-[#ffd400]! hc:text-black! hc:border-none! mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#25D366] py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#20b858]">
-          Order via WhatsApp
-        </a>
-      </div>
-      
-      <a href="https://wa.me/254734635274?text=I%20have%20a%20question%20about%20{{ product.product_name|urlencode }}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-1.5 border-t border-gray-100 bg-[#26251F] py-2 text-[10px] font-bold text-white transition-colors hover:bg-black sm:text-xs">
-        <svg class="h-3 w-3 fill-current text-[#25D366]" viewBox="0 0 24 24">
-          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771z" />
-        </svg>
-        <span>ASK QUESTION</span>
-      </a>
-    </article>
-    
-    {% empty %}
-    <div class="col-span-full py-12 text-center text-gray-500">
-      <p class="text-lg font-bold">No products found in this category.</p>
-    </div>
-    {% endfor %}
 
-  </div>
-</section>
+        <div
+          class="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4"
+        >
+          {% for product in products %}
+          <article
+            class="group flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-lg"
+          >
+            <!-- Image & Category Pill Container -->
+            <div
+              class="group relative isolate aspect-square w-full overflow-hidden bg-gray-100"
+            >
+              {% if product.image %}
+              <!--  original product image logic (DO NOT change to .url) -->
+              <img
+                src="/static/product_images/{{ product.image }}"
+                alt="{{ product.product_name }}"
+                loading="lazy"
+                decoding="async"
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+
+              <!-- Dynamic TheraPlay Watermark  -->
+              <img
+                src="{% static 'theraplay-resources-logo-1.png' %}"
+                alt=""
+                aria-hidden="true"
+                draggable="false"
+                class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+              />
+              {% else %}
+              <div
+                class="flex h-full w-full items-center justify-center text-xs text-gray-400"
+              >
+                No Image
+              </div>
+              {% endif %}
+
+              <!-- Category Pill -->
+              <span
+                class="absolute top-2.5 left-2.5 z-30 rounded-full bg-teal-900 px-2.5 py-0.5 text-[9px] font-bold tracking-wide text-white uppercase shadow"
+              >
+                {% for cat in product.categories.all|slice:":1" %} {{ cat.name
+                }} {% empty %} Product {% endfor %}
+              </span>
+            </div>
+
+            <div class="flex flex-1 flex-col justify-between p-3 sm:p-4">
+              <div>
+                <h3
+                  class="line-clamp-2 text-xs font-bold text-gray-900 sm:text-sm"
+                >
+                  {{ product.product_name }}
+                </h3>
+
+                <!-- Descriptions -->
+                {% if product.short_description %}
+                <p
+                  class="mt-1.5 line-clamp-2 text-[10px] text-gray-600 sm:text-xs"
+                >
+                  {{ product.short_description }}
+                </p>
+                {% elif product.long_description %}
+                <p
+                  class="mt-1.5 line-clamp-2 text-[10px] text-gray-600 sm:text-xs"
+                >
+                  {{ product.long_description }}
+                </p>
+                {% endif %}
+
+                <!--  THE FIXED PRICE LOGIC  -->
+                <p class="mt-2 text-sm font-bold text-teal-900 sm:text-base">
+                  {% if product.price %} KSh {{ product.price|floatformat:0 }}
+                  {% else %} Contact for Price {% endif %}
+                </p>
+              </div>
+
+              <!-- WhatsApp Buttons  -->
+              <a
+                href="https://wa.me/254734635274?text=Hello,%20I%20am%20interested%20in%20{{ product.product_name|urlencode }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hc:bg-[#ffd400]! hc:text-black! hc:border-none! mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#25D366] py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#20b858]"
+              >
+                Order via WhatsApp
+              </a>
+            </div>
+
+            <a
+              href="https://wa.me/254734635274?text=I%20have%20a%20question%20about%20{{ product.product_name|urlencode }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-center gap-1.5 border-t border-gray-100 bg-[#26251F] py-2 text-[10px] font-bold text-white transition-colors hover:bg-black sm:text-xs"
+            >
+              <svg
+                class="h-3 w-3 fill-current text-[#25D366]"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771z"
+                />
+              </svg>
+              <span>ASK QUESTION</span>
+            </a>
+          </article>
+
+          {% empty %}
+          <div class="col-span-full py-12 text-center text-gray-500">
+            <p class="text-lg font-bold">No products found in this category.</p>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
     </main>
 
     <!-- MOBILE CATEGORY SLIDE-OVER DRAWER -->

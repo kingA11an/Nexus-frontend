@@ -16,7 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
       rel="stylesheet"
     />
-    
+
     <!-- Compiled Tailwind v4 Stylesheet -->
     <link rel="stylesheet" href="{% static 'output.css' %}" />
 
@@ -207,7 +207,6 @@
               <li>
                 <a
                   href="#shop"
-                  
                   class="block rounded-md px-3 py-1.5 whitespace-nowrap transition-colors hover:text-teal-800 lg:px-2 lg:py-1"
                   >Shop</a
                 >
@@ -327,7 +326,7 @@
                 <span class="sm:hidden">Book consultation</span>
                 <span class="hidden sm:inline"
                   >Book an inclusive space consultation</span
-                > 
+                >
               </a>
             </div>
           </div>
@@ -366,12 +365,24 @@
             </button>
 
             <!-- Image Container  -->
-            <div class="relative flex w-full items-center justify-center">
+            <div
+              class="relative isolate flex w-full items-center justify-center"
+            >
               <img
                 src="{% static 'tumaini-autism-center.jpeg' %}"
                 alt="Completed sensory inclusive space"
                 class="border-brand-border z-10 aspect-4/3 h-auto w-full rounded-2xl border object-cover shadow-md"
               />
+
+              <!-- Dynamic Watermark -->
+              <img
+                src="{% static 'theraplay-resources-logo-1.png' %}"
+                alt=""
+                aria-hidden="true"
+                draggable="false"
+                class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/3 max-w-40 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+              />
+
               <!-- decorative background accent -->
               <div
                 class="bg-brand-teal-light/10 absolute h-full w-full translate-x-2 translate-y-2 rounded-3xl lg:translate-x-4 lg:translate-y-4"
@@ -624,7 +635,8 @@
               >Sensory &amp; Furniture</a
             >
             <a
-              href=href="{% url 'shop' %}?category=Oral%20Motor#catalog-grid"
+              href="href"
+              ="{% url 'shop' %}?category=Oral%20Motor#catalog-grid"
               target="_blank"
               rel="noopener noreferrer"
               class="border-brand-border/50 lg:border-brand-border block border-b pb-1.5 text-[11px] font-bold text-teal-800 transition-all duration-200 sm:text-xs lg:inline-flex lg:items-center lg:rounded-full lg:border lg:border-solid lg:bg-white lg:px-5 lg:py-2 lg:pb-0 lg:text-sm lg:text-[#4E4C42] lg:hover:-translate-y-0.5 lg:hover:bg-teal-900 lg:hover:text-white lg:hover:shadow-md"
@@ -645,7 +657,7 @@
               >Montessori</a
             >
             <a
-            href="{% url 'shop' %}?category=ADL%20Training#catalog-grid"
+              href="{% url 'shop' %}?category=ADL%20Training#catalog-grid"
               target="_blank"
               rel="noopener noreferrer"
               class="border-brand-border/50 lg:border-brand-border col-span-2 block border-b pb-1.5 text-[11px] font-bold text-teal-800 transition-all duration-200 sm:text-xs lg:col-span-1 lg:inline-flex lg:items-center lg:rounded-full lg:border lg:border-solid lg:bg-white lg:px-5 lg:py-2 lg:pb-0 lg:text-sm lg:text-[#4E4C42] lg:hover:-translate-y-0.5 lg:hover:bg-teal-900 lg:hover:text-white lg:hover:shadow-md"
@@ -1374,16 +1386,33 @@
                   <div
                     class="bna-slides-wrapper flex h-full w-full translate-x-0 transform transition-transform duration-1000 ease-in-out"
                   >
-                    <img
-                      src="{% static 'pangani-special-school-before.jpeg' %}"
-                      alt="Pangani School Before"
-                      class="h-full w-full shrink-0 object-cover"
-                    />
-                    <img
-                      src="{% static 'pangani-special-school-after.jpeg' %}"
-                      alt="Pangani School After"
-                      class="h-full w-full shrink-0 object-cover"
-                    />
+                    <!-- Slide 1: Before -->
+                    <div class="relative isolate h-full w-full shrink-0">
+                      <img
+                        src="{% static 'pangani-special-school-before.jpg' %}"
+                        alt="Pangani School Before"
+                        class="h-full w-full object-cover"
+                      />
+                      <img
+                        src="{% static 'theraplay-resources-logo-1.png' %}"
+                        alt=""
+                        class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-32 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                      />
+                    </div>
+
+                    <!-- Slide 2: After -->
+                    <div class="relative isolate h-full w-full shrink-0">
+                      <img
+                        src="{% static 'pangani-special-school-after.jpg' %}"
+                        alt="Pangani School After"
+                        class="h-full w-full object-cover"
+                      />
+                      <img
+                        src="{% static 'theraplay-resources-logo-1.png' %}"
+                        alt=""
+                        class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-32 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div class="flex grow flex-col justify-between p-5 lg:p-6">
@@ -1421,16 +1450,30 @@
                   <div
                     class="bna-slides-wrapper flex h-full w-full translate-x-0 transform transition-transform duration-1000 ease-in-out"
                   >
-                    <img
-                      src="{% static 'kasarani-school-before.jpg' %}"
-                      alt="Kasarani School Before"
-                      class="h-full w-full shrink-0 object-cover"
-                    />
-                    <img
-                      src="{% static 'kasarani-school-after.jpg' %}"
-                      alt="Kasarani School After"
-                      class="h-full w-full shrink-0 object-cover"
-                    />
+                    <div class="relative isolate h-full w-full shrink-0">
+                      <img
+                        src="{% static 'kasarani-school-before.jpg' %}"
+                        alt="Kasarani School Before"
+                        class="h-full w-full shrink-0 object-cover"
+                      />
+                      <img
+                        src="{% static 'theraplay-resources-logo-1.png' %}"
+                        alt=""
+                        class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-32 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                      />
+                    </div>
+                    <div class="relative isolate h-full w-full shrink-0">
+                      <img
+                        src="{% static 'kasarani-school-after.jpg' %}"
+                        alt="Kasarani School After"
+                        class="h-full w-full shrink-0 object-cover"
+                      />
+                      <img
+                        src="{% static 'theraplay-resources-logo-1.png' %}"
+                        alt=""
+                        class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-32 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div class="flex grow flex-col justify-between p-5 lg:p-6">
@@ -1470,16 +1513,30 @@
                   <div
                     class="bna-slides-wrapper flex h-full w-full translate-x-0 transform transition-transform duration-1000 ease-in-out"
                   >
-                    <img
-                      src="{% static 'dagoretti-special-school-after.JPEG' %}"
-                      alt="Dagoretti School View 1"
-                      class="h-full w-full shrink-0 object-cover"
-                    />
-                    <img
-                      src="{% static 'dagoretti-special-school-after-1.jpeg' %}"
-                      alt="Dagoretti School View 2"
-                      class="h-full w-full shrink-0 object-cover"
-                    />
+                    <div class="relative isolate h-full w-full shrink-0">
+                      <img
+                        src="{% static 'dagoretti-special-school-view-1.jpeg' %}"
+                        alt="Dagoretti School View 1"
+                        class="h-full w-full shrink-0 object-cover"
+                      />
+                      <img
+                        src="{% static 'theraplay-resources-logo-1.png' %}"
+                        alt=""
+                        class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-32 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                      />
+                    </div>
+                    <div class="relative isolate h-full w-full shrink-0">
+                      <img
+                        src="{% static 'dagoretti-special-school-view-2.jpeg' %}"
+                        alt="Dagoretti School View 2"
+                        class="h-full w-full shrink-0 object-cover"
+                      />
+                      <img
+                        src="{% static 'theraplay-resources-logo-1.png' %}"
+                        alt=""
+                        class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-32 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div class="flex grow flex-col justify-between p-5 lg:p-6">
@@ -1502,8 +1559,8 @@
               <!-- Card: Mnarani (view 1 & 2) -->
               <article
                 class="bna-card group border-brand-border flex h-auto w-70 shrink-0 snap-start flex-col overflow-hidden rounded-2xl border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[320px] lg:w-auto"
-                 data-label-1="View 1"
-                 data-label-2="View 2"
+                data-label-1="View 1"
+                data-label-2="View 2"
               >
                 <div
                   class="relative flex h-40 w-full shrink-0 items-center justify-center overflow-hidden bg-slate-200 sm:h-48 lg:h-44"
@@ -1519,16 +1576,30 @@
                   <div
                     class="bna-slides-wrapper flex h-full w-full translate-x-0 transform transition-transform duration-1000 ease-in-out"
                   >
-                    <img
-                      src="{% static 'mnarani-equipment-donation.jpeg' %}"
-                      alt="Mnarani School Before"
-                      class="h-full w-full shrink-0 object-cover"
-                    />
-                    <img
-                      src="{% static 'mnarani-donation.jpeg' %}"
-                      alt="Mnarani School After"
-                      class="h-full w-full shrink-0 object-cover"
-                    />
+                    <div class="relative isolate h-full w-full shrink-0">
+                      <img
+                        src="{% static 'mnarani-equipment-donation.jpeg' %}"
+                        alt="Mnarani School Before"
+                        class="h-full w-full shrink-0 object-cover"
+                      />
+                      <img
+                        src="{% static 'theraplay-resources-logo-1.png' %}"
+                        alt=""
+                        class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-32 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                      />
+                    </div>
+                    <div class="relative isolate h-full w-full shrink-0">
+                      <img
+                        src="{% static 'mnarani-donation.jpeg' %}"
+                        alt="Mnarani School After"
+                        class="h-full w-full shrink-0 object-cover"
+                      />
+                      <img
+                        src="{% static 'theraplay-resources-logo-1.png' %}"
+                        alt=""
+                        class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-32 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div class="flex grow flex-col justify-between p-5 lg:p-6">
@@ -1587,16 +1658,30 @@
                   <div
                     class="bna-slides-wrapper flex h-full w-full translate-x-0 transform transition-transform duration-1000 ease-in-out"
                   >
-                    <img
-                      src="{% static 'tumaini-autism-center.jpeg' %}"
-                      alt="Tumaini View 1"
-                      class="h-full w-full shrink-0 object-cover"
-                    />
-                    <img
-                      src="{% static 'tumaini-autism-center.jpeg' %}"
-                      alt="Tumaini View 2"
-                      class="h-full w-full shrink-0 object-cover"
-                    />
+                    <div class="relative isolate h-full w-full shrink-0">
+                      <img
+                        src="{% static 'tumaini-autism-center.jpeg' %}"
+                        alt="Tumaini View 1"
+                        class="h-full w-full shrink-0 object-cover"
+                      />
+                      <img
+                        src="{% static 'theraplay-resources-logo-1.png' %}"
+                        alt=""
+                        class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-32 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                      />
+                    </div>
+                    <div class="relative isolate h-full w-full shrink-0">
+                      <img
+                        src="{% static 'tumaini-autism-center.jpeg' %}"
+                        alt="Tumaini View 2"
+                        class="h-full w-full shrink-0 object-cover"
+                      />
+                      <img
+                        src="{% static 'theraplay-resources-logo-1.png' %}"
+                        alt=""
+                        class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-32 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div class="flex grow flex-col justify-between p-5 lg:p-6">
@@ -1619,7 +1704,7 @@
               <!-- Card: Urafiki (Before & After) -->
               <article
                 class="bna-card group border-brand-border flex h-auto w-70 shrink-0 snap-start flex-col overflow-hidden rounded-2xl border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:w-[320px] lg:w-auto"
-                 data-label-1="View 1"
+                data-label-1="View 1"
                 data-label-2="View 2"
               >
                 <div
@@ -1636,16 +1721,30 @@
                   <div
                     class="bna-slides-wrapper flex h-full w-full translate-x-0 transform transition-transform duration-1000 ease-in-out"
                   >
-                    <img
-                      src="{% static 'carovana-school-2.jpeg' %}"
-                      alt="Urafiki Before"
-                      class="h-full w-full shrink-0 object-cover"
-                    />
-                    <img
-                      src="{% static 'carovana-school-4.jpeg' %}"
-                      alt="Urafiki After"
-                      class="h-full w-full shrink-0 object-cover"
-                    />
+                    <div class="relative isolate h-full w-full shrink-0">
+                      <img
+                        src="{% static 'carovana-school-2.jpeg' %}"
+                        alt="Urafiki Before"
+                        class="h-full w-full shrink-0 object-cover"
+                      />
+                      <img
+                        src="{% static 'theraplay-resources-logo-1.png' %}"
+                        alt=""
+                        class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-32 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                      />
+                    </div>
+                    <div class="relative isolate h-full w-full shrink-0">
+                      <img
+                        src="{% static 'carovana-school-4.jpeg' %}"
+                        alt="Urafiki After"
+                        class="h-full w-full shrink-0 object-cover"
+                      />
+                      <img
+                        src="{% static 'theraplay-resources-logo-1.png' %}"
+                        alt=""
+                        class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-32 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div class="flex grow flex-col justify-between p-5 lg:p-6">
@@ -1685,16 +1784,30 @@
                   <div
                     class="bna-slides-wrapper flex h-full w-full translate-x-0 transform transition-transform duration-1000 ease-in-out"
                   >
-                    <img
-                      src="{% static 'nexus-therapy-center.jpeg' %}"
-                      alt="Nexus therapy center View 1"
-                      class="h-full w-full shrink-0 object-cover"
-                    />
-                    <img
-                      src="{% static 'nexus-therapy-center (2).jpeg' %}"
-                      alt="Nexus therapy center View 2"
-                      class="h-full w-full shrink-0 object-cover"
-                    />
+                    <div class="relative isolate h-full w-full shrink-0">
+                      <img
+                        src="{% static 'nexus-therapy-center.jpeg' %}"
+                        alt="Nexus therapy center View 1"
+                        class="h-full w-full shrink-0 object-cover"
+                      />
+                      <img
+                        src="{% static 'theraplay-resources-logo-1.png' %}"
+                        alt=""
+                        class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-32 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                      />
+                    </div>
+                    <div class="relative isolate h-full w-full shrink-0">
+                      <img
+                        src="{% static 'nexus-therapy-center (2).jpeg' %}"
+                        alt="Nexus therapy center View 2"
+                        class="h-full w-full shrink-0 object-cover"
+                      />
+                      <img
+                        src="{% static 'theraplay-resources-logo-1.png' %}"
+                        alt=""
+                        class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-32 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div class="flex grow flex-col justify-between p-5 lg:p-6">
@@ -1754,368 +1867,557 @@
             </div>
 
             <!-- Endless Scroll Container -->
-         
+
             <div
               id="gallery-container"
               class="group-marquee relative flex w-full gap-4 overflow-hidden pb-4"
             >
               <!-- Track 1 -->
-            
+
               <div
                 class="marquee-track animate-marquee flex min-w-full shrink-0 gap-4 sm:gap-6"
               >
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/ntc-nairobi.jpeg' %}"
                     alt="ntc Nairobi 1"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >calm down corner</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/ntc-nairobi (1).jpeg' %}"
                     alt="ntc Nairobi 2"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Sensory Room Setup</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/ntc-nairobi (2).jpeg' %}"
                     alt="ntc Nairobi 3"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Hon.Dr.Isaac Mwaura, visit</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/ntc-nairobi (3).jpeg' %}"
                     alt="ntc Nairobi 3"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Sensory Room Setup</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/andySpeaksHq.jpeg' %}"
                     alt="andySpeaksHq"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >child playing</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/ntc-nakuru.jpeg' %}"
                     alt="ntc Nakuru"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Nakuru mobile room setup</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/pangani-highlight.jpeg' %}"
                     alt="pangani highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Pangani donations</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/pangani-highlight (1).jpg' %}"
                     alt="pangani highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Room Setup</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/pangani-highlight (2).jpg' %}"
                     alt="pangani highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Sensory Room Setup</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/pangani-highlight (3).jpg' %}"
                     alt="pangani highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Pangani Room Setup</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/kasarani-highlight.jpg' %}"
                     alt="kasarani highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Kasarani special school donations</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/kasarani-highlight (1).jpg' %}"
                     alt="kasarani highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Kasarani classroom Setup</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/garissa-highlight.jpg' %}"
                     alt="garissa highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Garissa awareness event</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/garissa-highlight (1).jpg' %}"
                     alt="garissa highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Garissa parent training</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/garissa-highlight (2).jpg' %}"
                     alt="garissa highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Garissa donations</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/carovana-school.jpeg' %}"
                     alt="urafiki carovana highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Urafiki Carovana school</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/carovana-school-3.jpeg' %}"
                     alt="urafiki carovana highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Urafiki Carovana school</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/carovana-school-5.jpeg' %}"
                     alt="urafiki carovana highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Urafiki Carovana school</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/kasarani-furniture-repaint.jpeg' %}"
                     alt="urafiki carovana highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Kasarani furniture repaint</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/kasarani-complete.jpeg' %}"
                     alt="urafiki carovana highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Kasarani completed setup</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/home-setup-nrb-sensory-space.jpeg' %}"
                     alt="urafiki carovana highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >home setup nrb - sesnsory space</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/home-setup-nrb-sensory-room.jpeg' %}"
                     alt="urafiki carovana highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
-                    >home setup nrb - sesnsory space</span
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    >home setup nrb - sesnsory room</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/home-setup-nairobi-sensory-garden.jpeg' %}"
                     alt="urafiki carovana highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >home setup nrb - sesnsory garden</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/home-setup-nairobi-room-setup.jpeg' %}"
                     alt="urafiki carovana highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >home setup - nairobi</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/garissa-doctor-training.jpeg' %}"
                     alt="urafiki carovana highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Garissa doctor training</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/nairobi-autism-classroom.jpeg' %}"
                     alt="urafiki carovana highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >nairobi - autism classroom</span
                   >
                 </div>
                 <div
-                  class="relative h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
+                  class="relative isolate h-48 w-64 shrink-0 overflow-hidden rounded-2xl shadow-sm sm:h-56 sm:w-72 lg:h-64 lg:w-80"
                 >
                   <img
                     src="{% static 'project gallery/garissa-parent-training.jpeg' %}"
                     alt="urafiki carovana highlight"
                     class="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                   />
+                  <img
+                    src="{% static 'theraplay-resources-logo-1.png' %}"
+                    alt=""
+                    aria-hidden="true"
+                    draggable="false"
+                    class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-28 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none"
+                  />
                   <span
-                    class="absolute top-3 left-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
+                    class="absolute top-3 left-3 z-30 rounded-full bg-black/70 px-3 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-sm sm:text-xs"
                     >Garissa parent training</span
                   >
                 </div>
-              </div> 
+              </div>
             </div>
           </div>
         </div>
