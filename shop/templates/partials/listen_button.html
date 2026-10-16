@@ -1,0 +1,11 @@
+<button
+  type="button"
+  class="listen-btn no-read {{ extra_class }}"
+  data-target="{{ target }}"
+  data-default-label="Listen to this section"
+  aria-describedby="{{ heading_id }}"
+>
+  {% include "partials/icons/speaker.html" with class="h-3.5 w-3.5 lg:h-4 lg:w-4" %}
+  <span class="btn-label lg:hidden" data-stop-label="Stop">Listen</span>
+  <span class="btn-label hidden lg:inline" data-stop-label="Stop reading">Listen to this section</span>
+</button>

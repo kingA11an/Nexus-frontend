@@ -1,0 +1,37 @@
+{% load static %}
+<article
+  class="{% if project.image_2 %}bna-card {% endif %}group card card-lift flex h-auto w-70 shrink-0 snap-start flex-col overflow-hidden sm:w-80 lg:w-auto"
+  {% if project.image_2 %}data-label-1="{{ project.label_1 }}" data-label-2="{{ project.label_2 }}"{% endif %}
+>
+  <div class="relative flex h-40 w-full shrink-0 items-center justify-center overflow-hidden bg-slate-200 sm:h-48 lg:h-44">
+    <span class="absolute top-3 left-3 z-20 rounded-full bg-teal-900 px-3 py-1 text-xs font-bold text-white shadow-sm">{{ project.badge }}</span>
+    {% if project.image_2 %}
+    <span class="bna-pill absolute top-3 right-3 z-20 rounded-full bg-black/70 px-3 py-1 text-[0.6875rem] font-bold tracking-wide text-white uppercase shadow-sm transition-colors duration-300">{{ project.label_1 }}</span>
+    {% endif %}
+    <div class="bna-slides-wrapper flex h-full w-full translate-x-0 transform transition-transform duration-1000 ease-in-out">
+      <div class="relative isolate h-full w-full shrink-0">
+        <img src="{{ project.image_1_src }}" alt="{{ project.alt_1 }}" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+        <img src="{% static 'theraplay-resources-logo-1.png' %}" alt="" aria-hidden="true" draggable="false" class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-32 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none" />
+      </div>
+      {% if project.image_2 %}
+      <div class="relative isolate h-full w-full shrink-0">
+        <img src="{{ project.image_2_src }}" alt="{{ project.alt_2 }}" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+        <img src="{% static 'theraplay-resources-logo-1.png' %}" alt="" aria-hidden="true" draggable="false" class="pointer-events-none absolute top-1/2 left-1/2 z-20 w-1/2 max-w-32 -translate-x-1/2 -translate-y-1/2 opacity-40 grayscale select-none" />
+      </div>
+      {% endif %}
+    </div>
+    {% if project.image_2 %}
+    <button type="button" class="bna-toggle no-read absolute right-3 bottom-3 z-30 flex h-9 w-9 items-center justify-center rounded-full bg-black/70 text-white transition-colors duration-150 hover:bg-black focus-visible:outline-white focus-visible:outline-offset-0" aria-label="Pause slideshow: {{ project.title }}">
+      {% include "partials/icons/pause.html" with class="icon-pause h-5 w-5" %}
+      {% include "partials/icons/play.html" with class="icon-play hidden h-5 w-5" %}
+      {% include "partials/icons/arrow_right.html" with class="icon-next hidden h-5 w-5" %}
+    </button>
+    {% endif %}
+  </div>
+  <div class="flex grow flex-col justify-between p-5 lg:p-6">
+    <div>
+      <h4 class="mb-2 line-clamp-2 text-base leading-tight font-bold text-brand-ink sm:text-lg lg:text-xl">{{ project.title }}</h4>
+      <p class="line-clamp-3 text-xs leading-relaxed text-brand-muted sm:text-sm lg:mb-4">{{ project.description }}</p>
+    </div>
+  </div>
+</article>

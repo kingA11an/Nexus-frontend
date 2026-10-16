@@ -1,18 +1,26 @@
+import re
+
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path, re_path
-from django.conf import settings
 from django.views.static import serve
 
-# Import your views
-from shop.views import shop_view, home_view 
+from shop.views import home_view, shop_view
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', home_view, name='home'),         
-    path('shop/', shop_view, name='shop'),    
+    path(settings.ADMIN_URL, admin.site.urls),
+    path('', home_view, name='home'),
+    path('shop/', shop_view, name='shop'),
 ]
 
-# 🚨 This explicit route bypasses Gunicorn's block in production 🚨
-urlpatterns += [
-    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
-]
+# Uploaded media. WhiteNoise only serves collected static files, so on hosts
+# without a front-end web server Django serves /media/ itself. Turn this off
+# with DJANGO_SERVE_MEDIA=False once Nginx or object storage takes over.
+if settings.DEBUG or settings.SERVE_MEDIA_WITH_DJANGO:
+    urlpatterns += [
+        re_path(
+            r'^%s(?P<path>.*)$' % re.escape(settings.MEDIA_URL.lstrip('/')),
+            serve,
+            {'document_root': settings.MEDIA_ROOT},
+        ),
+    ]

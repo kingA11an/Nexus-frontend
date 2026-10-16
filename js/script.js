@@ -1,64 +1,117 @@
 (function () {
   "use strict";
 
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  // 1. ACCESSIBILITY & MAIN SITE NAVIGATION
+  // ---------------------------------------------------------------------------
+  // Helpers
+  // ---------------------------------------------------------------------------
 
-  const statusEl = document.getElementById("a11y-status");
+  var statusEl = document.getElementById("a11y-status");
+
+  // Polite live-region announcement. The region is cleared first so that
+  // repeating the same message (for example "Text size set to 100 percent")
+  // is still read out.
   function announce(msg) {
-    if (statusEl) statusEl.textContent = msg;
+    if (!statusEl) return;
+    statusEl.textContent = "";
+    window.setTimeout(function () {
+      statusEl.textContent = msg;
+    }, 50);
   }
 
-  // Main Site Mobile Navigation Toggle (Home Page)
-  const navToggle = document.getElementById("nav-toggle");
-  const nav = document.getElementById("primary-nav");
-  if (navToggle && nav) {
-    navToggle.addEventListener("click", function () {
-      const isOpen = nav.classList.toggle("hidden");
-      navToggle.setAttribute("aria-expanded", !isOpen ? "true" : "false");
+  function store(key, value) {
+    try {
+      if (value === null) localStorage.removeItem(key);
+      else localStorage.setItem(key, value);
+    } catch (e) {
+      /* storage can be blocked; preferences just won't persist */
+    }
+  }
+
+  function recall(key) {
+    try {
+      return localStorage.getItem(key);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // 1. Accessibility toolbar
+  // ---------------------------------------------------------------------------
+
+  // Text size: the whole site is sized in rem, so changing the root font size
+  // scales everything. The choice is remembered between pages and visits
+  // (an inline snippet in <head> applies it before first paint).
+  var SIZES = [87.5, 100, 112.5, 125, 137.5];
+  var sizeIndex = 1;
+  var savedSize = parseFloat(recall("snrh-text-size"));
+  if (SIZES.indexOf(savedSize) > -1) sizeIndex = SIZES.indexOf(savedSize);
+
+  function applySize(message) {
+    document.documentElement.style.fontSize = SIZES[sizeIndex] + "%";
+    store("snrh-text-size", sizeIndex === 1 ? null : String(SIZES[sizeIndex]));
+    announce(message || "Text size set to " + SIZES[sizeIndex] + " percent.");
+  }
+
+  var fontInc = document.getElementById("font-inc");
+  var fontDec = document.getElementById("font-dec");
+  var fontReset = document.getElementById("font-reset");
+
+  if (fontInc) {
+    fontInc.addEventListener("click", function () {
+      if (sizeIndex === SIZES.length - 1) return announce("Largest text size reached.");
+      sizeIndex += 1;
+      applySize();
     });
-    nav.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        nav.classList.add("hidden");
-        navToggle.setAttribute("aria-expanded", "false");
-      });
+  }
+  if (fontDec) {
+    fontDec.addEventListener("click", function () {
+      if (sizeIndex === 0) return announce("Smallest text size reached.");
+      sizeIndex -= 1;
+      applySize();
+    });
+  }
+  if (fontReset) {
+    fontReset.addEventListener("click", function () {
+      sizeIndex = 1;
+      applySize("Text size reset to default.");
     });
   }
 
-  // Text Size Adjuster 
-  const sizes = [87.5, 100, 112.5, 125, 137.5];
-  let sizeIndex = 1;
-  function applySize() {
-    document.documentElement.style.fontSize = sizes[sizeIndex] + "%";
-    announce("Text size set to " + sizes[sizeIndex] + " percent.");
+  // High contrast: state is remembered the same way.
+  var contrastBtn = document.getElementById("contrast-toggle");
+  if (contrastBtn) {
+    contrastBtn.setAttribute(
+      "aria-pressed",
+      document.documentElement.classList.contains("high-contrast") ? "true" : "false"
+    );
+    contrastBtn.addEventListener("click", function () {
+      var on = document.documentElement.classList.toggle("high-contrast");
+      contrastBtn.setAttribute("aria-pressed", on ? "true" : "false");
+      store("snrh-contrast", on ? "1" : null);
+      announce(on ? "High contrast mode on." : "High contrast mode off.");
+    });
   }
-  document.getElementById("font-inc")?.addEventListener("click", function () {
-    sizeIndex = Math.min(sizeIndex + 1, sizes.length - 1);
-    applySize();
-  });
-  document.getElementById("font-dec")?.addEventListener("click", function () {
-    sizeIndex = Math.max(sizeIndex - 1, 0);
-    applySize();
-  });
-  document.getElementById("font-reset")?.addEventListener("click", function () {
-    sizeIndex = 1;
-    applySize();
-  });
 
-  // High Contrast Toggle 
-  const contrastBtn = document.getElementById("contrast-toggle");
-  contrastBtn?.addEventListener("click", function () {
-    const on = document.documentElement.classList.toggle("high-contrast");
-    contrastBtn.setAttribute("aria-pressed", on ? "true" : "false");
-    announce(on ? "High contrast mode on." : "High contrast mode off.");
-  });
+  // ---------------------------------------------------------------------------
+  // 2. Read aloud
+  //
+  // Long utterances are cut off by Chrome after roughly fifteen seconds, so
+  // the text is spoken as a queue of sentence-sized chunks. A session number
+  // makes sure late "end" and "error" events from a cancelled utterance can
+  // never reset the button of the one that replaced it.
+  //
+  // These buttons change their label while reading ("Stop reading"), so they
+  // deliberately do not use aria-pressed. A toggle must not do both.
+  // ---------------------------------------------------------------------------
 
-  // Text-to-Speech / Read Aloud
-
-  const synth = window.speechSynthesis;
-  const speedSelect = document.getElementById("speed-select");
-  let currentBtn = null;
-  const supported = "speechSynthesis" in window;
+  var supported = "speechSynthesis" in window && "SpeechSynthesisUtterance" in window;
+  var synth = supported ? window.speechSynthesis : null;
+  var speedSelect = document.getElementById("speed-select");
+  var activeBtn = null;
+  var session = 0;
 
   if (!supported) {
     document.querySelectorAll(".listen-btn, #read-page-btn").forEach(function (b) {
@@ -66,230 +119,478 @@
     });
   }
 
-  function resetButton(btn) {
-    btn.setAttribute("aria-pressed", "false");
-    
-    // Find ALL labels (desktop and mobile) inside the button
-    btn.querySelectorAll(".btn-label").forEach(label => {
-      // Restore the exact original text, or default to "Listen"
-      if (label.dataset.originalText) {
+  function setSpeaking(btn, speaking) {
+    btn.dataset.speaking = speaking ? "true" : "false";
+    btn.querySelectorAll(".btn-label").forEach(function (label) {
+      if (speaking) {
+        if (!label.dataset.originalText) label.dataset.originalText = label.textContent;
+        label.textContent = label.dataset.stopLabel || "Stop reading";
+      } else if (label.dataset.originalText) {
         label.textContent = label.dataset.originalText;
-      } else {
-        label.textContent = btn.dataset.defaultLabel || "Listen";
       }
     });
   }
 
   function getReadableText(el) {
-    const clone = el.cloneNode(true);
-    clone.querySelectorAll(".no-read, script, style").forEach(function (n) {
+    var clone = el.cloneNode(true);
+    // Skip controls, decorative and duplicated (aria-hidden) content such as
+    // the cloned gallery track, which would otherwise be read twice.
+    clone.querySelectorAll('.no-read, [aria-hidden="true"], script, style').forEach(function (n) {
       n.remove();
     });
     return clone.textContent.replace(/\s+/g, " ").trim();
   }
 
-  function toggleSpeech(text, btn) {
-    if (!supported) return;
-    if (btn.getAttribute("aria-pressed") === "true") {
-      synth.cancel();
-      resetButton(btn);
-      currentBtn = null;
-      announce("Reading stopped.");
-      return;
-    }
-    synth.cancel();
-    if (currentBtn) resetButton(currentBtn);
+  function splitIntoChunks(text, max) {
+    var sentences = text.match(/[^.!?]+[.!?]*\s*/g) || [text];
+    var chunks = [];
+    var current = "";
 
-    const utter = new SpeechSynthesisUtterance(text);
-    utter.rate = parseFloat(speedSelect?.value || "1");
-    utter.onend = function () {
-      resetButton(btn);
-      currentBtn = null;
-    };
-    utter.onerror = function () {
-      resetButton(btn);
-      currentBtn = null;
-    };
-
-    synth.speak(utter);
-    btn.setAttribute("aria-pressed", "true");
-
-    // Update ALL labels when reading starts
-    btn.querySelectorAll(".btn-label").forEach(label => {
-      // Memorize the original text before overwriting it!
-      if (!label.dataset.originalText) {
-        label.dataset.originalText = label.textContent;
+    function pushLongSentence(sentence) {
+      while (sentence.length > max) {
+        var cut = sentence.lastIndexOf(" ", max);
+        if (cut < 1) cut = max;
+        chunks.push(sentence.slice(0, cut).trim());
+        sentence = sentence.slice(cut);
       }
-      
-      // Give the mobile button a short text, and desktop a long text
-      if (label.classList.contains("sm:hidden")) {
-        label.textContent = "Stop"; // Mobile view
+      return sentence;
+    }
+
+    sentences.forEach(function (sentence) {
+      if (sentence.length > max) {
+        if (current.trim()) chunks.push(current.trim());
+        current = pushLongSentence(sentence);
+      } else if ((current + sentence).length > max) {
+        if (current.trim()) chunks.push(current.trim());
+        current = sentence;
       } else {
-        label.textContent = "Stop reading"; // Desktop view
+        current += sentence;
       }
     });
+    if (current.trim()) chunks.push(current.trim());
+    return chunks;
+  }
 
-    currentBtn = btn;
+  function stopSpeech(message) {
+    if (!supported) return;
+    session += 1;
+    synth.cancel();
+    if (activeBtn) setSpeaking(activeBtn, false);
+    activeBtn = null;
+    if (message) announce(message);
+  }
+
+  function speak(text, btn) {
+    if (!supported) return;
+    if (btn.dataset.speaking === "true") return stopSpeech("Reading stopped.");
+
+    stopSpeech();
+    var chunks = splitIntoChunks(text, 200);
+    if (!chunks.length) return;
+
+    var mySession = session;
+    var index = 0;
+    activeBtn = btn;
+    setSpeaking(btn, true);
     announce("Reading started.");
+
+    function next() {
+      if (mySession !== session) return;
+      if (index >= chunks.length) {
+        setSpeaking(btn, false);
+        activeBtn = null;
+        return;
+      }
+      var utter = new SpeechSynthesisUtterance(chunks[index++]);
+      // Read the speed on every chunk so changing it mid-reading takes effect
+      utter.rate = parseFloat((speedSelect && speedSelect.value) || "1");
+      utter.onend = next;
+      utter.onerror = function () {
+        if (mySession !== session) return;
+        stopSpeech();
+      };
+      synth.speak(utter);
+    }
+    next();
   }
 
   document.querySelectorAll(".listen-btn").forEach(function (btn) {
     btn.addEventListener("click", function () {
-      const section = document.getElementById(btn.dataset.target);
-      if (section) toggleSpeech(getReadableText(section), btn);
+      var section = document.getElementById(btn.dataset.target);
+      if (section) speak(getReadableText(section), btn);
     });
   });
 
-  const readPageBtn = document.getElementById("read-page-btn");
-  readPageBtn?.addEventListener("click", function () {
-    const main = document.getElementById("main");
-    if (main) toggleSpeech(getReadableText(main), readPageBtn);
+  var readPageBtn = document.getElementById("read-page-btn");
+  if (readPageBtn) {
+    readPageBtn.addEventListener("click", function () {
+      var main = document.getElementById("main");
+      if (main) speak(getReadableText(main), readPageBtn);
+    });
+  }
+
+  // Browsers keep speaking after navigation unless told to stop
+  window.addEventListener("pagehide", function () {
+    if (supported) synth.cancel();
   });
 
+  // ---------------------------------------------------------------------------
+  // 3. Home page: mobile navigation (disclosure pattern)
+  // ---------------------------------------------------------------------------
 
-  // 2. MAIN SITE ANIMATIONS
+  var navToggle = document.getElementById("nav-toggle");
+  var nav = document.getElementById("primary-nav");
 
-  
-  // Impact Page Animation 
-  const counters = document.querySelectorAll('.counter');
-  if (counters.length > 0 && 'IntersectionObserver' in window) {
-    const animationDuration = 1500; 
-    const animateCounters = (entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const counter = entry.target;
-          const target = +counter.getAttribute('data-target');
-          let startTime = null;
+  if (navToggle && nav) {
+    var navOpen = function () {
+      return navToggle.getAttribute("aria-expanded") === "true";
+    };
+    var setNav = function (open, returnFocus) {
+      nav.classList.toggle("hidden", !open);
+      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      if (!open && returnFocus) navToggle.focus();
+    };
 
-          const step = (currentTime) => {
-            if (!startTime) startTime = currentTime;
-            const progress = Math.min((currentTime - startTime) / animationDuration, 1);
-            const easeProgress = progress < 0.5 
-              ? 8 * progress * progress * progress * progress 
-              : 1 - Math.pow(-2 * progress + 2, 4) / 2;
-            
-            const currentCount = Math.floor(easeProgress * target);
-            counter.innerText = currentCount.toLocaleString();
+    navToggle.addEventListener("click", function () {
+      setNav(!navOpen());
+    });
+    nav.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        setNav(false);
+      });
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && navOpen() && window.getComputedStyle(navToggle).display !== "none") {
+        setNav(false, true);
+      }
+    });
+    document.addEventListener("click", function (e) {
+      if (navOpen() && !nav.contains(e.target) && !navToggle.contains(e.target)) setNav(false);
+    });
+  }
 
-            if (progress < 1) {
-              window.requestAnimationFrame(step);
-            } else {
-              counter.innerText = target.toLocaleString(); 
-            }
-          };
-          window.requestAnimationFrame(step);
-          observer.unobserve(counter);
+  // ---------------------------------------------------------------------------
+  // 4. Impact counters
+  // Markup holds the real number (correct without JavaScript). When the count-up
+  // will run, it is reset to 0 first; with reduced motion the final value stays.
+  // ---------------------------------------------------------------------------
+
+  var counters = document.querySelectorAll(".counter");
+  if (counters.length) {
+    var formatNumber = function (n) {
+      return n.toLocaleString();
+    };
+
+    if (reduceMotion.matches || !("IntersectionObserver" in window)) {
+      counters.forEach(function (c) {
+        c.textContent = formatNumber(+c.getAttribute("data-target"));
+      });
+    } else {
+      var DURATION = 1500;
+      var counterObserver = new IntersectionObserver(
+        function (entries, observer) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            var counter = entry.target;
+            var target = +counter.getAttribute("data-target");
+            var start = null;
+
+            var step = function (now) {
+              if (!start) start = now;
+              var progress = Math.min((now - start) / DURATION, 1);
+              var eased =
+                progress < 0.5
+                  ? 8 * Math.pow(progress, 4)
+                  : 1 - Math.pow(-2 * progress + 2, 4) / 2;
+              counter.textContent = formatNumber(progress < 1 ? Math.floor(eased * target) : target);
+              if (progress < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
+            observer.unobserve(counter);
+          });
+        },
+        { threshold: 0.5 }
+      );
+      counters.forEach(function (c) {
+        c.textContent = "0";
+        counterObserver.observe(c);
+      });
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  // 5. Project before / after sliders
+  //
+  // Auto-advancing content that lasts more than five seconds needs a way to be
+  // paused (WCAG 2.2.2). Each slider therefore pauses on hover and keyboard
+  // focus, has its own pause button, and never auto-advances when the visitor
+  // prefers reduced motion (the button then switches photos by hand).
+  // ---------------------------------------------------------------------------
+
+  var sliders = [];
+
+  document.querySelectorAll(".bna-card").forEach(function (card) {
+    var wrapper = card.querySelector(".bna-slides-wrapper");
+    var pill = card.querySelector(".bna-pill");
+    if (!wrapper || !pill) return;
+
+    var state = {
+      card: card,
+      wrapper: wrapper,
+      pill: pill,
+      button: card.querySelector(".bna-toggle"),
+      label1: card.getAttribute("data-label-1") || "Before",
+      label2: card.getAttribute("data-label-2") || "After",
+      title: (card.querySelector("h4") || {}).textContent || "project",
+      showingSecond: false,
+      timer: null,
+      visible: false,
+      hovered: false,
+      focused: false,
+      userPaused: false,
+    };
+
+    state.show = function (second) {
+      state.showingSecond = second;
+      wrapper.classList.toggle("translate-x-0", !second);
+      wrapper.classList.toggle("-translate-x-full", second);
+      pill.textContent = second ? state.label2 : state.label1;
+      pill.classList.toggle("bg-black/70", !second);
+      pill.classList.toggle("bg-teal-700", second);
+    };
+
+    state.sync = function () {
+      var shouldRun =
+        state.visible &&
+        !state.userPaused &&
+        !state.hovered &&
+        !state.focused &&
+        !reduceMotion.matches;
+      if (shouldRun && !state.timer) {
+        state.timer = window.setInterval(function () {
+          state.show(!state.showingSecond);
+        }, 4000);
+      } else if (!shouldRun && state.timer) {
+        window.clearInterval(state.timer);
+        state.timer = null;
+      }
+    };
+
+    state.renderButton = function () {
+      var btn = state.button;
+      if (!btn) return;
+      var manual = reduceMotion.matches;
+      var playing = !state.userPaused && !manual;
+      btn.querySelector(".icon-pause").classList.toggle("hidden", !(playing && !manual));
+      btn.querySelector(".icon-play").classList.toggle("hidden", manual || playing);
+      btn.querySelector(".icon-next").classList.toggle("hidden", !manual);
+      btn.setAttribute(
+        "aria-label",
+        manual
+          ? "Show the other photo: " + state.title
+          : (playing ? "Pause slideshow: " : "Play slideshow: ") + state.title
+      );
+    };
+
+    if (state.button) {
+      state.button.addEventListener("click", function () {
+        if (reduceMotion.matches) {
+          state.show(!state.showingSecond);
+          announce("Showing " + (state.showingSecond ? state.label2 : state.label1) + " photo.");
+          return;
         }
+        state.userPaused = !state.userPaused;
+        state.renderButton();
+        state.sync();
+        announce(state.userPaused ? "Slideshow paused." : "Slideshow playing.");
+      });
+    }
+
+    card.addEventListener("mouseenter", function () { state.hovered = true; state.sync(); });
+    card.addEventListener("mouseleave", function () { state.hovered = false; state.sync(); });
+    card.addEventListener("focusin", function () { state.focused = true; state.sync(); });
+    card.addEventListener("focusout", function () { state.focused = false; state.sync(); });
+
+    state.renderButton();
+    sliders.push(state);
+  });
+
+  if (sliders.length) {
+    var sliderObserver = null;
+    if ("IntersectionObserver" in window) {
+      sliderObserver = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            var s = sliders.filter(function (x) { return x.card === entry.target; })[0];
+            if (!s) return;
+            s.visible = entry.isIntersecting;
+            if (!s.visible) s.show(false); // reset to the first photo when scrolled away
+            s.sync();
+          });
+        },
+        { threshold: 0.5 }
+      );
+      sliders.forEach(function (s) { sliderObserver.observe(s.card); });
+    }
+
+    var onMotionChange = function () {
+      sliders.forEach(function (s) {
+        if (reduceMotion.matches) s.show(false);
+        s.renderButton();
+        s.sync();
       });
     };
-    const observer = new IntersectionObserver(animateCounters, { threshold: 0.5 });
-    counters.forEach(counter => observer.observe(counter));
+    if (reduceMotion.addEventListener) reduceMotion.addEventListener("change", onMotionChange);
   }
 
-  // Project Before and After Animation 
-  const bnaCards = document.querySelectorAll('.bna-card');
-  if (bnaCards.length > 0 && 'IntersectionObserver' in window) {
-    const bnaObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        const card = entry.target;
-        const wrapper = card.querySelector('.bna-slides-wrapper');
-        const pill = card.querySelector('.bna-pill');
+  // ---------------------------------------------------------------------------
+  // 6. Project Highlights marquee
+  // The track is cloned for a seamless loop; the clone is hidden from assistive
+  // technology and, with reduced motion, from view (see input.css).
+  // ---------------------------------------------------------------------------
 
-        if (!wrapper || !pill) return; 
+  var galleryContainer = document.getElementById("gallery-container");
+  var marqueeTrack = galleryContainer ? galleryContainer.querySelector(".marquee-track") : null;
 
-        const label1 = card.getAttribute('data-label-1') || 'Before';
-        const label2 = card.getAttribute('data-label-2') || 'After';
-
-        if (entry.isIntersecting) {
-          if (!card.dataset.intervalId) {
-            card.dataset.isAfter = "false"; 
-            
-            const intervalId = setInterval(() => {
-              let isAfter = card.dataset.isAfter === "true";
-              isAfter = !isAfter; 
-              card.dataset.isAfter = isAfter;
-
-              if (isAfter) {
-                wrapper.classList.remove('translate-x-0');
-                wrapper.classList.add('-translate-x-full');
-                pill.textContent = label2;
-                pill.classList.replace('bg-black/70', 'bg-teal-700');
-              } else {
-                wrapper.classList.remove('-translate-x-full');
-                wrapper.classList.add('translate-x-0');
-                pill.textContent = label1;
-                pill.classList.replace('bg-teal-700', 'bg-black/70');
-              }
-            }, 4000); 
-            
-            card.dataset.intervalId = intervalId; 
-          }
-        } else {
-          if (card.dataset.intervalId) {
-            clearInterval(card.dataset.intervalId);
-            card.dataset.intervalId = "";
-            card.dataset.isAfter = "false";
-            wrapper.classList.remove('-translate-x-full');
-            wrapper.classList.add('translate-x-0');
-            pill.textContent = label1;
-            pill.classList.replace('bg-teal-700', 'bg-black/70');
-          }
-        }
-      });
-    }, { threshold: 0.5 }); 
-    bnaCards.forEach(card => bnaObserver.observe(card));
-  }
-
-  // Auto-clone and auto-speed the gallery track
-  const galleryContainer = document.getElementById('gallery-container');
-  const marqueeTrack = galleryContainer ? galleryContainer.querySelector('.marquee-track') : null;
   if (galleryContainer && marqueeTrack) {
-    const itemCount = marqueeTrack.children.length;
-    const secondsPerItem = 8; 
-    const totalDuration = itemCount * secondsPerItem;
+    var totalDuration = marqueeTrack.children.length * 8;
+    marqueeTrack.style.animationDuration = totalDuration + "s";
 
-    marqueeTrack.style.animationDuration = `${totalDuration}s`;
-    
-    const clone = marqueeTrack.cloneNode(true);
-    clone.setAttribute('aria-hidden', 'true'); 
-    clone.style.animationDuration = `${totalDuration}s`;
-    
-    galleryContainer.appendChild(clone);
+    var trackClone = marqueeTrack.cloneNode(true);
+    trackClone.setAttribute("aria-hidden", "true");
+    trackClone.style.animationDuration = totalDuration + "s";
+    galleryContainer.appendChild(trackClone);
+
+    var galleryToggle = document.getElementById("gallery-toggle");
+    var galleryPaused = false;
+
+    if (galleryToggle) {
+      galleryToggle.addEventListener("click", function () {
+        galleryPaused = !galleryPaused;
+        galleryContainer.querySelectorAll(".marquee-track").forEach(function (track) {
+          track.style.animationPlayState = galleryPaused ? "paused" : "";
+        });
+        galleryToggle.querySelector(".icon-pause").classList.toggle("hidden", galleryPaused);
+        galleryToggle.querySelector(".icon-play").classList.toggle("hidden", !galleryPaused);
+        galleryToggle.querySelector(".gallery-toggle-label").textContent = galleryPaused
+          ? "Play gallery"
+          : "Pause gallery";
+        announce(galleryPaused ? "Gallery paused." : "Gallery playing.");
+      });
+    }
   }
 
+  // ---------------------------------------------------------------------------
+  // 7. Shop: category drawer (modal dialog)
+  //
+  // Opening makes the drawer reachable (removes `inert`), moves focus into it,
+  // traps Tab, closes on Escape, backdrop click, link click and when the window
+  // grows to desktop width, then returns focus to the control that opened it.
+  // While it is open the rest of the page is inert for keyboard and screen readers.
+  // ---------------------------------------------------------------------------
 
-  // 3. SHOP SPECIFIC - Mobile Drawer Toggle
- 
-  const shopDrawer = document.getElementById('category-drawer');
-  const openDrawerBtn = document.getElementById('mobile-drawer-toggle');
-  const bottomOpenDrawerBtn = document.getElementById('bottom-bar-categories');
-  const closeDrawerBtn = document.getElementById('close-drawer-btn');
-  const drawerBackdrop = document.getElementById('drawer-backdrop');
+  var drawer = document.getElementById("category-drawer");
 
-  if (shopDrawer) {
-    function openShopDrawer() {
-      shopDrawer.classList.remove('pointer-events-none', 'opacity-0');
-      shopDrawer.classList.add('opacity-100');
-      const maxW = shopDrawer.querySelector('.max-w-sm');
-      if (maxW) maxW.classList.remove('translate-x-full');
-    }
+  if (drawer) {
+    var panel = document.getElementById("drawer-panel") || drawer.querySelector(".max-w-sm");
+    var closeBtn = document.getElementById("close-drawer-btn");
+    var backdrop = document.getElementById("drawer-backdrop");
+    var openers = [
+      document.getElementById("mobile-drawer-toggle"),
+      document.getElementById("bottom-bar-categories"),
+    ].filter(Boolean);
+    var desktopQuery = window.matchMedia("(min-width: 1024px)");
+    var drawerOpener = null;
+    var inertedByDrawer = [];
 
-    function closeShopDrawer() {
-      shopDrawer.classList.add('pointer-events-none', 'opacity-0');
-      shopDrawer.classList.remove('opacity-100');
-      const maxW = shopDrawer.querySelector('.max-w-sm');
-      if (maxW) maxW.classList.add('translate-x-full');
-    }
+    var FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
-    if (openDrawerBtn) openDrawerBtn.addEventListener('click', openShopDrawer);
-    if (bottomOpenDrawerBtn) bottomOpenDrawerBtn.addEventListener('click', openShopDrawer);
-    if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeShopDrawer);
-    if (drawerBackdrop) drawerBackdrop.addEventListener('click', closeShopDrawer);
+    var isOpen = function () {
+      return !drawer.hasAttribute("inert");
+    };
 
-    // Close drawer when a category link is clicked
-    shopDrawer.querySelectorAll('a[href^="?"]').forEach(link => {
-      link.addEventListener('click', closeShopDrawer);
+    var setBackgroundInert = function (on) {
+      if (on) {
+        Array.prototype.forEach.call(document.body.children, function (el) {
+          if (el === drawer || el.tagName === "SCRIPT" || el.hasAttribute("inert")) return;
+          el.setAttribute("inert", "");
+          inertedByDrawer.push(el);
+        });
+      } else {
+        inertedByDrawer.splice(0).forEach(function (el) {
+          el.removeAttribute("inert");
+        });
+      }
+    };
+
+    var openDrawer = function (opener) {
+      if (isOpen()) return;
+      drawerOpener = opener || document.activeElement;
+      setBackgroundInert(true);
+      drawer.removeAttribute("inert");
+      drawer.classList.remove("pointer-events-none", "opacity-0");
+      drawer.classList.add("opacity-100");
+      if (panel) panel.classList.remove("translate-x-full");
+      openers.forEach(function (b) { b.setAttribute("aria-expanded", "true"); });
+      document.body.style.overflow = "hidden";
+      window.requestAnimationFrame(function () {
+        if (closeBtn) closeBtn.focus();
+      });
+    };
+
+    var closeDrawer = function (returnFocus) {
+      if (!isOpen()) return;
+      drawer.setAttribute("inert", "");
+      drawer.classList.add("pointer-events-none", "opacity-0");
+      drawer.classList.remove("opacity-100");
+      if (panel) panel.classList.add("translate-x-full");
+      setBackgroundInert(false);
+      openers.forEach(function (b) { b.setAttribute("aria-expanded", "false"); });
+      document.body.style.overflow = "";
+      if (returnFocus !== false && drawerOpener && drawerOpener.focus) drawerOpener.focus();
+      drawerOpener = null;
+    };
+
+    openers.forEach(function (btn) {
+      btn.addEventListener("click", function () { openDrawer(btn); });
     });
-  }
+    if (closeBtn) closeBtn.addEventListener("click", function () { closeDrawer(); });
+    if (backdrop) backdrop.addEventListener("click", function () { closeDrawer(); });
 
+    // Any link in the drawer navigates, so close it. Focus is not restored
+    // because the page is about to change (or jump to #catalog-grid).
+    drawer.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () { closeDrawer(false); });
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (!isOpen()) return;
+      if (e.key === "Escape") {
+        e.preventDefault();
+        closeDrawer();
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      var items = Array.prototype.slice.call(drawer.querySelectorAll(FOCUSABLE));
+      if (!items.length) return;
+      var first = items[0];
+      var last = items[items.length - 1];
+      if (!drawer.contains(document.activeElement)) {
+        e.preventDefault();
+        first.focus();
+      } else if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    });
+
+    var onResize = function (q) {
+      if (q.matches) closeDrawer(false);
+    };
+    if (desktopQuery.addEventListener) desktopQuery.addEventListener("change", onResize);
+  }
 })();

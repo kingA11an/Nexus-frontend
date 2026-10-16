@@ -1,0 +1,37 @@
+<div
+  class="a11y-bar border-b border-teal-800 bg-teal-900 px-2 py-1.5 text-white sm:px-4 sm:py-2"
+  role="region"
+  aria-label="Accessibility tools"
+>
+  <div class="no-scrollbar mx-auto flex max-w-7xl flex-nowrap items-center justify-between gap-1 overflow-x-auto text-[0.625rem] font-bold sm:justify-end sm:gap-3 sm:text-sm">
+    <span class="flex shrink-0 items-center gap-0.5 sm:gap-1.5" role="group" aria-label="Text size">
+      <button type="button" id="font-dec" class="a11y-btn" aria-label="Decrease text size">A&minus;</button>
+      <button type="button" id="font-reset" class="a11y-btn" aria-label="Reset text size">A</button>
+      <button type="button" id="font-inc" class="a11y-btn" aria-label="Increase text size">A+</button>
+    </span>
+
+    <button type="button" id="contrast-toggle" class="a11y-btn shrink-0" aria-pressed="false">
+      {% include "partials/icons/contrast.html" with class="h-3.5 w-3.5 sm:h-4 sm:w-4" %}
+      <span class="hidden sm:inline">High contrast</span>
+      <span class="sm:hidden">Contrast</span>
+    </button>
+
+    <span class="flex shrink-0 items-center gap-1 sm:gap-1.5" role="group" aria-label="Read aloud controls">
+      <label for="speed-select" class="sr-only">Reading speed</label>
+      <select
+        id="speed-select"
+        class="hc:bg-black hc:text-white hc:border-gray-600 min-h-8 rounded-md border border-white/40 bg-white px-1 py-1 text-[0.625rem] font-semibold text-slate-800 sm:min-h-11 sm:px-2.5 sm:py-1.5 sm:text-sm"
+      >
+        <option value="0.8" class="hc:bg-black hc:text-white">Slow</option>
+        <option value="1" selected class="hc:bg-black hc:text-white">Normal</option>
+        <option value="1.25" class="hc:bg-black hc:text-white">Fast</option>
+      </select>
+      <button type="button" id="read-page-btn" class="a11y-btn" data-default-label="Read page aloud">
+        {% include "partials/icons/speaker.html" with class="h-3 w-3 sm:h-4 sm:w-4" %}
+        <span class="btn-label hidden sm:inline" data-stop-label="Stop reading">Read page aloud</span>
+        <span class="btn-label sm:hidden" data-stop-label="Stop">Read page</span>
+      </button>
+    </span>
+  </div>
+  <p id="a11y-status" class="sr-only" role="status" aria-live="polite"></p>
+</div>

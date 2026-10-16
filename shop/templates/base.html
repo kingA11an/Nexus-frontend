@@ -1,0 +1,43 @@
+{% load static %}<!doctype html>
+<html lang="en" class="scroll-pt-35 scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Special Needs Resource Hub{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Assistive products, sensory and therapy equipment, and inclusive-space design for homes, schools, therapy centres, healthcare facilities, churches, workplaces and community institutions.{% endblock %}" />
+    <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet" />
+
+    <script>
+      /* Apply saved accessibility preferences before first paint to avoid a flash. */
+      try {
+        var s = localStorage.getItem("snrh-text-size");
+        if (["87.5", "112.5", "125", "137.5"].indexOf(s) > -1) document.documentElement.style.fontSize = s + "%";
+        if (localStorage.getItem("snrh-contrast") === "1") document.documentElement.classList.add("high-contrast");
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="{% static 'output.css' %}" />
+    <link rel="icon" type="image/png" href="{% static 'logo-large.png' %}" />
+    {% block extra_head %}{% endblock %}
+  </head>
+
+  <body class="{% block body_class %}bg-brand-bg text-lg leading-relaxed text-brand-ink antialiased{% endblock %}">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-lg focus:bg-teal-900 focus:p-4 focus:font-bold focus:text-white"
+    >{% block skip_label %}Skip to main content{% endblock %}</a>
+
+    {% block header %}{% endblock %}
+
+    {% block content %}{% endblock %}
+
+    {% block footer %}{% include "partials/footer.html" %}{% endblock %}
+
+    {% block after_footer %}{% endblock %}
+
+    <script src="{% static 'script.js' %}" defer></script>
+  </body>
+</html>

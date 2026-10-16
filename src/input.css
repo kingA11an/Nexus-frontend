@@ -2,8 +2,8 @@
 
 @theme {
   --font-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
-  
-  /* Brand Theme Tokens */
+
+  /* Brand tokens (unchanged) */
   --color-brand-teal: #1f4f46;
   --color-brand-teal-light: #2b6f63;
   --color-brand-accent: #c97b2e;
@@ -11,7 +11,21 @@
   --color-brand-bg: #faf7f1;
   --color-brand-bg-alt: #f1eada;
   --color-brand-border: #e1d8c4;
-  
+
+  /* Tokens for values that were previously repeated as arbitrary hex codes */
+  --color-brand-accent-darker: #834e19;
+  --color-brand-ink: #26251f;
+  --color-brand-muted: #4e4c42;
+
+  /* Keyboard focus ring */
+  --color-focus: #1b4dff;
+
+  /* WhatsApp. The official #25d366 fails contrast with white text (about 2:1),
+     so solid buttons use the darker pair; the official green stays for icons on dark. */
+  --color-whatsapp: #0e7a5f;
+  --color-whatsapp-dark: #0a5f4a;
+  --color-whatsapp-brand: #25d366;
+
   --animate-marquee: marquee 50s linear infinite;
 
   @keyframes marquee {
@@ -24,9 +38,138 @@
   }
 }
 
+/* Tailwind v4 no longer ships a scrollbar-hiding utility. The markup uses
+   .no-scrollbar on horizontally scrolling strips, so it is defined here. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer base {
+  /* Tailwind v4 resets buttons to the default cursor */
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-brand-bg);
+    transition: font-size 0.15s ease-in-out;
+  }
+
+  /* One focus style for every interactive element. It lives in the base layer
+     so a utility such as outline-hidden can still opt out (search inputs do,
+     because their wrapper shows the ring instead). */
+  :where(a, button, select, input, textarea, summary, [tabindex]):focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 3px;
+  }
+
+  /* Blue fails contrast on the dark teal and charcoal surfaces */
+  .a11y-bar :focus-visible,
+  footer :focus-visible,
+  .on-dark :focus-visible {
+    outline-color: #fff;
+  }
+
+  /* The skip link moves focus to <main>; no ring is needed around the whole page */
+  main:focus {
+    outline: none;
+  }
+}
+
+@layer components {
+  /* ---- Buttons: one hover, transition and size system for the whole site ---- */
+  .btn {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-center text-sm font-bold transition-colors duration-150 lg:px-6 lg:py-3 lg:text-base;
+  }
+  .btn-sm {
+    @apply min-h-10 px-3 py-2 text-xs whitespace-nowrap lg:min-h-11 lg:px-6 lg:py-2.5 lg:text-sm;
+  }
+  .btn-lg {
+    @apply lg:px-8 lg:py-3.5 lg:text-lg;
+  }
+  .btn-primary {
+    @apply bg-teal-900 text-white hover:bg-teal-800;
+  }
+  .btn-outline {
+    @apply border-2 border-teal-900 text-teal-900 hover:bg-teal-50;
+  }
+  .btn-accent {
+    @apply bg-brand-accent-dark text-white hover:bg-brand-accent-darker;
+  }
+  .btn-whatsapp {
+    @apply bg-whatsapp text-white hover:bg-whatsapp-dark;
+  }
+  .btn-light {
+    @apply bg-white text-teal-900 hover:bg-teal-50;
+  }
+  .btn-ghost-light {
+    @apply border border-white/50 text-white hover:bg-white/10;
+  }
+
+  /* ---- Cards ---- */
+  .card {
+    @apply rounded-xl border border-brand-border bg-white shadow-sm lg:rounded-2xl;
+  }
+  .card-link {
+    @apply transition-colors duration-150 hover:border-teal-800;
+  }
+  /* Subtle lift on hover. Defined after .card-link so its transition wins on cards that use both. */
+  .card-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  /* ---- Text links styled as chips on desktop, underlined rows on mobile ---- */
+  .chip {
+    @apply block border-b border-brand-border/50 pb-1.5 text-xs font-bold text-teal-800 transition-colors duration-150 lg:inline-flex lg:items-center lg:rounded-full lg:border lg:border-brand-border lg:bg-white lg:px-4 lg:py-2 lg:pb-2 lg:text-sm lg:font-semibold lg:text-brand-muted lg:hover:border-teal-700 lg:hover:bg-teal-50 lg:hover:text-teal-900;
+  }
+
+  /* ---- Accessibility toolbar ---- */
+  .a11y-btn {
+    @apply inline-flex min-h-8 items-center gap-1 rounded-md border border-white/40 bg-white/10 px-1.5 py-1 transition-colors duration-150 hover:bg-white/20 sm:min-h-11 sm:gap-1.5 sm:px-3 sm:py-1.5;
+  }
+
+  /* ---- "Listen to this section" buttons (class is also used by script.js) ---- */
+  .listen-btn {
+    @apply inline-flex min-h-9 shrink-0 items-center gap-1.5 self-start rounded-lg border-2 border-dashed border-brand-border px-3 py-1.5 text-xs font-bold text-brand-muted transition-colors duration-150 hover:border-teal-900 hover:text-teal-900 lg:min-h-11 lg:gap-2 lg:self-auto lg:px-4 lg:py-2 lg:text-sm;
+  }
+}
+
 /* Pause marquee on hover */
 .group-marquee:hover .animate-marquee {
   animation-play-state: paused;
+}
+
+/* Respect the operating-system "reduce motion" setting. The gallery stops
+   scrolling by itself and becomes a normal swipeable row instead. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-marquee {
+    animation: none !important;
+  }
+  /* No movement on hover for visitors who ask for less motion (the shadow still shows) */
+  .card-lift:hover {
+    translate: none;
+  }
+  #gallery-container {
+    overflow-x: auto;
+  }
+  /* The looping clone and its pause button only make sense while it moves */
+  #gallery-container .marquee-track[aria-hidden="true"],
+  #gallery-toggle {
+    display: none;
+  }
 }
 
 /* Accessibility: High Contrast Mode Overrides */
@@ -38,59 +181,80 @@ html.high-contrast {
   color: #ffffff !important;
 }
 
+html.high-contrast :focus-visible {
+  outline-color: #ffd400;
+}
+
 /* Force backgrounds to black and borders to yellow */
 html.high-contrast header,
 html.high-contrast nav,
 html.high-contrast section,
-html.high-contrast footer,
-html.high-contrast .bg-\[\#FAF7F1\],
-html.high-contrast .bg-\[\#F1EADA\] {
+html.high-contrast footer {
   background-color: #000000 !important;
   border-color: #ffd400 !important;
 }
 
-/* Force text and icons to white */
-html.high-contrast h1, 
-html.high-contrast h2, 
-html.high-contrast h3, 
-html.high-contrast p, 
+/* Force text and icons to white (h4 to h6, strong and labels were missing before,
+   which left card titles dark on a dark card) */
+html.high-contrast h1,
+html.high-contrast h2,
+html.high-contrast h3,
+html.high-contrast h4,
+html.high-contrast h5,
+html.high-contrast h6,
+html.high-contrast p,
 html.high-contrast span,
-html.high-contrast li {
+html.high-contrast li,
+html.high-contrast strong,
+html.high-contrast label {
   color: #ffffff !important;
 }
 
-/* Fix Cards and white backgrounds */
+/* Cards and white surfaces */
 html.high-contrast .bg-white,
+html.high-contrast .card,
 html.high-contrast article {
   background-color: #0d0d0d !important;
   border: 1px solid #ffd400 !important;
 }
 
-/* Make links and specific text cyan */
+/* Links and brand-coloured text in cyan */
 html.high-contrast a,
 html.high-contrast .text-teal-800,
 html.high-contrast .text-teal-900,
-html.high-contrast .text-\[\#26251F\] {
+html.high-contrast .text-brand-ink {
   color: #7fe7d4 !important;
 }
 
-/* Fix ALL solid buttons to yellow with black text */
+/* Solid buttons: yellow with black text, including text inside nested spans
+   (the span rule above would otherwise turn it white on yellow) */
+html.high-contrast .btn-primary,
+html.high-contrast .btn-accent,
+html.high-contrast .btn-whatsapp,
+html.high-contrast .btn-light,
 html.high-contrast .bg-teal-900,
 html.high-contrast .bg-teal-800,
-html.high-contrast .bg-\[\#9C5D1E\],
 html.high-contrast .floating-wa {
   background-color: #ffd400 !important;
   color: #000000 !important;
   border: none !important;
 }
 
-/* Fix outlined buttons to have yellow borders */
-html.high-contrast .border-teal-900,
-html.high-contrast .border-\[\#E1D8C4\] {
+html.high-contrast .btn-primary span,
+html.high-contrast .btn-accent span,
+html.high-contrast .btn-whatsapp span,
+html.high-contrast .btn-light span {
+  color: #000000 !important;
+}
+
+/* Outlined buttons keep a yellow border */
+html.high-contrast .btn-outline,
+html.high-contrast .btn-ghost-light,
+html.high-contrast .border-teal-900 {
   border-color: #ffd400 !important;
 }
 
-/* Fix accessibility toolbar elements */
+/* Accessibility toolbar */
 html.high-contrast button {
   border-color: #ffd400 !important;
 }
@@ -103,19 +267,6 @@ html.high-contrast .listen-btn {
 html.high-contrast .a11y-bar {
   background-color: #000000 !important;
   border-bottom: 2px solid #ffd400 !important;
-}
-
-/* Base Body Styles */
-body {
-  font-family: var(--font-body);
-  background-color: var(--color-brand-bg);
-  transition: font-size 0.15s ease-in-out;
-}
-
-/* Accessible outline for keyboard navigation */
-a:focus-visible, button:focus-visible, select:focus-visible {
-  outline: 3px solid #1b4dff;
-  outline-offset: 3px;
 }
 
 /* Tailwind Custom Variant for High Contrast */
