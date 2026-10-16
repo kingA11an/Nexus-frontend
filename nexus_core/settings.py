@@ -40,7 +40,7 @@ DEBUG = env_bool('DJANGO_DEBUG', False)
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
 if not SECRET_KEY:
     if DEBUG:
-        SECRET_KEY = 'dev-only-insecure-key-never-use-in-production'
+        SECRET_KEY = 'django-insecure-4f5lwpf&1@4zn%j0e9@5h#b&#!4ci&5(ptwe3w2^#j!4dk#)9*'
     else:
         raise ImproperlyConfigured(
             'DJANGO_SECRET_KEY must be set when DJANGO_DEBUG is off.'
