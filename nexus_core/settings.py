@@ -40,7 +40,7 @@ DEBUG = env_bool('DJANGO_DEBUG', False)
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
 if not SECRET_KEY:
     if DEBUG:
-        SECRET_KEY = 'django-insecure-4f5lwpf&1@4zn%j0e9@5h#b&#!4ci&5(ptwe3w2^#j!4dk#)9*'
+        SECRET_KEY = 'dev-only-insecure-key-never-use-in-production'
     else:
         raise ImproperlyConfigured(
             'DJANGO_SECRET_KEY must be set when DJANGO_DEBUG is off.'
@@ -48,7 +48,7 @@ if not SECRET_KEY:
 
 ALLOWED_HOSTS = env_list(
     'DJANGO_ALLOWED_HOSTS',
-    'localhost,127.0.0.1' if DEBUG else '',
+    'special-needs-hub.onrender.com,.onrender.com,localhost,127.0.0.1',
 )
 
 # Full origins including scheme, e.g. https://example.com
